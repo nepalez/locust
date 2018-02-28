@@ -4,5 +4,7 @@ class Locust
   #
   module Config
     module_function
+
+    require_relative "config/generator"
   end
 end
