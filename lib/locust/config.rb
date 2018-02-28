@@ -7,5 +7,6 @@ class Locust
 
     require_relative "config/generator"
     require_relative "config/generators"
+    require_relative "config/format"
   end
 end
