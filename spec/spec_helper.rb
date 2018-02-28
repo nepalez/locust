@@ -3,6 +3,7 @@ require "pry"
 require "locust"
 
 require_relative "support/fixtures_helper.rb"
+require_relative "support/matchers.rb"
 
 RSpec.configure do |config|
   config.example_status_persistence_file_path = ".rspec_status"
