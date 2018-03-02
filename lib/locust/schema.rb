@@ -9,5 +9,6 @@ class Locust
   module Schema
     require_relative "schema/coercion"
     require_relative "schema/type"
+    require_relative "schema/format"
   end
 end
