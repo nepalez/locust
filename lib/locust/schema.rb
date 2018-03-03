@@ -10,5 +10,6 @@ class Locust
     require_relative "schema/coercion"
     require_relative "schema/type"
     require_relative "schema/format"
+    require_relative "schema/pattern"
   end
 end
