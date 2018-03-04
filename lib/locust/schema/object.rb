@@ -18,6 +18,11 @@ module Locust::Schema
     option :default,        optional: true
     option :example,        optional: true
 
+    #
+    # The hash of known options assigned to the schema with symbolized keys
+    #
+    # @return [Hash<Symbol, Object>]
+    #
     def options
       @options ||= self.class.dry_initializer.attributes(self)
     end
