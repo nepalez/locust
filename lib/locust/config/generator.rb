@@ -17,7 +17,7 @@ class Locust::Config
     def initialize(block, immutable: false)
       @immutable = true & immutable
       return super(block) if block&.arity&.zero?
-      raise TypeError.new("Define a generator as a block without arguments")
+      raise TypeError, "Define a generator as a block without arguments"
     end
   end
 end

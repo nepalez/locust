@@ -21,7 +21,7 @@ RSpec.describe Locust::Schema::Enum do
     end
 
     context "with an array containing duplications" do
-      let(:source) { ["bar", "foo", "bar"] }
+      let(:source) { %w[bar foo bar] }
 
       it "raises ArgumentError" do
         expect { subject }.to raise_error(ArgumentError)

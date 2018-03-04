@@ -12,13 +12,19 @@ module Locust::Schema
     private
 
     def initialize(value)
-      super value.uniq rescue []
+      super uniq_array(value)
       return if self == value && any?
       raise ArgumentError,
             "Invalid value #{value.inspect} for the 'enum' keyword." \
             " The value of this keyword MUST be an array." \
             " This array SHOULD have at least one element." \
             " Elements in the array SHOULD be unique."
+    end
+
+    def uniq_array(value)
+      super value.uniq
+    rescue
+      []
     end
   end
 end
