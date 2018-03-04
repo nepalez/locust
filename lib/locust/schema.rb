@@ -11,5 +11,6 @@ class Locust
     require_relative "schema/type"
     require_relative "schema/format"
     require_relative "schema/pattern"
+    require_relative "schema/enum"
   end
 end
