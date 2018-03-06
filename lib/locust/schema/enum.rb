@@ -22,7 +22,7 @@ module Locust::Schema
     end
 
     def uniq_array(value)
-      super value.uniq
+      value.uniq
     rescue
       []
     end
