@@ -3,8 +3,8 @@ module Locust::Schema
   # @private
   # Container for definition of the 'enum' part of object schema
   #
-  # @see OpenAPI 2.0 specification for formats
-  #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types
+  # @see Enum in JSON Schema Specification
+  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1.2
   #
   class Enum < SimpleDelegator
     extend Coercion

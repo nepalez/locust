@@ -3,7 +3,7 @@ module Locust::Schema
   # @private
   # Container for definition of the 'pattern' part of object schema
   #
-  # @see
+  # @see JSON Schema pattern
   #   https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.2.3
   #
   class Pattern < SimpleDelegator

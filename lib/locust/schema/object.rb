@@ -2,9 +2,11 @@ module Locust::Schema
   #
   # Represents denormalized (without `$ref`) OpenAPI 2.0 object schema
   #
-  # @see
+  # @see Schema Object in OpenAPI Specification
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject
-  #   https://datatracker.ietf.org/doc/draft-handrews-json-schema-validation/?include_text=1
+  #
+  # @see Validation Keywords for Any Instance Type in JSON Schema Specification
+  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1
   #
   class Object
     extend Dry::Initializer

@@ -3,11 +3,11 @@ module Locust::Schema
   # @private
   # Container for definition of the 'type' part of object schema
   #
-  # @see JSON Schema formats
-  #   https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.5
-  #
-  # @see OpenAPI 2.0 format for 'file'
+  # @see Data Types in OpenAPI Specification
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types
+  #
+  # @see JSON Schema primitive types
+  #   https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.5
   #
   class Type < SimpleDelegator
     extend Coercion

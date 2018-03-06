@@ -3,8 +3,8 @@ module Locust::Schema
   # @private
   # Container for definition of the 'format' part of object schema
   #
-  # @see OpenAPI 2.0 specification for formats
-  #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types
+  # @see Data Type Format in OpenAPI 2.0 specification
+  #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#dataTypeFormat
   #
   class Format < SimpleDelegator
     extend Coercion
