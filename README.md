@@ -21,8 +21,7 @@ require "locust"
 builder = Locust.new
 
 object_schema = {
-  title: "phone",
-  type:  "string",
+  type: "string",
 }
 
 # collection of examples
@@ -44,7 +43,6 @@ How about more complex schema?
 
 ```ruby
 object_schema = {
-  title: "user",
   type: "object",
   properties: {
     id: {
@@ -55,7 +53,7 @@ object_schema = {
       type: "string",
     },
   },
-  required: ["name"],
+  required: ["id", "name"],
 }
 
 builder[definition].sample
@@ -69,6 +67,35 @@ What about references?
 **Nope!** The Locust uses only *denormalized* object schemas, where all the `$ref` keys are already substituted by the referred parts.
 
 This is because the gem deals with any object, not only request/response part of the http(s) schema. That's why parsing full OpenAPI 2.0 schemas is out of its scope.
+
+## JSON and XML
+
+Examples generated above were PORO objects. For dealing with remote APIs we can serialize them to either JSON or XML following the schema. Let's add xml definitions to the previous example:
+
+```ruby
+object_schema = {
+  type: "object",
+  properties: {
+    id: {
+      type:   "integer",
+      format: "int64",
+      xml: { attribute: true },
+    },
+    name: {
+      type: "string",
+      xml: { name: "Name" }
+    },
+  },
+  required: ["id", "name"],
+  xml: { name: "User" },
+}
+
+builder[definition].sample(:json)
+# => '{"id":-1,"name":"hdfowe"}'
+
+builder[definition].sample(:xml)
+# => '<User id="-328"><Name>noqeir</Name></User>'
+```
 
 ## How it Works
 
