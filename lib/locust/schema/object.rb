@@ -1,6 +1,6 @@
 module Locust::Schema
   #
-  # Represents denormalized (without `$ref`) OpenAPI 2.0 object schema
+  # Represents dereferenced (without `$ref`) OpenAPI 2.0 object schema
   #
   # @see Schema Object in OpenAPI Specification
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject
@@ -12,13 +12,13 @@ module Locust::Schema
     extend Dry::Initializer
     extend Coercion
 
-    # Keywords supported by objects of every type
-    option :type,   Type,   optional: true
-    option :format, Format, optional: true
-    option :enum,   Enum,   optional: true
-    option :const,          optional: true
-    option :default,        optional: true
-    option :example,        optional: true
+    option :type,     Type,            optional: true
+    option :format,   Format,          optional: true
+    option :enum,     Enum,            optional: true
+    option :readOnly, true.method(:&), default: -> { false }, as: :read_only
+    option :const,                     optional: true
+    option :default,                   optional: true
+    option :example,                   optional: true
 
     #
     # The hash of known options assigned to the schema with symbolized keys

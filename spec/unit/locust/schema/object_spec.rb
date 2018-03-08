@@ -48,7 +48,7 @@ RSpec.describe Locust::Schema::Object do
     subject { object.options }
 
     it "returns a hash of known options with symbolized keys" do
-      expect(subject).to eq type: "string", format: "email"
+      expect(subject).to eq type: "string", format: "email", read_only: false
     end
   end
 end
