@@ -20,13 +20,13 @@ class Locust
   # to break API under the test.
   #
   # @example
-  #   Locust.configure do |config|
+  #   builder = Locust.configure do |config|
   #     config.format "phone" do |f|
   #       f.generator { "+7 (916) 111-11-11" }
   #     end
   #   end
   #
-  #   examples = Locust[type: "string", format: "phone"]
+  #   examples = builder[type: "string", format: "phone"]
   #
   #   # Uses the sample without a mutation
   #   examples.sample # => "+7 (916) 100-11-11"
@@ -45,13 +45,13 @@ class Locust
   # not to mutate generated value in any way.
   #
   # @example
-  #   Locust.configure do |config|
+  #   builder = Locust.configure do |config|
   #     config.format "existing_phone" do |f|
   #       f.generator(immutable: true) { "+7 (916) 111-11-11" }
   #     end
   #   end
   #
-  #   examples = Locust[type: "string", format: "existing_phone"]
+  #   examples = builder[type: "string", format: "existing_phone"]
   #
   #   # Uses generated values as they are
   #   examples.to_a # => ["+7 (916) 111-11-11"]
@@ -64,13 +64,13 @@ class Locust
   # in addition to cases generated using a formatter.
   #
   # @example
-  #   Locust.configure do |config|
+  #   builder = Locust.configure do |config|
   #     config.format "existing_phone" do |f|
   #       f.generator(immutable: true) { "+7 (916) 111-11-11" }
   #     end
   #   end
   #
-  #   phone = Locust[type: "string", format: "existing_phone", minLength: 0]
+  #   phone = builder[type: "string", format: "existing_phone", minLength: 0]
   #
   #   # uses generated value as is
   #   phone.sample # => "+7 (916) 111-11-11"
