@@ -8,6 +8,13 @@ class Locust
     def new(value)
       value.is_a?(self) ? value : super
     end
-    alias :call :new
+
+    def call(value)
+      new(value)
+    end
+
+    def [](value)
+      call(value)
+    end
   end
 end
