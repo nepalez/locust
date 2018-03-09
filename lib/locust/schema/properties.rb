@@ -22,6 +22,10 @@ class Locust::Schema
     def hashify(value)
       Hash(value).each_with_object({}) { |(key, val), obj| obj[key.to_s] = val }
     rescue
+      raise_error(value)
+    end
+
+    def raise_error(value)
       raise DefinitionError,
             "Invalid value #{value.inspect} for the 'properties' keyword." \
             " The value of this keyword MUST be an object." \

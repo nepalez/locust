@@ -20,6 +20,7 @@ class Locust::Schema
     #
     # Factory method to construct object of proper type
     #
+    # @param  [Hash<#to_s, Object>] options The definition of the schema
     # @return [Locust::Schema::Object]
     #
     def self.call(options)
@@ -39,7 +40,10 @@ class Locust::Schema
 
     def initialize(value)
       super
-      return if type
+      raise_error(value) unless type
+    end
+
+    def raise_error(value)
       raise DefinitionError,
             "Invalid value #{value.inspect} for the object schema." \
             " The value MUST have a proper type."

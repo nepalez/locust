@@ -18,7 +18,10 @@ class Locust::Schema
 
     def initialize(value)
       super value.to_s
-      return if PRIMITIVES.include? self
+      raise_error(value) unless PRIMITIVES.include? self
+    end
+
+    def raise_error(value)
       raise DefinitionError,
             "Invalid value #{value.inspect} for the 'type' keyword." \
             " The value of this keyword MUST be stringified" \

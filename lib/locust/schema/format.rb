@@ -13,7 +13,10 @@ class Locust::Schema
 
     def initialize(value)
       super value.to_s
-      return unless empty?
+      raise_error(value) if empty?
+    end
+
+    def raise_error(value)
       raise DefinitionError,
             "Invalid value #{value.inspect} for the 'format' keyword." \
             " The value of this keyword MUST be a non-empty string."

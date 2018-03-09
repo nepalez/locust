@@ -14,10 +14,18 @@ class Locust::Schema
     private
 
     def initialize(value)
-      value = value.map(&:to_s) rescue nil
-      super value&.reject(&:empty?)&.uniq
+      value = stringify_items(value)
+      super value.reject(&:empty?).uniq
+      raise_error(value) unless value == self
+    end
 
-      return if value&.== self
+    def stringify_items(value)
+      value.map(&:to_s)
+    rescue
+      raise_error(value)
+    end
+
+    def raise_error(value)
       raise DefinitionError,
             "Invalid value #{value.inspect} for the 'required' keyword." \
             " The value of this keyword MUST be an array." \
