@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "pry"
 require "locust"
+require "rspec/its"
 
 require_relative "support/fixtures_helper.rb"
 require_relative "support/matchers.rb"
