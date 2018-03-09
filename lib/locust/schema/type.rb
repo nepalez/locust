@@ -1,4 +1,4 @@
-module Locust::Schema
+class Locust::Schema
   #
   # @private
   # Container for definition of the 'type' part of object schema

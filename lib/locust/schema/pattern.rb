@@ -1,4 +1,4 @@
-module Locust::Schema
+class Locust::Schema
   #
   # @private
   # Container for definition of the 'pattern' part of object schema

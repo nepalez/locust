@@ -1,4 +1,4 @@
-module Locust::Schema
+class Locust::Schema
   #
   # @private
   # Container for definition of the 'xml' part of object schema
@@ -6,10 +6,7 @@ module Locust::Schema
   # @see XML Object in OpenAPI Specification
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#xml-object
   #
-  class XML
-    extend Dry::Initializer
-    extend Coercion
-
+  class XML < self
     option :name,      proc(&:to_s),    optional: true
     option :namespace, proc(&:to_s),    optional: true
     option :prefix,    proc(&:to_s),    optional: true

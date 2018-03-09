@@ -1,4 +1,4 @@
-module Locust::Schema
+class Locust
   #
   # @private
   # Provides coercion functionality for using classes as
