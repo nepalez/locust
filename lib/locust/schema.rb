@@ -37,6 +37,7 @@ class Locust
     require_relative "schema/xml"
     require_relative "schema/required"
     require_relative "schema/items"
+    require_relative "schema/properties"
     require_relative "schema/object"
   end
 end
