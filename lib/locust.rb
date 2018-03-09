@@ -8,6 +8,7 @@ class Locust
   require_relative "locust/verifier"
   require_relative "locust/schema"
   require_relative "locust/keywords"
+  require_relative "locust/edge_cases"
   require_relative "locust/config"
 
   #
@@ -129,6 +130,29 @@ class Locust
     yield(config)
     self
   end
+
+  #
+  # Builds the enumerator of examples for given schema
+  #
+  # @param  [#to_h] object_schema The schema for generating examples by
+  # @return [Locust::Examples]
+  # @example
+  #   require "faker"
+  #
+  #   builder = Locust.configure do |c|
+  #     c.format "human_name" do |f|
+  #       f.generator(immutable: true) { Faker::Name.name }
+  #       f.generator { Faker::Name.name_with_middle }
+  #     end
+  #   end
+  #
+  #   schema = { "title" => "name", "format" => "human_name", "minLength" => 3 }
+  #   examples = builder[schema]
+  #
+  def examples(object_schema)
+    Locust::Examples.new config, object_schema.to_h
+  end
+  alias [] examples
 
   private
 
