@@ -18,7 +18,7 @@ class Locust::Schema
       super value&.reject(&:empty?)&.uniq
 
       return if value&.== self
-      raise ArgumentError,
+      raise DefinitionError,
             "Invalid value #{value.inspect} for the 'required' keyword." \
             " The value of this keyword MUST be an array." \
             " Elements of this array, if any, MUST be non-empty strings," \

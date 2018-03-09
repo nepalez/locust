@@ -14,7 +14,7 @@ class Locust::Schema
     def initialize(value)
       super value.to_s
       return unless empty?
-      raise ArgumentError,
+      raise DefinitionError,
             "Invalid value #{value.inspect} for the 'format' keyword." \
             " The value of this keyword MUST be a non-empty string."
     end

@@ -28,16 +28,16 @@ RSpec.describe Locust::Schema::Items do
     context "with an invalid object schema" do
       let(:source) { { "title" => "something" } }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
 
     context "with a list containing invalid object shema" do
       let(:source) { [{ "type" => "null" }, { "title" => "file" }] }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
   end

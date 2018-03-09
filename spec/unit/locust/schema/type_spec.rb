@@ -48,8 +48,8 @@ RSpec.describe Locust::Schema::Type do
     context "with invalid primitive type" do
       let(:source) { "foo" }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
   end

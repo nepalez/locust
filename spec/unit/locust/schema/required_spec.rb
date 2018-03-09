@@ -15,24 +15,24 @@ RSpec.describe Locust::Schema::Required do
     context "with an empty values" do
       let(:source) { ["", "foo"] }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
 
     context "with duplicates" do
       let(:source) { %i[foo bar foo] }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
 
     context "with non-array value" do
       let(:source) { "foo" }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
   end

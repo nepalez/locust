@@ -7,24 +7,24 @@ RSpec.describe Locust::Schema::Enum do
     context "with a non-array" do
       let(:source) { "foo" }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
 
     context "with an empty array" do
       let(:source) { [] }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
 
     context "with an array containing duplications" do
       let(:source) { %w[bar foo bar] }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
   end

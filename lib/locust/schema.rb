@@ -11,6 +11,11 @@ class Locust
     extend Coercion = Locust::Coercion
 
     #
+    # The exception to be risen when a schema has invalid definition
+    #
+    DefinitionError = Class.new(ArgumentError)
+
+    #
     # The hash of known options assigned to the instance
     #
     # @return [Hash<Symbol, Object>]
@@ -25,7 +30,7 @@ class Locust
       data = Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
       super(data)
     rescue
-      raise ArgumentError,
+      raise DefinitionError,
             "Invalid value #{value.inspect} for the schema." \
             " The value MUST be a hash."
     end

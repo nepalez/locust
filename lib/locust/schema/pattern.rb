@@ -22,7 +22,7 @@ class Locust::Schema
     def initialize(value)
       super Regexp.new(value.to_s)
     rescue
-      raise ArgumentError,
+      raise DefinitionError,
             "Invalid value #{value.inspect} for the 'pattern' keyword." \
             " The value of this keyword MUST be a string." \
             " This string SHOULD be a valid regular expression," \

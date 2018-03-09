@@ -8,8 +8,8 @@ RSpec.describe Locust::Schema::Format do
     context "with an empty format" do
       let(:source) { "" }
 
-      it "raises ArgumentError" do
-        expect { subject }.to raise_error(ArgumentError)
+      it "raises Locust::Schema::DefinitionError" do
+        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
       end
     end
   end

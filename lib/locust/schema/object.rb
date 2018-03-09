@@ -23,7 +23,7 @@ class Locust::Schema
     def initialize(value)
       super
       return if type
-      raise ArgumentError,
+      raise DefinitionError,
             "Invalid value #{value.inspect} for the object schema." \
             " The value MUST have a proper type."
     end

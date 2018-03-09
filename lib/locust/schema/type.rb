@@ -19,7 +19,7 @@ class Locust::Schema
     def initialize(value)
       super value.to_s
       return if PRIMITIVES.include? self
-      raise ArgumentError,
+      raise DefinitionError,
             "Invalid value #{value.inspect} for the 'type' keyword." \
             " The value of this keyword MUST be stringified" \
             " to any of the following primitives: '#{PRIMITIVES.join("', '")}'."
