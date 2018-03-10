@@ -21,8 +21,10 @@ class Locust::Schema
       value = symbolize_keys(value)
 
       case items = value.delete(:items)
-      when ::Hash  then value[:item]  = items.merge(parent: self)
-      when ::Array then value[:items] = items.map { |item| item.merge(parent: self) }
+      when ::Hash
+        value[:item] = items.merge(parent: self)
+      when ::Array
+        value[:items] = items.map { |item| item.merge(parent: self) }
       end
 
       super value
