@@ -1,4 +1,4 @@
-class Locust::Schema::Object
+class Locust::Schema
   #
   # Describes objects of the 'string' type
   #
@@ -8,7 +8,7 @@ class Locust::Schema::Object
   # @see Validation Keywords for Strings in JSON Schema specification
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.3
   #
-  class String < self
+  class Object::String < Object
     option :maxLength, proc(&:to_i),      optional: true, as: :max_length
     option :minLength, proc(&:to_i),      optional: true, as: :min_length
     option :pattern,   Keywords::Pattern, optional: true

@@ -30,8 +30,11 @@ class Locust
     private
 
     def initialize(value)
-      data = Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
-      super(data)
+      super symbolize_keys(value)
+    end
+
+    def symbolize_keys(value)
+      Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
     rescue
       raise DefinitionError,
             "Invalid value #{value.inspect} for the schema." \

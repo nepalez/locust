@@ -1,4 +1,4 @@
-class Locust::Schema::Object
+class Locust::Schema
   #
   # Describes objects of the numeric types 'integer' and 'number'
   #
@@ -8,7 +8,7 @@ class Locust::Schema::Object
   # @see Validation Keywords for Numeric Instances in JSON Schema specification
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.2
   #
-  class Integer < self
+  class Object::Integer < Object
     # rubocop: disable Metrics/LineLength
     option :multipleOf,       proc(&:to_i), optional: true, as: :multiple_of
     option :maximum,          proc(&:to_i), optional: true

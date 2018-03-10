@@ -12,10 +12,13 @@ class Locust::Schema
     option :type,   Keywords::Type,   optional: true
     option :format, Keywords::Format, optional: true
     option :enum,   Keywords::Enum,   optional: true
-    option :xml,    Keywords::XML,    default: -> { nil }
+    option :xml,    Keywords::XML,    default: -> {}
     option :const,                    optional: true
     option :default,                  optional: true
     option :example,                  optional: true
+    # refers back to the parent object in the schema and property name
+    option :parent,                   optional: true
+    option :name,   proc(&:to_s),     optional: true
 
     #
     # Factory method to construct object of proper type
