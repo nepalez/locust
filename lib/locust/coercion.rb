@@ -6,7 +6,11 @@ class Locust
   #
   module Coercion
     def new(value)
-      value.is_a?(self) ? value : super
+      case value
+      when self then value
+      when Hash then super symbolize_keys(value)
+      else           super value
+      end
     end
 
     def call(value)
@@ -15,6 +19,16 @@ class Locust
 
     def [](value)
       call(value)
+    end
+
+    private
+
+    def symbolize_keys(value)
+      Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
+    rescue
+      raise DefinitionError,
+            "Invalid value #{value.inspect} for the schema." \
+            " The value MUST be a hash."
     end
   end
 end

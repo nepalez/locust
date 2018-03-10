@@ -10,7 +10,6 @@ class Locust::Schema
     require_relative "keywords/pattern"
     require_relative "keywords/properties"
     require_relative "keywords/required"
-    require_relative "keywords/type"
     require_relative "keywords/xml"
   end
 end
