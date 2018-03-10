@@ -1,4 +1,4 @@
-RSpec.describe Locust::Schema::Properties do
+RSpec.describe Locust::Schema::Keywords::Properties do
   let(:properties) { described_class.call source }
   let(:source) do
     { "foo" => { "type" => "null" }, "bar" => { "type" => "file" } }

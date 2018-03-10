@@ -9,15 +9,15 @@ class Locust::Schema::Object
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.3
   #
   class String < self
-    option :maxLength, proc(&:to_i), optional: true, as: :max_length
-    option :minLength, proc(&:to_i), optional: true, as: :min_length
-    option :pattern,   Pattern,      optional: true
+    option :maxLength, proc(&:to_i),      optional: true, as: :max_length
+    option :minLength, proc(&:to_i),      optional: true, as: :min_length
+    option :pattern,   Keywords::Pattern, optional: true
 
     # stringify values
     option :const,   optional: true, type: proc(&:to_s)
     option :default, optional: true, type: proc(&:to_s)
     option :example, optional: true, type: proc(&:to_s)
     option :enum,    optional: true,
-                     type: ->(v) { Enum.call Array(v).map(&:to_s) }
+                     type: ->(v) { Keywords::Enum.call Array(v).map(&:to_s) }
   end
 end

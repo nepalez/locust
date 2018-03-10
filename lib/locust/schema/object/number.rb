@@ -19,7 +19,7 @@ class Locust::Schema::Object
     option :const,   optional: true, type: proc(&:to_f)
     option :default, optional: true, type: proc(&:to_f)
     option :example, optional: true, type: proc(&:to_f)
-    option :enum,    optional: true, type: ->(v) { Enum.call Array(v).map(&:to_f) }
+    option :enum,    optional: true, type: ->(v) { Keywords::Enum.call Array(v).map(&:to_f) }
     # rubocop: enable Metrics/LineLength
   end
 end

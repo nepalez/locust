@@ -8,7 +8,7 @@ class Locust::Schema
   # @see Required in JSON Schema Specification
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.3
   #
-  class Required < SimpleDelegator
+  class Keywords::Required < SimpleDelegator
     extend Coercion
 
     private

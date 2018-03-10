@@ -9,7 +9,7 @@ class Locust::Schema::Object
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.4
   #
   class Array < self
-    option :items,       Items,           optional: true
+    option :items,       Keywords::Items, optional: true
     option :maxItems,    proc(&:to_i),    optional: true, as: :max_items
     option :minItems,    proc(&:to_i),    optional: true, as: :min_items
     option :uniqueItems, true.method(:&), optional: true, as: :unique_items

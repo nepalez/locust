@@ -6,7 +6,7 @@ class Locust::Schema
   # @see Properties in JSON Schema Specification
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.4
   #
-  class Properties < SimpleDelegator
+  class Keywords::Properties < SimpleDelegator
     extend Coercion
 
     private

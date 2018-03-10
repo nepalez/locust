@@ -6,7 +6,7 @@ class Locust::Schema
   # @see Data Type Format in OpenAPI 2.0 specification
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#dataTypeFormat
   #
-  class Format < SimpleDelegator
+  class Keywords::Format < SimpleDelegator
     extend Coercion
 
     private

@@ -10,6 +10,9 @@ class Locust
     extend Dry::Initializer
     extend Coercion = Locust::Coercion
 
+    require_relative "schema/keywords"
+    require_relative "schema/object"
+
     #
     # The exception to be risen when a schema has invalid definition
     #
@@ -34,15 +37,5 @@ class Locust
             "Invalid value #{value.inspect} for the schema." \
             " The value MUST be a hash."
     end
-
-    require_relative "schema/type"
-    require_relative "schema/format"
-    require_relative "schema/pattern"
-    require_relative "schema/enum"
-    require_relative "schema/xml"
-    require_relative "schema/required"
-    require_relative "schema/items"
-    require_relative "schema/properties"
-    require_relative "schema/object"
   end
 end

@@ -1,4 +1,4 @@
-RSpec.describe Locust::Schema::Pattern do
+RSpec.describe Locust::Schema::Keywords::Pattern do
   let(:pattern) { described_class.call source }
   let(:source)  { '^\w+$' }
 

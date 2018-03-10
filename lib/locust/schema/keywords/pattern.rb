@@ -6,7 +6,7 @@ class Locust::Schema
   # @see JSON Schema pattern
   #   https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.2.3
   #
-  class Pattern < SimpleDelegator
+  class Keywords::Pattern < SimpleDelegator
     extend Coercion
 
     def accept?(string)

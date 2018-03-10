@@ -10,11 +10,11 @@ class Locust::Schema::Object
   #
   class Struct < self
     # rubocop: disable Metrics/LineLength
-    option :properties,           Properties,   optional: true
-    option :additionalProperties, Properties,   optional: true, as: :additional_properties
-    option :maxProperties,        proc(&:to_i), optional: true, as: :max_properties
-    option :minProperties,        proc(&:to_i), optional: true, as: :min_properties
-    option :required,             Required,     default: -> { [] }
+    option :required,             Keywords::Required,     default: -> { [] }
+    option :properties,           Keywords::Properties,   optional: true
+    option :additionalProperties, Keywords::Properties,   optional: true, as: :additional_properties
+    option :maxProperties,        proc(&:to_i),           optional: true, as: :max_properties
+    option :minProperties,        proc(&:to_i),           optional: true, as: :min_properties
     # rubocop: enable Metrics/LineLength
   end
 end

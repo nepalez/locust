@@ -9,13 +9,13 @@ class Locust::Schema
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1
   #
   class Object < self
-    option :type,     Type,   optional: true
-    option :format,   Format, optional: true
-    option :enum,     Enum,   optional: true
-    option :xml,      XML,    default: -> { nil }
-    option :const,            optional: true
-    option :default,          optional: true
-    option :example,          optional: true
+    option :type,   Keywords::Type,   optional: true
+    option :format, Keywords::Format, optional: true
+    option :enum,   Keywords::Enum,   optional: true
+    option :xml,    Keywords::XML,    default: -> { nil }
+    option :const,                    optional: true
+    option :default,                  optional: true
+    option :example,                  optional: true
 
     #
     # Factory method to construct object of proper type

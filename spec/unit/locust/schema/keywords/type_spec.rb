@@ -1,4 +1,4 @@
-RSpec.describe Locust::Schema::Type do
+RSpec.describe Locust::Schema::Keywords::Type do
   let(:type)   { described_class.call source }
   let(:source) { nil }
 

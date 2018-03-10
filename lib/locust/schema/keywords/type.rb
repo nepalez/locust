@@ -9,7 +9,7 @@ class Locust::Schema
   # @see JSON Schema primitive types
   #   https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.5
   #
-  class Type < SimpleDelegator
+  class Keywords::Type < SimpleDelegator
     extend Coercion
 
     private

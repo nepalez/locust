@@ -6,7 +6,7 @@ class Locust::Schema
   # @see Enum in JSON Schema Specification
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1.2
   #
-  class Enum < SimpleDelegator
+  class Keywords::Enum < SimpleDelegator
     extend Coercion
 
     private

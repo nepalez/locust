@@ -1,4 +1,5 @@
 RSpec.describe Locust::Schema::Object do
+  let(:types)  { Locust::Schema::Keywords }
   let(:object) { described_class.call schema }
   let(:schema) do
     {
@@ -42,8 +43,8 @@ RSpec.describe Locust::Schema::Object do
       its(:example)        { is_expected.to eq "foo@bar.baz" }
       its(:min_length)     { is_expected.to eq 1 }
       its(:max_length)     { is_expected.to eq 12 }
-      its(:pattern)        { is_expected.to be_kind_of Locust::Schema::Pattern }
-      its(:xml)            { is_expected.to be_kind_of Locust::Schema::XML }
+      its(:pattern)        { is_expected.to be_kind_of types::Pattern }
+      its(:xml)            { is_expected.to be_kind_of types::XML }
       its("xml.name")      { is_expected.to eq "email" }
       its("xml.namespace") { is_expected.to eq "https://example.com" }
       its("xml.prefix")    { is_expected.to eq "params" }
@@ -87,7 +88,7 @@ RSpec.describe Locust::Schema::Object do
       its(:minimum)           { is_expected.to eq 12 }
       its(:exclusive_maximum) { is_expected.to eq 13 }
       its(:exclusive_minimum) { is_expected.to eq 11 }
-      its(:xml)               { is_expected.to be_kind_of Locust::Schema::XML }
+      its(:xml)               { is_expected.to be_kind_of types::XML }
       its("xml.name")         { is_expected.to eq "MagicNumber" }
       its("xml.namespace")    { is_expected.to eq "https://example.com" }
       its("xml.prefix")       { is_expected.to eq "params" }
@@ -131,7 +132,7 @@ RSpec.describe Locust::Schema::Object do
       its(:minimum)           { is_expected.to eq 12.5 }
       its(:exclusive_maximum) { is_expected.to eq 13.1 }
       its(:exclusive_minimum) { is_expected.to eq 11.3 }
-      its(:xml)               { is_expected.to be_kind_of Locust::Schema::XML }
+      its(:xml)               { is_expected.to be_kind_of types::XML }
       its("xml.name")         { is_expected.to eq "MagicNumber" }
       its("xml.namespace")    { is_expected.to eq "https://example.com" }
       its("xml.prefix")       { is_expected.to eq "params" }
@@ -173,7 +174,7 @@ RSpec.describe Locust::Schema::Object do
       its(:max_items)         { is_expected.to eq 3 }
       its(:min_items)         { is_expected.to eq 1 }
       its("items.first.type") { is_expected.to eq "integer" }
-      its(:xml)               { is_expected.to be_kind_of Locust::Schema::XML }
+      its(:xml)               { is_expected.to be_kind_of types::XML }
       its("xml.name")         { is_expected.to eq "MagicNumber" }
       its("xml.namespace")    { is_expected.to eq "https://example.com" }
       its("xml.prefix")       { is_expected.to eq "params" }
@@ -212,9 +213,9 @@ RSpec.describe Locust::Schema::Object do
       its(:required)         { is_expected.to eq %w[id name] }
       its(:max_properties)   { is_expected.to eq 4 }
       its(:min_properties)   { is_expected.to eq 3 }
-      its(:properties)       { is_expected.to be_a Locust::Schema::Properties }
+      its(:properties)       { is_expected.to be_a types::Properties }
       its("properties.keys") { is_expected.to eq %w[id name admin active] }
-      its(:xml)              { is_expected.to be_kind_of Locust::Schema::XML }
+      its(:xml)              { is_expected.to be_kind_of types::XML }
       its("xml.name")        { is_expected.to eq "MagicNumber" }
       its("xml.namespace")   { is_expected.to eq "https://example.com" }
       its("xml.prefix")      { is_expected.to eq "params" }

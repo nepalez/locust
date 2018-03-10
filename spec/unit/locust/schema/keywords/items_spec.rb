@@ -1,4 +1,4 @@
-RSpec.describe Locust::Schema::Items do
+RSpec.describe Locust::Schema::Keywords::Items do
   let(:items) { described_class.call source }
 
   describe ".call" do

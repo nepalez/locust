@@ -1,4 +1,4 @@
-RSpec.describe Locust::Schema::Enum do
+RSpec.describe Locust::Schema::Keywords::Enum do
   let(:enum) { described_class.call source }
 
   describe ".call" do

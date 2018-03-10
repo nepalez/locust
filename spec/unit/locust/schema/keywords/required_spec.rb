@@ -1,4 +1,4 @@
-RSpec.describe Locust::Schema::Required do
+RSpec.describe Locust::Schema::Keywords::Required do
   let(:required) { described_class.call source }
   let(:source)   { %i[foo bar] }
 
