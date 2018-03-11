@@ -7,7 +7,7 @@ class Locust::Schema
   #   https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.2.3
   #
   class Keywords::Pattern < SimpleDelegator
-    extend Coercion
+    extend Locust::Coercion
 
     def accept?(string)
       !reject?(string)
@@ -26,7 +26,7 @@ class Locust::Schema
     end
 
     def raise_error(value)
-      raise DefinitionError,
+      raise Locust::InvalidSchemaError,
             "Invalid value #{value.inspect} for the 'pattern' keyword." \
             " The value of this keyword MUST be a string." \
             " This string SHOULD be a valid regular expression," \

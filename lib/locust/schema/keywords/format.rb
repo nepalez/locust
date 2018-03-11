@@ -7,7 +7,7 @@ class Locust::Schema
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#dataTypeFormat
   #
   class Keywords::Format < SimpleDelegator
-    extend Coercion
+    extend Locust::Coercion
 
     private
 
@@ -17,7 +17,7 @@ class Locust::Schema
     end
 
     def raise_error(value)
-      raise DefinitionError,
+      raise Locust::InvalidSchemaError,
             "Invalid value #{value.inspect} for the 'format' keyword." \
             " The value of this keyword MUST be a non-empty string."
     end

@@ -14,32 +14,32 @@ RSpec.describe Locust::Schema::Object do
   context "without any type" do
     before { schema.delete "type" }
 
-    it "raises Locust::Schema::DefinitionError" do
-      expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+    it "raises Locust::InvalidSchemaError" do
+      expect { subject }.to raise_error(Locust::InvalidSchemaError)
     end
   end
 
   context "with an improper type" do
     before { schema["type"] = "foo" }
 
-    it "raises Locust::Schema::DefinitionError" do
-      expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+    it "raises Locust::InvalidSchemaError" do
+      expect { subject }.to raise_error(Locust::InvalidSchemaError)
     end
   end
 
   context "with an improper format" do
     before { schema["format"] = nil }
 
-    it "raises Locust::Schema::DefinitionError" do
-      expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+    it "raises Locust::InvalidSchemaError" do
+      expect { subject }.to raise_error(Locust::InvalidSchemaError)
     end
   end
 
   context "with an improper enum" do
     before { schema["enum"] = nil }
 
-    it "raises Locust::Schema::DefinitionError" do
-      expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+    it "raises Locust::InvalidSchemaError" do
+      expect { subject }.to raise_error(Locust::InvalidSchemaError)
     end
   end
 end

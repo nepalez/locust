@@ -7,7 +7,7 @@ class Locust::Schema
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.4
   #
   class Keywords::Properties < SimpleDelegator
-    extend Coercion
+    extend Locust::Coercion
 
     private
 
@@ -26,7 +26,7 @@ class Locust::Schema
     end
 
     def raise_error(value)
-      raise DefinitionError,
+      raise Locust::InvalidSchemaError,
             "Invalid value #{value.inspect} for the 'properties' keyword." \
             " The value of this keyword MUST be an object." \
             " Each value of this object MUST be a valid Object Schema."

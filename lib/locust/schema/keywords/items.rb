@@ -7,12 +7,11 @@ class Locust::Schema
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.4.1
   #
   class Keywords::Items < SimpleDelegator
-    extend Coercion
+    extend Locust::Coercion
 
     private
 
     def initialize(value)
-      value = [value] unless value.is_a? Array
       value = value.map { |item| Object.call(item) }
       super value
     end

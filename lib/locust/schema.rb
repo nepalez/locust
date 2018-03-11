@@ -8,15 +8,10 @@ class Locust
   #
   class Schema
     extend Dry::Initializer
-    extend Coercion = Locust::Coercion
+    extend Locust::Coercion
 
     require_relative "schema/keywords"
     require_relative "schema/object"
-
-    #
-    # The exception to be risen when a schema has invalid definition
-    #
-    DefinitionError = Class.new(ArgumentError)
 
     #
     # The hash of known options assigned to the instance

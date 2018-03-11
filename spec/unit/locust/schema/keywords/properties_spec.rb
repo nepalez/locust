@@ -25,16 +25,16 @@ RSpec.describe Locust::Schema::Keywords::Properties do
     context "with a hash containing invalid schema" do
       before { source["baz"] = { "title" => "file" } }
 
-      it "raises Locust::Schema::DefinitionError" do
-        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
       end
     end
 
     context "with not a hash" do
       let(:source) { [{ "type" => "null" }] }
 
-      it "raises Locust::Schema::DefinitionError" do
-        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
       end
     end
   end

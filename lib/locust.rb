@@ -4,6 +4,8 @@ require "dry-initializer"
 # Edge-case examples generator for mutation testing of public APIs
 #
 class Locust
+  # Exception to be risen when object schema is invalid 
+  InvalidSchemaError = Class.new(ArgumentError)
   # Result of generation if the schema object forbids the case
   NotApplicableError = Class.new(StandardError)
 

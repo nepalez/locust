@@ -9,7 +9,7 @@ class Locust::Schema
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.3
   #
   class Keywords::Required < SimpleDelegator
-    extend Coercion
+    extend Locust::Coercion
 
     private
 
@@ -26,7 +26,7 @@ class Locust::Schema
     end
 
     def raise_error(value)
-      raise DefinitionError,
+      raise Locust::InvalidSchemaError,
             "Invalid value #{value.inspect} for the 'required' keyword." \
             " The value of this keyword MUST be an array." \
             " Elements of this array, if any, MUST be non-empty strings," \

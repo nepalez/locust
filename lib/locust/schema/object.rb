@@ -58,7 +58,7 @@ class Locust::Schema
       private
 
       def raise_error(value)
-        raise DefinitionError,
+        raise Locust::InvalidSchemaError,
               "Invalid value #{value.inspect} for the object schema." \
               " The value MUST have a primitive type from the following list:" \
               " '#{PRIMITIVES.keys.join("', '")}'"

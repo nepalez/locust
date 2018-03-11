@@ -26,7 +26,7 @@ class Locust
     def symbolize_keys(value)
       Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
     rescue
-      raise DefinitionError,
+      raise Locust::InvalidSchemaError,
             "Invalid value #{value.inspect} for the schema." \
             " The value MUST be a hash."
     end

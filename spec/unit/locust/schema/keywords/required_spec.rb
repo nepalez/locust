@@ -15,24 +15,24 @@ RSpec.describe Locust::Schema::Keywords::Required do
     context "with an empty values" do
       let(:source) { ["", "foo"] }
 
-      it "raises Locust::Schema::DefinitionError" do
-        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
       end
     end
 
     context "with duplicates" do
       let(:source) { %i[foo bar foo] }
 
-      it "raises Locust::Schema::DefinitionError" do
-        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
       end
     end
 
     context "with non-array value" do
       let(:source) { "foo" }
 
-      it "raises Locust::Schema::DefinitionError" do
-        expect { subject }.to raise_error(Locust::Schema::DefinitionError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
       end
     end
   end
