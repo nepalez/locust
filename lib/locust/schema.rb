@@ -1,17 +1,11 @@
 class Locust
   #
-  # Container for OpenApi schemas
-  #
-  # @see
-  #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject
-  #   https://datatracker.ietf.org/doc/draft-handrews-json-schema-validation/?include_text=1
+  # @abstract
+  # Base class for OpenApi schemas
   #
   class Schema
     extend Dry::Initializer
-    extend Locust::Coercion
-
-    require_relative "schema/keywords"
-    require_relative "schema/object"
+    extend Coercion
 
     #
     # The hash of known options assigned to the instance
