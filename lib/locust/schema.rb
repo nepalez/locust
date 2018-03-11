@@ -1,6 +1,6 @@
 class Locust
   #
-  # Container for OpenAPI 2.0 sub-schema object
+  # Container for OpenApi schemas
   #
   # @see
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject
