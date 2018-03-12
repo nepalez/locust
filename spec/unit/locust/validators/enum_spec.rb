@@ -28,4 +28,20 @@ RSpec.describe Locust::Validators::Enum do
       end
     end
   end
+
+  describe "#errors" do
+    subject { enum.errors object, "foo/bar" }
+
+    let(:source) { %w[Foo Bar] }
+
+    context "when object is included to the source" do
+      let(:object) { "Foo" }
+      it { is_expected.to be_empty }
+    end
+
+    context "when object is not included to the source" do
+      let(:object) { :Bar }
+      it { is_expected.not_to be_empty }
+    end
+  end
 end

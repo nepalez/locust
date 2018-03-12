@@ -8,6 +8,10 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1.2
     #
     class Enum < Base
+      def errors(object, path)
+        return [] if include? object
+        ["The #{object} of object #{path} doesn't match #{self}"]
+      end
 
       private
 
