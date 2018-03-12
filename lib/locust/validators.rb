@@ -5,6 +5,7 @@ class Locust
   #
   module Validators
     require_relative "validators/base"
+    require_relative "validators/const"
     require_relative "validators/enum"
     require_relative "validators/format"
     require_relative "validators/items"
