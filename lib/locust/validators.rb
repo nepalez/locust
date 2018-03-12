@@ -9,6 +9,8 @@ class Locust
     require_relative "validators/enum"
     require_relative "validators/format"
     require_relative "validators/items"
+    require_relative "validators/max_length"
+    require_relative "validators/min_length"
     require_relative "validators/pattern"
     require_relative "validators/properties"
     require_relative "validators/required"

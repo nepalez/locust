@@ -2,9 +2,7 @@ class Locust
   module Validators
     #
     # @private
-    # Container for definition of the 'properties' part of object schema
-    #
-    # @see Properties in JSON Schema Specification
+    # @see The 'properties' keyword in JSON Schema Specification
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.4
     #
     class Properties < Base

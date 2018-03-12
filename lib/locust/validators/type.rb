@@ -2,10 +2,8 @@ class Locust
   module Validators
     #
     # @private
-    # The 'type' validator of object schema
-    #
-    # @see Data Type Format in OpenAPI 2.0 specification
-    #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#dataTypeFormat
+    # @see The 'type' keyword in JSON Schema Specification
+    #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1.1
     #
     class Type < Base
       def errors(object, path)
@@ -17,6 +15,14 @@ class Locust
 
       def initialize(value)
         super value.to_s
+        raise_error(value) unless TYPES.keys.include? self
+      end
+
+      def raise_error(value)
+        raise InvalidSchemaError,
+              "Invalid value #{value.inspect} for the 'type' keyword." \
+              " The value of this keyword MUST be one of the strings:" \
+              " '#{TYPES.keys.join("', '")}'."
       end
 
       TYPES = {

@@ -2,9 +2,7 @@ class Locust
   module Validators
     #
     # @private
-    # Container for definition of the 'enum' part of object schema
-    #
-    # @see Enum in JSON Schema Specification
+    # @see The 'enum' keyword in JSON Schema Specification
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1.2
     #
     class Enum < Base

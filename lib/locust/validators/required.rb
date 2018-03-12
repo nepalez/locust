@@ -2,11 +2,7 @@ class Locust
   module Validators
     #
     # @private
-    # Container for definition of the 'required' part of object schema
-    #
-    # It describes the array of required parameters of some object
-    #
-    # @see Required in JSON Schema Specification
+    # @see The 'required' keyword in JSON Schema Specification
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.3
     #
     class Required < Base

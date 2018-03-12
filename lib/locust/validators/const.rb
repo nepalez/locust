@@ -2,10 +2,8 @@ class Locust
   module Validators
     #
     # @private
-    # The 'const' validator of object schema
-    #
-    # @see Data Type Format in OpenAPI 2.0 specification
-    #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#dataTypeFormat
+    # @see The 'const' keyword in JSON Schema Specification
+    #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1.3
     #
     class Const < Base
       def errors(object, path)

@@ -2,9 +2,7 @@ class Locust
   module Validators
     #
     # @private
-    # Container for definition of the 'format' part of object schema
-    #
-    # @see Data Type Format in OpenAPI 2.0 specification
+    # @see The 'format' keyword in OpenAPI Specification 2.0
     #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#dataTypeFormat
     #
     class Format < Base

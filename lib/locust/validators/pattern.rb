@@ -2,10 +2,8 @@ class Locust
   module Validators
     #
     # @private
-    # Container for definition of the 'pattern' part of object schema
-    #
-    # @see JSON Schema pattern
-    #   https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.2.3
+    # @see The 'pattern' keyword in JSON Schema Specification
+    #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.3.3
     #
     class Pattern < Base
       def accept?(string)
