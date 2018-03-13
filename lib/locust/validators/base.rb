@@ -20,6 +20,33 @@ class Locust
       def errors(_, _)
         []
       end
+
+      #
+      # The human-readable representation of the validator
+      #
+      # @return [String]
+      #
+      def to_str
+        @to_str ||= "self.class[#{self}]"
+      end
+
+      #
+      # The human-readable representation of the validator
+      #
+      # @return [String]
+      #
+      def inspect
+        to_str
+      end
+
+      #
+      # The name of the schema keyword
+      #
+      # @return [String]
+      #
+      def keyword
+        self.class.name.tap { |line| line[0].downcase! }
+      end
     end
   end
 end
