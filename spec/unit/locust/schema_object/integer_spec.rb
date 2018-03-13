@@ -27,7 +27,7 @@ RSpec.describe Locust::SchemaObject do
   end
 
   it { is_expected.to be_kind_of described_class }
-  it { is_expected.to be_kind_of described_class::Integer }
+  it { is_expected.to be_kind_of described_class::Numeric }
 
   its(:type)              { is_expected.to eq "integer" }
   its(:format)            { is_expected.to eq "magic" }

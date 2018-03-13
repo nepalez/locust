@@ -1,11 +1,7 @@
 class Locust
   class SchemaObject
     require_relative "array"
-    require_relative "boolean"
-    require_relative "file"
-    require_relative "integer"
-    require_relative "null"
-    require_relative "number"
+    require_relative "numeric"
     require_relative "object"
     require_relative "string"
 
@@ -16,11 +12,11 @@ class Locust
       # @private
       PRIMITIVES = {
         "array"   => Array,
-        "boolean" => Boolean,
-        "file"    => File,
-        "integer" => Integer,
-        "null"    => Null,
-        "number"  => Number,
+        "boolean" => SchemaObject,
+        "file"    => SchemaObject,
+        "integer" => Numeric,
+        "null"    => SchemaObject,
+        "number"  => Numeric,
         "object"  => Object,
         "string"  => String,
       }.freeze

@@ -3,7 +3,6 @@ RSpec.describe Locust::SchemaObject do
 
   let(:schema) { { "type" => "null" } }
 
-  it { is_expected.to be_kind_of described_class }
-  it { is_expected.to be_kind_of described_class::Null }
+  it { is_expected.to be_instance_of described_class }
   its(:type) { is_expected.to eq "null" }
 end

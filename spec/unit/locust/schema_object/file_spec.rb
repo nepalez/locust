@@ -3,7 +3,6 @@ RSpec.describe Locust::SchemaObject do
 
   let(:schema) { { "type" => "file" } }
 
-  it { is_expected.to be_kind_of described_class }
-  it { is_expected.to be_kind_of described_class::File }
+  it { is_expected.to be_instance_of described_class }
   its(:type) { is_expected.to eq "file" }
 end

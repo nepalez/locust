@@ -1,7 +1,7 @@
 class Locust
   class SchemaObject
     #
-    # Describes schema objects of the 'integer' type
+    # Describes objects of the numeric types 'integer' and 'number'
     #
     # @see Schema Object in OpenAPI 2.0 specification
     #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schema-object
@@ -9,7 +9,7 @@ class Locust
     # @see Validation Keywords for Numeric Instances in JSON Schema specification
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.2
     #
-    class Integer < SchemaObject
+    class Numeric < SchemaObject
       # rubocop: disable Metrics/LineLength
       option :multipleOf,       Validators::MultipleOf, optional: true, as: :multiple_of
       option :maximum,          Validators::Maximum, optional: true
