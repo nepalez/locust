@@ -1,5 +1,5 @@
-RSpec.describe Locust::Validators::MaxLength do
-  let(:limit) { described_class.call source }
+RSpec.describe Locust::Validators::MinProperties do
+  let(:limit)  { described_class.call source }
 
   describe ".call" do
     subject { limit }
@@ -34,20 +34,20 @@ RSpec.describe Locust::Validators::MaxLength do
   describe "#errors" do
     subject { limit.errors object, "foo/bar" }
 
-    let(:source) { 5 }
+    let(:source) { 3 }
 
-    context "when object has no length" do
-      let(:object) { 13.4 }
+    context "when object is not a hash" do
+      let(:object) { [1, 2, 3] }
       it { is_expected.to be_empty }
     end
 
-    context "when object length doesn't exceed the limit" do
-      let(:object) { :fooba }
+    context "when number of object properties satisfies the limit" do
+      let(:object) { { a: 1, b: 2, c: 3 } }
       it { is_expected.to be_empty }
     end
 
-    context "when object length exceeds the limit" do
-      let(:object) { "foobar" }
+    context "when number of object properties breaks the limit" do
+      let(:object) { { a: 1, b: 2 } }
       it { is_expected.not_to be_empty }
     end
   end

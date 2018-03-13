@@ -13,9 +13,9 @@ class Locust
       # rubocop: disable Metrics/LineLength
       option :properties, Validators::Properties, optional: true
       option :required,   Validators::Required,   default: -> { [] }
-      option :additionalProperties, superclass,   optional: true, as: :additional_properties
-      option :maxProperties,        proc(&:to_i), optional: true, as: :max_properties
-      option :minProperties,        proc(&:to_i), optional: true, as: :min_properties
+      option :additionalProperties, SchemaObject, optional: true, as: :additional_properties
+      option :maxProperties, Validators::MaxProperties, optional: true, as: :max_properties
+      option :minProperties, Validators::MinProperties, optional: true, as: :min_properties
       # rubocop: enable Metrics/LineLength
 
       private

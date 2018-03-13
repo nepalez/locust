@@ -22,6 +22,14 @@ RSpec.describe Locust::Validators::MinLength do
         expect { subject }.to raise_error(Locust::InvalidSchemaError)
       end
     end
+
+    context "with a non-integer value" do
+      let(:source) { :foo }
+
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      end
+    end
   end
 
   describe "#errors" do
