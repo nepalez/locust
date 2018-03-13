@@ -13,13 +13,6 @@ class Locust
       option :maxLength, Validators::MaxLength, optional: true, as: :max_length
       option :minLength, Validators::MinLength, optional: true, as: :min_length
       option :pattern,   Validators::Pattern,   optional: true
-
-      # stringify values
-      option :const,   optional: true, type: proc(&:to_s)
-      option :default, optional: true, type: proc(&:to_s)
-      option :example, optional: true, type: proc(&:to_s)
-      option :enum,    optional: true,
-                       type: ->(v) { Validators::Enum.call Array(v).map(&:to_s) }
     end
   end
 end
