@@ -14,9 +14,11 @@ class Locust
     require_relative "validators/exclusive_minimum"
     require_relative "validators/format"
     require_relative "validators/items"
+    require_relative "validators/max_items"
     require_relative "validators/max_length"
     require_relative "validators/max_properties"
     require_relative "validators/maximum"
+    require_relative "validators/min_items"
     require_relative "validators/min_length"
     require_relative "validators/min_properties"
     require_relative "validators/minimum"
@@ -25,6 +27,7 @@ class Locust
     require_relative "validators/properties"
     require_relative "validators/required"
     require_relative "validators/type"
+    require_relative "validators/unique_items"
     require_relative "validators/xml"
   end
 end
