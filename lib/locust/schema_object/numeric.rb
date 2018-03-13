@@ -6,7 +6,7 @@ class Locust
     # @see Schema Object in OpenAPI 2.0 specification
     #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schema-object
     #
-    # @see Validation Keywords for Numeric Instances in JSON Schema specification
+    # @see Validation Keywords for numerics in JSON Schema specification
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.2
     #
     class Numeric < SchemaObject

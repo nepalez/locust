@@ -15,7 +15,7 @@ class Locust
       #
       # @param  [String] path The path to object from the root of the schema
       # @param  [Object] object
-      # @return [Array<String>] list of validation errors 
+      # @return [Array<String>] list of validation errors
       #
       def errors(_, _)
         []

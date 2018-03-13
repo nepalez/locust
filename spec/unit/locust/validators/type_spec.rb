@@ -99,7 +99,7 @@ RSpec.describe Locust::Validators::Type do
       let(:source) { "array" }
 
       context "with an array" do
-        let(:object) { [[:foo, :bar]] }
+        let(:object) { [%i[foo bar]] }
         it { is_expected.to be_empty }
       end
 
@@ -118,7 +118,7 @@ RSpec.describe Locust::Validators::Type do
       end
 
       context "with non-hash object" do
-        let(:object) { [[:foo, :bar]] }
+        let(:object) { [%i[foo bar]] }
         it { is_expected.not_to be_empty }
       end
     end
