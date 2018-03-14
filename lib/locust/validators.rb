@@ -8,6 +8,7 @@ class Locust
     require_relative "validators/base_number"
     require_relative "validators/base_positive"
 
+    require_relative "validators/additional_properties"
     require_relative "validators/const"
     require_relative "validators/enum"
     require_relative "validators/exclusive_maximum"

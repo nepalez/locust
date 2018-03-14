@@ -11,10 +11,10 @@ class Locust
     #
     class Numeric < SchemaObject
       # rubocop: disable Metrics/LineLength
-      option :multipleOf,       Validators::MultipleOf, optional: true, as: :multiple_of
-      option :maximum,          Validators::Maximum, optional: true
+      option :multipleOf,       Validators::MultipleOf,       optional: true, as: :multiple_of
+      option :maximum,          Validators::Maximum,          optional: true
       option :exclusiveMaximum, Validators::ExclusiveMaximum, optional: true, as: :exclusive_maximum
-      option :minimum,          Validators::Minimum, optional: true
+      option :minimum,          Validators::Minimum,          optional: true
       option :exclusiveMinimum, Validators::ExclusiveMinimum, optional: true, as: :exclusive_minimum
       # rubocop: enable Metrics/LineLength
     end
