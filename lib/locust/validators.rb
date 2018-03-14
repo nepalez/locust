@@ -13,6 +13,7 @@ class Locust
     require_relative "validators/exclusive_maximum"
     require_relative "validators/exclusive_minimum"
     require_relative "validators/format"
+    require_relative "validators/item"
     require_relative "validators/items"
     require_relative "validators/max_items"
     require_relative "validators/max_length"

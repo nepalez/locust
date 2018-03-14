@@ -11,11 +11,11 @@ class Locust
     #
     class Array < SchemaObject
       # rubocop: disable Metrics/LineLength
-      option :maxItems,    Validators::MaxItems, optional: true, as: :max_items
-      option :minItems,    Validators::MinItems, optional: true, as: :min_items
+      option :maxItems,    Validators::MaxItems,    optional: true, as: :max_items
+      option :minItems,    Validators::MinItems,    optional: true, as: :min_items
       option :uniqueItems, Validators::UniqueItems, optional: true, as: :unique_items
-      option :items,       Validators::Items,    optional: true
-      option :item,        SchemaObject,         optional: true
+      option :items,       Validators::Items,       optional: true
+      option :item,        Validators::Item,        optional: true
       # rubocop: enable Metrics/LineLength
 
       private

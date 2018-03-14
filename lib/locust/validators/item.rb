@@ -2,15 +2,14 @@ class Locust
   module Validators
     #
     # @private
-    # @see The 'items' keyword in JSON Schema Specification (several values)
+    # @see The 'items' keyword in JSON Schema Specification (single value)
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.4.1
     #
-    class Items < Base
+    class Item < Base
       private
 
       def initialize(value)
-        value = value.map { |item| Locust::SchemaObject.call(item) }
-        super value
+        super Locust::SchemaObject.call(value)
       end
     end
   end

@@ -25,25 +25,25 @@ RSpec.describe Locust::SchemaObject do
   it { is_expected.to be_kind_of described_class }
   it { is_expected.to be_kind_of described_class::Array }
 
-  its(:type)              { is_expected.to eq "array" }
-  its(:format)            { is_expected.to eq "tuple" }
-  its(:default)           { is_expected.to eq [1] }
-  its(:example)           { is_expected.to eq [1, 2.5, 3.5] }
-  its(:unique_items)      { is_expected.to eq true }
-  its(:max_items)         { is_expected.to eq 3 }
-  its(:min_items)         { is_expected.to eq 1 }
-  its(:xml)               { is_expected.to be_kind_of types::XML }
-  its("xml.name")         { is_expected.to eq "MagicNumber" }
-  its("xml.namespace")    { is_expected.to eq "https://example.com" }
-  its("xml.prefix")       { is_expected.to eq "params" }
-  its("xml.attribute")    { is_expected.to eq true }
-  its("xml.wrapped")      { is_expected.to eq true }
+  its(:type)           { is_expected.to eq "array" }
+  its(:format)         { is_expected.to eq "tuple" }
+  its(:default)        { is_expected.to eq [1] }
+  its(:example)        { is_expected.to eq [1, 2.5, 3.5] }
+  its(:unique_items)   { is_expected.to eq true }
+  its(:max_items)      { is_expected.to eq 3 }
+  its(:min_items)      { is_expected.to eq 1 }
+  its(:xml)            { is_expected.to be_kind_of types::XML }
+  its("xml.name")      { is_expected.to eq "MagicNumber" }
+  its("xml.namespace") { is_expected.to eq "https://example.com" }
+  its("xml.prefix")    { is_expected.to eq "params" }
+  its("xml.attribute") { is_expected.to eq true }
+  its("xml.wrapped")   { is_expected.to eq true }
 
   context "with hash for items" do
     before { schema["items"] = { "type" => "integer" } }
 
     its(:items) { is_expected.to be_nil }
-    its(:item)  { is_expected.to be_a Locust::SchemaObject }
+    its(:item)  { is_expected.to be_a types::Item }
     its("item.type") { is_expected.to eq "integer" }
   end
 
@@ -56,7 +56,7 @@ RSpec.describe Locust::SchemaObject do
       ]
     end
 
-    its(:items) { is_expected.to be_a Locust::Validators::Items }
+    its(:items) { is_expected.to be_a types::Items }
     its(:item)  { is_expected.to be_nil }
     its("items.first.type") { is_expected.to eq "integer" }
   end
