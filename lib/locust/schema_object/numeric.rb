@@ -10,13 +10,11 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.2
     #
     class Numeric < SchemaObject
-      # rubocop: disable Metrics/LineLength
-      option :multipleOf,       Validators::MultipleOf,       optional: true, as: :multiple_of
-      option :maximum,          Validators::Maximum,          optional: true
-      option :exclusiveMaximum, Validators::ExclusiveMaximum, optional: true, as: :exclusive_maximum
-      option :minimum,          Validators::Minimum,          optional: true
-      option :exclusiveMinimum, Validators::ExclusiveMinimum, optional: true, as: :exclusive_minimum
-      # rubocop: enable Metrics/LineLength
+      option :exclusiveMaximum, Validators::ExclusiveMaximum
+      option :exclusiveMinimum, Validators::ExclusiveMinimum
+      option :maximum,          Validators::Maximum
+      option :minimum,          Validators::Minimum
+      option :multipleOf,       Validators::MultipleOf
     end
   end
 end

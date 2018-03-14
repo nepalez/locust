@@ -12,14 +12,14 @@ class Locust
     require_relative "schema_object/factory"
     extend Factory
 
-    option :parent,                      optional: true
-    option :name,    proc(&:to_s),       optional: true
-    option :type,    Validators::Type,   optional: true
-    option :format,  Validators::Format, optional: true
-    option :enum,    Validators::Enum,   optional: true
-    option :xml,     Validators::XML,    default: -> {}
-    option :const,   Validators::Const,  optional: true
-    option :default,                     optional: true
-    option :example,                     optional: true
+    option :parent
+    option :name,   proc(&:to_s)
+    option :type,   Validators::Type
+    option :format, Validators::Format
+    option :enum,   Validators::Enum
+    option :xml,    Validators::XML, default: -> {}
+    option :const,  Validators::Const
+    option :default
+    option :example
   end
 end

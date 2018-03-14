@@ -10,13 +10,11 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5
     #
     class Object < SchemaObject
-      # rubocop: disable Metrics/LineLength
-      option :properties,           Validators::Properties,           optional: true
-      option :required,             Validators::Required,             default: -> { [] }
-      option :additionalProperties, Validators::AdditionalProperties, optional: true, as: :additional_properties
-      option :maxProperties,        Validators::MaxProperties,        optional: true, as: :max_properties
-      option :minProperties,        Validators::MinProperties,        optional: true, as: :min_properties
-      # rubocop: enable Metrics/LineLength
+      option :properties,           Validators::Properties
+      option :required,             Validators::Required, default: -> { [] }
+      option :additionalProperties, Validators::AdditionalProperties
+      option :maxProperties,        Validators::MaxProperties
+      option :minProperties,        Validators::MinProperties
 
       private
 
