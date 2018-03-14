@@ -1,8 +1,8 @@
 RSpec.describe Locust::Validators::Items do
-  let(:items) { described_class.call source }
+  let(:validator) { described_class.call source }
 
   describe ".call" do
-    subject { items }
+    subject { validator }
 
     context "with a list of object schemas" do
       let(:source) { [{ "type" => "null" }, { "type" => "file" }] }

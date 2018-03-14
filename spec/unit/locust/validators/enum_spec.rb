@@ -1,8 +1,8 @@
 RSpec.describe Locust::Validators::Enum do
-  let(:enum) { described_class.call source }
+  let(:validator) { described_class.call source }
 
   describe ".call" do
-    subject { enum }
+    subject { validator }
 
     context "with a non-array" do
       let(:source) { "foo" }
@@ -30,7 +30,7 @@ RSpec.describe Locust::Validators::Enum do
   end
 
   describe "#errors" do
-    subject { enum.errors object, "foo/bar" }
+    subject { validator.errors object, "foo/bar" }
 
     let(:source) { %w[Foo Bar] }
 

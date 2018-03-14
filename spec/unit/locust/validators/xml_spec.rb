@@ -1,19 +1,20 @@
 RSpec.describe Locust::Validators::XML do
-  let(:xml) { described_class.call source }
-  let(:source) do
-    {
-      name:      :foo,
-      namespace: :bar,
-      prefix:    :baz,
-      attribute: true,
-      wrapped:   true,
-    }
-  end
+  let(:validator) { described_class.call source }
 
   describe ".call" do
-    subject { xml }
+    subject { validator }
 
     context "with data" do
+      let(:source) do
+        {
+          name:      :foo,
+          namespace: :bar,
+          prefix:    :baz,
+          attribute: true,
+          wrapped:   true,
+        }
+      end
+
       its(:name)      { is_expected.to eq "foo" }
       its(:namespace) { is_expected.to eq "bar" }
       its(:prefix)    { is_expected.to eq "baz" }

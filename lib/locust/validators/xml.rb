@@ -8,11 +8,18 @@ class Locust
     #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#xml-object
     #
     class XML < Schema
-      option :name,      proc(&:to_s)
-      option :namespace, proc(&:to_s)
-      option :prefix,    proc(&:to_s)
-      option :attribute, true.method(:&), default: -> { false }
-      option :wrapped,   true.method(:&), default: -> { false }
+      require_relative "xml/attribute"
+      require_relative "xml/name"
+      require_relative "xml/namespace"
+      require_relative "xml/prefix"
+      require_relative "xml/wrapped"
+
+      option :parent
+      option :name,      Name
+      option :namespace, Namespace
+      option :prefix,    Prefix
+      option :attribute, Attribute, default: -> { false }
+      option :wrapped,   Wrapped,   default: -> { false }
     end
   end
 end

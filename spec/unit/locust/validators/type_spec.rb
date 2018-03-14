@@ -1,9 +1,8 @@
 RSpec.describe Locust::Validators::Type do
-  let(:format) { described_class.call source }
-  let(:source) { nil }
+  let(:validator) { described_class.call source }
 
   describe ".errors" do
-    subject { format.errors object, "foo/bar" }
+    subject { validator.errors object, "foo/bar" }
 
     context "when type is 'null'" do
       let(:source) { "null" }

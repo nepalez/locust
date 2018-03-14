@@ -1,9 +1,9 @@
 RSpec.describe Locust::Validators::Pattern do
-  let(:pattern) { described_class.call source }
-  let(:source)  { '^\w+$' }
+  let(:validator) { described_class.call source }
+  let(:source)    { '^\w+$' }
 
   describe "#accept?" do
-    subject { pattern.accept? string }
+    subject { validator.accept? string }
 
     context "when a string satisfies the pattern" do
       let(:string) { "foobar" }
@@ -17,7 +17,7 @@ RSpec.describe Locust::Validators::Pattern do
   end
 
   describe "#reject?" do
-    subject { pattern.reject? string }
+    subject { validator.reject? string }
 
     context "when a string satisfies the pattern" do
       let(:string) { "foobar" }

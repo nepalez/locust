@@ -1,8 +1,8 @@
 RSpec.describe Locust::Validators::UniqueItems do
-  let(:limit)  { described_class.call source }
+  let(:validator) { described_class.call source }
 
   describe ".call" do
-    subject { limit }
+    subject { validator }
 
     context "with a true" do
       let(:source) { "true" }
@@ -24,7 +24,7 @@ RSpec.describe Locust::Validators::UniqueItems do
   end
 
   describe "#errors" do
-    subject { limit.errors object, "foo/bar" }
+    subject { validator.errors object, "foo/bar" }
 
     context "with true" do
       let(:source) { true }

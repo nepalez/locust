@@ -1,4 +1,4 @@
-RSpec.describe Locust::Validators::Format do
+RSpec.describe Locust::Validators::XML::Namespace do
   let(:validator) { described_class.call source }
 
   describe ".call" do

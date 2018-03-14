@@ -1,8 +1,8 @@
 RSpec.describe Locust::Validators::MaxProperties do
-  let(:limit)  { described_class.call source }
+  let(:validator) { described_class.call source }
 
   describe ".call" do
-    subject { limit }
+    subject { validator }
 
     context "with a positive value" do
       let(:source) { "5" }
@@ -32,7 +32,7 @@ RSpec.describe Locust::Validators::MaxProperties do
   end
 
   describe "#errors" do
-    subject { limit.errors object, "foo/bar" }
+    subject { validator.errors object, "foo/bar" }
 
     let(:source) { 3 }
 

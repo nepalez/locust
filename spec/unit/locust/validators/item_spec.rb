@@ -1,8 +1,8 @@
 RSpec.describe Locust::Validators::Item do
-  let(:items) { described_class.call source }
+  let(:validator) { described_class.call source }
 
   describe ".call" do
-    subject { items }
+    subject { validator }
 
     context "with a valid schema" do
       let(:source) { { "type" => "null" } }
@@ -10,7 +10,7 @@ RSpec.describe Locust::Validators::Item do
     end
 
     context "with an invalid object shema" do
-      let(:source) {  { "title" => "file" } }
+      let(:source) { { "title" => "file" } }
 
       it "raises Locust::InvalidSchemaError" do
         expect { subject }.to raise_error(Locust::InvalidSchemaError)

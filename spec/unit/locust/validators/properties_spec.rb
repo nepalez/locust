@@ -1,11 +1,11 @@
 RSpec.describe Locust::Validators::Properties do
-  let(:properties) { described_class.call source }
+  let(:validator) { described_class.call source }
   let(:source) do
     { "foo" => { "type" => "null" }, "bar" => { "type" => "file" } }
   end
 
   describe ".call" do
-    subject { properties }
+    subject { validator }
 
     context "with a hash of valid object schemas" do
       let(:foo) { subject["foo"] }

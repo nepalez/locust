@@ -1,8 +1,8 @@
 RSpec.describe Locust::Validators::MultipleOf do
-  let(:limit) { described_class.call source }
+  let(:validator) { described_class.call source }
 
   describe ".call" do
-    subject { limit }
+    subject { validator }
 
     context "with a positive value" do
       let(:source) { "5.3" }
@@ -32,7 +32,7 @@ RSpec.describe Locust::Validators::MultipleOf do
   end
 
   describe "#errors" do
-    subject { limit.errors object, "foo/bar" }
+    subject { validator.errors object, "foo/bar" }
 
     let(:source) { 3.1 }
 
