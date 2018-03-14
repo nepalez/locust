@@ -5,8 +5,10 @@ class Locust
   #
   module Validators
     require_relative "validators/base"
+    require_relative "validators/base_boolean"
     require_relative "validators/base_number"
     require_relative "validators/base_positive"
+    require_relative "validators/base_string"
 
     require_relative "validators/additional_properties"
     require_relative "validators/const"

@@ -5,7 +5,7 @@ class Locust
     # @see The 'type' keyword in JSON Schema Specification
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1.1
     #
-    class Type < Base
+    class Type < BaseString
       def errors(object, path)
         return [] if TYPES[self].find { |type| object.is_a? type }
         ["The value #{object} of object #{path} is not a #{self}"]
@@ -14,7 +14,7 @@ class Locust
       private
 
       def initialize(value)
-        super value.to_s
+        super
         raise_error(value) unless TYPES.keys.include? self
       end
 
