@@ -1,11 +1,14 @@
 RSpec.describe Locust::Validators::Required do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
 
   describe ".call" do
     subject { validator }
 
     context "with array of unique values" do
       let(:source) { %i[foo bar] }
+
+      its(:parent) { is_expected.to eq parent }
       it { is_expected.to eq %w[foo bar] }
     end
 

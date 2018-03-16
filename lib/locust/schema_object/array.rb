@@ -18,7 +18,7 @@ class Locust
 
       private
 
-      def initialize(value = {})
+      def initialize(parent, value = {})
         value = symbolize_keys(value)
 
         case items = value.delete(:items)
@@ -28,7 +28,7 @@ class Locust
           value[:items] = items.map { |item| item.merge(parent: self) }
         end
 
-        super value
+        super parent, value
       end
     end
   end

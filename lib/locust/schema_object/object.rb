@@ -18,7 +18,7 @@ class Locust
 
       private
 
-      def initialize(value = {})
+      def initialize(parent, value = {})
         value = symbolize_keys(value)
 
         props = Hash value[:properties]
@@ -26,7 +26,7 @@ class Locust
           o[k.to_sym] = v.merge(parent: self, name: k)
         end
 
-        super(value)
+        super(parent, value)
       end
     end
   end

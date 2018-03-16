@@ -1,11 +1,14 @@
 RSpec.describe Locust::Validators::XML::Wrapped do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
 
   describe ".call" do
     subject { validator }
 
     context "with a true" do
       let(:source) { "true" }
+
+      its(:parent) { is_expected.to eq parent }
       it { is_expected.to eq true }
     end
 

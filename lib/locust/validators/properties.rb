@@ -8,12 +8,12 @@ class Locust
     class Properties < Base
       private
 
-      def initialize(value = {})
+      def initialize(parent, value = {})
         data = hashify(value).each_with_object({}) do |(key, item), obj|
-          obj[key] = SchemaObject.call(item)
+          obj[key] = SchemaObject.call(item, parent)
         end
 
-        super data
+        super parent, data
       end
 
       def hashify(value)

@@ -13,7 +13,7 @@ class Locust
 
       private
 
-      def initialize(value)
+      def initialize(parent, value)
         super
         raise_error(value) unless TYPES.keys.include? self
       end

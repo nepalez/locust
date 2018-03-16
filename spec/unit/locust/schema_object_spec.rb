@@ -1,14 +1,14 @@
 RSpec.describe Locust::SchemaObject do
-  subject      { described_class.call schema }
+  subject      { described_class.call schema, parent }
+  let(:parent) { double :parent }
   let(:schema) { { "type" => "null" } }
 
   context "with a minimal schema" do
     it "applies default options" do
-      expect(subject.options.keys).to match_array %i[type xml]
+      expect(subject.options.keys).to match_array %i[parent type]
     end
 
-    its(:type)         { is_expected.to eq "null" }
-    its("xml.options") { is_expected.to eq attribute: false, wrapped: false }
+    its(:type) { is_expected.to eq "null" }
   end
 
   context "without any type" do

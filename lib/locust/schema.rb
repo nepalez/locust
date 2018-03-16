@@ -7,6 +7,8 @@ class Locust
     extend Dry::Initializer
     extend Coercion
 
+    param :parent
+
     #
     # @!method option(name, type = nil, default: nil)
     # Adds an optional keyword to the current schema

@@ -13,8 +13,8 @@ class Locust
 
       private
 
-      def initialize(value)
-        super uniq_array(value)
+      def initialize(parent, value)
+        super parent, uniq_array(value)
         raise_error(value) unless self == value && any?
       end
 

@@ -1,11 +1,14 @@
 RSpec.describe Locust::Validators::MultipleOf do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
 
   describe ".call" do
     subject { validator }
 
     context "with a positive value" do
       let(:source) { "5.3" }
+
+      its(:parent) { is_expected.to eq parent }
       it { is_expected.to be_positive }
     end
 

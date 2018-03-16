@@ -1,5 +1,6 @@
 RSpec.describe Locust::Validators::Properties do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
   let(:source) do
     { "foo" => { "type" => "null" }, "bar" => { "type" => "file" } }
   end
@@ -11,7 +12,8 @@ RSpec.describe Locust::Validators::Properties do
       let(:foo) { subject["foo"] }
       let(:bar) { subject["bar"] }
 
-      its(:keys) { is_expected.to match_array %w[foo bar] }
+      its(:parent) { is_expected.to eq parent }
+      its(:keys)   { is_expected.to match_array %w[foo bar] }
 
       it "contains a named schemas" do
         expect(foo).to be_a Locust::SchemaObject

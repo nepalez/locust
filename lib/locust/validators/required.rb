@@ -8,9 +8,9 @@ class Locust
     class Required < Base
       private
 
-      def initialize(value)
+      def initialize(parent, value)
         value = stringify_items(value)
-        super value.reject(&:empty?).uniq
+        super parent, value.reject(&:empty?).uniq
         raise_error(value) unless value == self
       end
 

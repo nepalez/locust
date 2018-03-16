@@ -14,12 +14,11 @@ class Locust
       require_relative "xml/prefix"
       require_relative "xml/wrapped"
 
-      option :parent
       option :name,      Name
       option :namespace, Namespace
       option :prefix,    Prefix
-      option :attribute, Attribute, default: -> { false }
-      option :wrapped,   Wrapped,   default: -> { false }
+      option :attribute, Attribute
+      option :wrapped,   Wrapped
     end
   end
 end

@@ -1,5 +1,6 @@
 RSpec.describe Locust::Validators::AdditionalProperties do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
 
   describe ".call" do
     subject { validator }
@@ -9,7 +10,7 @@ RSpec.describe Locust::Validators::AdditionalProperties do
       its(:type)   { is_expected.to eq "null" }
     end
 
-    context "with an invalid object shema" do
+    context "with an invalid object schema" do
       let(:source) {  { "title" => "file" } }
 
       it "raises Locust::InvalidSchemaError" do

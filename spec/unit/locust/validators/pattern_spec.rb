@@ -1,6 +1,13 @@
 RSpec.describe Locust::Validators::Pattern do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
   let(:source)    { '^\w+$' }
+  let(:parent)    { double :parent }
+
+  describe ".call" do
+    subject { validator }
+
+    its(:parent) { is_expected.to eq parent }
+  end
 
   describe "#accept?" do
     subject { validator.accept? string }

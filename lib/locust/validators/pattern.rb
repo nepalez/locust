@@ -16,8 +16,8 @@ class Locust
 
       private
 
-      def initialize(value)
-        super Regexp.new(value.to_s)
+      def initialize(parent, value)
+        super parent, Regexp.new(value.to_s)
       rescue
         raise_error(value)
       end

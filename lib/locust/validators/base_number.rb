@@ -8,9 +8,9 @@ class Locust
     class BaseNumber < Base
       private
 
-      def initialize(value)
+      def initialize(parent, value)
         raise_error(value) unless value.respond_to? :to_f
-        super(value.to_f)
+        super(parent, value.to_f)
         raise_error(value) unless to_s == value.to_s || to_i == value.to_i
       end
 

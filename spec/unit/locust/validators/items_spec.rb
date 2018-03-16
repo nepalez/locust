@@ -1,5 +1,6 @@
 RSpec.describe Locust::Validators::Items do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
 
   describe ".call" do
     subject { validator }
@@ -7,7 +8,8 @@ RSpec.describe Locust::Validators::Items do
     context "with a list of object schemas" do
       let(:source) { [{ "type" => "null" }, { "type" => "file" }] }
 
-      its(:count) { is_expected.to eq 2 }
+      its(:parent) { is_expected.to eq parent }
+      its(:count)  { is_expected.to eq 2 }
       its("first.type") { is_expected.to eq "null" }
       its("last.type")  { is_expected.to eq "file" }
     end
@@ -17,7 +19,7 @@ RSpec.describe Locust::Validators::Items do
       it { is_expected.to eq [] }
     end
 
-    context "with a list containing invalid object shema" do
+    context "with a list containing invalid object schema" do
       let(:source) { [{ "type" => "null" }, { "title" => "file" }] }
 
       it "raises Locust::InvalidSchemaError" do

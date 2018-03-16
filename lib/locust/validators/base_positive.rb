@@ -8,7 +8,7 @@ class Locust
     class BasePositive < BaseNumber
       private
 
-      def initialize(value)
+      def initialize(parent, value)
         super
         raise_error(value) if negative?
       end

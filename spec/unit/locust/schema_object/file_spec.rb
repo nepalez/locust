@@ -1,6 +1,7 @@
 RSpec.describe Locust::SchemaObject do
-  subject { described_class.call schema }
+  subject { described_class.call schema, parent }
 
+  let(:parent) { double :parent }
   let(:schema) { { "type" => "file" } }
 
   it { is_expected.to be_instance_of described_class }

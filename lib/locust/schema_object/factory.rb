@@ -27,11 +27,11 @@ class Locust
       # @param  [Hash<#to_s, Object>] options The definition of the schema
       # @return [Locust::Schema::Object]
       #
-      def call(options)
+      def call(options, parent)
         options = symbolize_keys(options)
         type    = options[:type].to_s.downcase
         klass   = PRIMITIVES.fetch(type) { raise_error(options) }
-        klass.new(options)
+        klass.new(parent, options)
       end
 
       private

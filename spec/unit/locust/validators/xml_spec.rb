@@ -1,5 +1,6 @@
 RSpec.describe Locust::Validators::XML do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
 
   describe ".call" do
     subject { validator }
@@ -15,6 +16,7 @@ RSpec.describe Locust::Validators::XML do
         }
       end
 
+      its(:parent)    { is_expected.to eq parent }
       its(:name)      { is_expected.to eq "foo" }
       its(:namespace) { is_expected.to eq "bar" }
       its(:prefix)    { is_expected.to eq "baz" }
@@ -25,11 +27,12 @@ RSpec.describe Locust::Validators::XML do
     context "by default" do
       let(:source) { nil }
 
+      its(:parent)    { is_expected.to eq parent }
       its(:name)      { is_expected.to be_nil }
       its(:namespace) { is_expected.to be_nil }
       its(:prefix)    { is_expected.to be_nil }
-      its(:attribute) { is_expected.to eq false }
-      its(:wrapped)   { is_expected.to eq false }
+      its(:attribute) { is_expected.to be_nil }
+      its(:wrapped)   { is_expected.to be_nil }
     end
   end
 end

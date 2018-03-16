@@ -1,8 +1,15 @@
 RSpec.describe Locust::Validators::Enum do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
 
   describe ".call" do
     subject { validator }
+
+    context "with array of unique strings" do
+      let(:source) { %w[Foo Bar] }
+
+      its(:parent) { is_expected.to eq parent }
+    end
 
     context "with a non-array" do
       let(:source) { "foo" }

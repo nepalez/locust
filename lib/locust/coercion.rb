@@ -5,20 +5,20 @@ class Locust
   # dry-initializer option/param types.
   #
   module Coercion
-    def new(value)
+    def new(parent, value)
       case value
       when self then value
-      when Hash then super symbolize_keys(value)
-      else           super value
+      when Hash then super(parent, symbolize_keys(value))
+      else           super(parent, value)
       end
     end
 
-    def call(value)
-      new(value)
+    def call(value, parent)
+      new(parent, value)
     end
 
-    def [](value)
-      call(value)
+    def [](value, parent)
+      call(parent, value)
     end
 
     private

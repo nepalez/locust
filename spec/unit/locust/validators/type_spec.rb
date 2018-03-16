@@ -1,5 +1,17 @@
 RSpec.describe Locust::Validators::Type do
-  let(:validator) { described_class.call source }
+  let(:validator) { described_class.call source, parent }
+  let(:parent)    { double :parent }
+
+  describe ".call" do
+    subject { validator }
+
+    context "with a valid type" do
+      let(:source) { :null }
+
+      its(:parent) { is_expected.to eq parent }
+      it { is_expected.to eq "null" }
+    end
+  end
 
   describe ".errors" do
     subject { validator.errors object, "foo/bar" }

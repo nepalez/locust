@@ -47,6 +47,20 @@ class Locust
       def keyword
         self.class.name.tap { |line| line[0].downcase! }
       end
+
+      #
+      # The reference to the parent schema
+      #
+      # @return [String]
+      #
+      attr_reader :parent
+
+      private
+
+      def initialize(parent, value)
+        @parent = parent
+        super(value)
+      end
     end
   end
 end

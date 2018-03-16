@@ -8,8 +8,8 @@ class Locust
     class AdditionalProperties < Base
       private
 
-      def initialize(value)
-        super Locust::SchemaObject.call(value)
+      def initialize(parent, value)
+        super parent, SchemaObject.call(value, parent)
       end
     end
   end

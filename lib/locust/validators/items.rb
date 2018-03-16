@@ -8,9 +8,9 @@ class Locust
     class Items < Base
       private
 
-      def initialize(value)
-        value = value.map { |item| Locust::SchemaObject.call(item) }
-        super value
+      def initialize(parent, value)
+        value = value.map { |item| SchemaObject.call(item, parent) }
+        super parent, value
       end
     end
   end

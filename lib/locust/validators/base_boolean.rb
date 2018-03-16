@@ -8,10 +8,10 @@ class Locust
     class BaseBoolean < Base
       private
 
-      def initialize(value)
+      def initialize(parent, value)
         case value.to_s
-        when "true"  then super(true)
-        when "false" then super(false)
+        when "true"  then super(parent, true)
+        when "false" then super(parent, false)
         else              raise_error(value)
         end
       end

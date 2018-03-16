@@ -8,8 +8,8 @@ class Locust
     class BaseString < Base
       private
 
-      def initialize(value)
-        super value.to_s
+      def initialize(parent, value)
+        super parent, value.to_s
         raise_error(value) if empty?
       end
 
