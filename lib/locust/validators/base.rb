@@ -27,7 +27,7 @@ class Locust
       # @return [String]
       #
       def to_str
-        @to_str ||= "self.class[#{self}]"
+        "#{self.class.name}[#{self}]"
       end
 
       #

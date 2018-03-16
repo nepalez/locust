@@ -25,6 +25,7 @@ class Locust
       # Factory method to construct object of proper type
       #
       # @param  [Hash<#to_s, Object>] options The definition of the schema
+      # @param  [Object] parent The reference to the parent schema
       # @return [Locust::Schema::Object]
       #
       def call(options, parent)
