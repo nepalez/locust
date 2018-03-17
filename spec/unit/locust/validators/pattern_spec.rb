@@ -36,4 +36,23 @@ RSpec.describe Locust::Validators::Pattern do
       it { is_expected.to eq true }
     end
   end
+
+  describe "#errors" do
+    subject { validator.errors(object, "x") }
+
+    context "when a string is accepted" do
+      let(:object) { "foo" }
+      it { is_expected.to be_empty }
+    end
+
+    context "when a string is not accepted" do
+      let(:object) { "---" }
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object is not a string" do
+      let(:object) { 12 }
+      it { is_expected.to be_empty }
+    end
+  end
 end

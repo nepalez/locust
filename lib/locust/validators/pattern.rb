@@ -6,6 +6,13 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.3.3
     #
     class Pattern < Base
+      def errors(object, path)
+        return [] unless object.is_a? String
+        return [] if accept? object
+        ["The value #{object} of the object #{path}" \
+         " doesn't satisfy the pattern #{self}"]
+      end
+
       def accept?(string)
         !reject?(string)
       end
