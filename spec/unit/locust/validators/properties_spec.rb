@@ -40,4 +40,44 @@ RSpec.describe Locust::Validators::Properties do
       end
     end
   end
+
+  describe "#errors" do
+    subject { validator.errors object, "x" }
+
+    let(:source) do
+      {
+        "foo" => { "type" => "null" },
+        "bar" => { "type" => "string" },
+      }
+    end
+
+    context "when object is not a hash" do
+      let(:object) { %w[foo bar] }
+      it { is_expected.to be_empty }
+    end
+
+    context "when all properties satisfy the requirements" do
+      let(:object) do
+        {
+          "foo" => nil,
+          "bar" => "baz",
+          "qux" => 3,
+        }
+      end
+
+      it { is_expected.to be_empty }
+    end
+
+    context "when some properties break the requirement" do
+      let(:object) do
+        {
+          "foo" => "foo",
+          "bar" => "baz",
+          "qux" => 3,
+        }
+      end
+
+      it { is_expected.not_to be_empty }
+    end
+  end
 end

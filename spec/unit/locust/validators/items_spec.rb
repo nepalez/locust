@@ -27,4 +27,25 @@ RSpec.describe Locust::Validators::Items do
       end
     end
   end
+
+  describe "#errors" do
+    subject { validator.errors object, "x" }
+
+    let(:source) { [{ "type" => "null" }, { "type" => "string" }] }
+
+    context "when object is not an array" do
+      let(:object) { { foo: nil } }
+      it { is_expected.to be_empty }
+    end
+
+    context "when corresponding the items satisfy the requirement" do
+      let(:object) { [nil, "foo", 12] }
+      it { is_expected.to be_empty }
+    end
+
+    context "when some items break the requirement" do
+      let(:object) { ["foo", nil, 12] }
+      it { is_expected.not_to be_empty }
+    end
+  end
 end

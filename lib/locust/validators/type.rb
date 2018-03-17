@@ -8,7 +8,7 @@ class Locust
     class Type < BaseString
       def errors(object, path)
         return [] if TYPES[self].find { |type| object.is_a? type }
-        ["The value #{object} of object #{path} is not a #{self}"]
+        ["The value #{object.inspect} of object #{path} is not a #{self}"]
       end
 
       private

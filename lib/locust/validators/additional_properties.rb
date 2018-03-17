@@ -6,10 +6,21 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.6
     #
     class AdditionalProperties < Base
+      def errors(object, path)
+        return [] unless object.is_a? Hash
+
+        object.reject { |key| properties.include? key }
+              .flat_map { |key, item| __getobj__.errors item, "#{path}/#{key}" }
+      end
+
       private
 
       def initialize(parent, value)
         super parent, SchemaObject.call(value, parent)
+      end
+
+      def properties
+        @properties ||= Array parent.properties&.keys
       end
     end
   end

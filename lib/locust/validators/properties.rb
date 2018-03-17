@@ -6,6 +6,14 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.4
     #
     class Properties < Base
+      def errors(object, path)
+        return [] unless object.is_a? Hash
+
+        object.flat_map do |key, item|
+          Array self[key.to_s]&.errors(item, "#{path}/#{key}")
+        end
+      end
+
       private
 
       def initialize(parent, value = {})

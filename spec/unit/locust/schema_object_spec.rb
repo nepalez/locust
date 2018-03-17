@@ -1,45 +1,49 @@
 RSpec.describe Locust::SchemaObject do
-  subject      { described_class.call schema, parent }
+  let(:schema) { described_class.call source, parent }
   let(:parent) { double :parent }
-  let(:schema) { { "type" => "null" } }
+  let(:source) { { "type" => "null" } }
 
-  context "with a minimal schema" do
-    it "applies default options" do
-      expect(subject.options.keys).to match_array %i[parent type]
+  describe ".call" do
+    subject { schema }
+
+    context "with a minimal schema" do
+      it "applies default options" do
+        expect(subject.options.keys).to match_array %i[parent type]
+      end
+
+      its(:type) { is_expected.to eq "null" }
     end
 
-    its(:type) { is_expected.to eq "null" }
-  end
+    context "without any type" do
+      before { source.delete "type" }
 
-  context "without any type" do
-    before { schema.delete "type" }
-
-    it "raises Locust::InvalidSchemaError" do
-      expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      end
     end
-  end
 
-  context "with an improper type" do
-    before { schema["type"] = "foo" }
+    context "with an improper type" do
+      before { source["type"] = "foo" }
 
-    it "raises Locust::InvalidSchemaError" do
-      expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      end
     end
-  end
 
-  context "with an improper format" do
-    before { schema["format"] = nil }
+    context "with an improper format" do
+      before { source["format"] = nil }
 
-    it "raises Locust::InvalidSchemaError" do
-      expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      end
     end
-  end
 
-  context "with an improper enum" do
-    before { schema["enum"] = nil }
+    context "with an improper enum" do
+      before { source["enum"] = nil }
 
-    it "raises Locust::InvalidSchemaError" do
-      expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      it "raises Locust::InvalidSchemaError" do
+        expect { subject }.to raise_error(Locust::InvalidSchemaError)
+      end
     end
   end
 end

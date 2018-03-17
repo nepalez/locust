@@ -20,5 +20,18 @@ class Locust
     option :const,  Validators::Const
     option :default
     option :example
+
+    #
+    # Validates an object by some path, and returns the errors
+    #
+    # @param [Object] object The object described by the schema
+    # @param [#to_s]  path   The path to the object from root of schema
+    # @return [Array<String>]
+    #
+    def errors(object, path)
+      options.values
+             .select { |option| option.is_a? Locust::Validators::Base }
+             .flat_map { |validator| validator.errors(object, path) }
+    end
   end
 end

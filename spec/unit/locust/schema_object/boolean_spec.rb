@@ -1,9 +1,12 @@
 RSpec.describe Locust::SchemaObject do
-  subject { described_class.call schema, parent }
-
+  let(:schema) { described_class.call source, parent }
   let(:parent) { double :parent }
-  let(:schema) { { "type" => "boolean" } }
+  let(:source) { { "type" => "boolean" } }
 
-  it { is_expected.to be_instance_of described_class }
-  its(:type) { is_expected.to eq "boolean" }
+  describe ".call" do
+    subject { schema }
+
+    it { is_expected.to be_instance_of described_class }
+    its(:type) { is_expected.to eq "boolean" }
+  end
 end

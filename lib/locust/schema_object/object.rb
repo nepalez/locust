@@ -11,7 +11,7 @@ class Locust
     #
     class Object < SchemaObject
       option :properties,           Validators::Properties
-      option :required,             Validators::Required, default: -> { [] }
+      option :required,             Validators::Required
       option :additionalProperties, Validators::AdditionalProperties
       option :maxProperties,        Validators::MaxProperties
       option :minProperties,        Validators::MinProperties
