@@ -41,4 +41,25 @@ RSpec.describe Locust::Validators::Required do
       end
     end
   end
+
+  describe "#errors" do
+    subject { validator.errors(object, "") }
+
+    let(:source) { %w[foo bar] }
+
+    context "when object has required keys" do
+      let(:object) { { "foo" => :FOO, "bar" => :BAR, "baz" => :BAZ } }
+      it { is_expected.to be_empty }
+    end
+
+    context "when object misses required keys" do
+      let(:object) { { "foo" => :FOO, "baz" => :BAZ } }
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object is not a hash" do
+      let(:object) { %w[foo bar] }
+      it { is_expected.to be_empty }
+    end
+  end
 end

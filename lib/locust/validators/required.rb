@@ -6,6 +6,16 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.3
     #
     class Required < Base
+      def errors(object, path)
+        return [] unless object.is_a? Hash
+
+        missed = self - object.keys.map(&:to_s)
+        return [] if missed.empty?
+
+        ["The required properties '#{missed.join("', '")}'" \
+         " were missed in the object #{path}"]
+      end
+
       private
 
       def initialize(parent, value)
