@@ -10,11 +10,11 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5
     #
     class Object < SchemaObject
-      option :properties,           Validators::Properties
-      option :required,             Validators::Required
-      option :additionalProperties, Validators::AdditionalProperties
-      option :maxProperties,        Validators::MaxProperties
-      option :minProperties,        Validators::MinProperties
+      option :properties,           Keywords::Properties
+      option :required,             Keywords::Required
+      option :additionalProperties, Keywords::AdditionalProperties
+      option :maxProperties,        Keywords::MaxProperties
+      option :minProperties,        Keywords::MinProperties
 
       private
 

@@ -10,11 +10,11 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.4
     #
     class Array < SchemaObject
-      option :maxItems,    Validators::MaxItems
-      option :minItems,    Validators::MinItems
-      option :uniqueItems, Validators::UniqueItems
-      option :items,       Validators::Items
-      option :item,        Validators::Item
+      option :maxItems,    Keywords::MaxItems
+      option :minItems,    Keywords::MinItems
+      option :uniqueItems, Keywords::UniqueItems
+      option :items,       Keywords::Items
+      option :item,        Keywords::Item
 
       private
 

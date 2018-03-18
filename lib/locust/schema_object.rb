@@ -13,11 +13,11 @@ class Locust
     extend Factory
 
     option :name,   proc(&:to_s)
-    option :type,   Validators::Type
-    option :format, Validators::Format
-    option :enum,   Validators::Enum
-    option :xml,    Validators::XML
-    option :const,  Validators::Const
+    option :type,   Keywords::Type
+    option :format, Keywords::Format
+    option :enum,   Keywords::Enum
+    option :xml,    Keywords::XML
+    option :const,  Keywords::Const
     option :default
     option :example
 

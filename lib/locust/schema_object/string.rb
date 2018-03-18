@@ -10,9 +10,9 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.3
     #
     class String < SchemaObject
-      option :maxLength, Validators::MaxLength
-      option :minLength, Validators::MinLength
-      option :pattern,   Validators::Pattern
+      option :maxLength, Keywords::MaxLength
+      option :minLength, Keywords::MinLength
+      option :pattern,   Keywords::Pattern
     end
   end
 end

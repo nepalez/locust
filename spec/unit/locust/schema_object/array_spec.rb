@@ -5,7 +5,7 @@ RSpec.describe Locust::SchemaObject do
   describe ".call" do
     subject { schema }
 
-    let(:types)  { Locust::Validators }
+    let(:types)  { Locust::Keywords }
     let(:source) do
       {
         "type"        => :array,

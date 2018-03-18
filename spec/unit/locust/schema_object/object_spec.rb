@@ -1,7 +1,7 @@
 RSpec.describe Locust::SchemaObject do
   let(:schema) { described_class.call source, parent }
   let(:parent) { double :parent }
-  let(:types)  { Locust::Validators }
+  let(:types)  { Locust::Keywords }
   let(:source) do
     {
       "type"          => :object,

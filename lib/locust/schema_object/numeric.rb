@@ -10,11 +10,11 @@ class Locust
     #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.2
     #
     class Numeric < SchemaObject
-      option :exclusiveMaximum, Validators::ExclusiveMaximum
-      option :exclusiveMinimum, Validators::ExclusiveMinimum
-      option :maximum,          Validators::Maximum
-      option :minimum,          Validators::Minimum
-      option :multipleOf,       Validators::MultipleOf
+      option :exclusiveMaximum, Keywords::ExclusiveMaximum
+      option :exclusiveMinimum, Keywords::ExclusiveMinimum
+      option :maximum,          Keywords::Maximum
+      option :minimum,          Keywords::Minimum
+      option :multipleOf,       Keywords::MultipleOf
     end
   end
 end
