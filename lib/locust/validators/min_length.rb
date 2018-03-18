@@ -9,7 +9,7 @@ class Locust
       def errors(object, path)
         return [] unless object.respond_to? :length
         return [] if object.length >= self
-        ["The length of value '#{object}' of object #{path}" \
+        ["The length of value '#{object}' of object #{to_i}" \
          " is less than #{self}"]
       end
     end

@@ -57,4 +57,77 @@ RSpec.describe Locust::SchemaObject do
       expect(names).to match_array %w[id name admin active]
     end
   end
+
+  describe "#errors" do
+    subject { schema.errors object, "x" }
+
+    let(:source) { { "type" => "object" } }
+
+    context "when object satisfies all the constraints" do
+      let(:object) { { id: 3, name: "Joe", admin: true, gender: "male" } }
+      let(:source) do
+        {
+          "type"          => :object,
+          "required"      => %i[id name],
+          "maxProperties" => 4,
+          "minProperties" => 3,
+          "properties"    => {
+            "id"     => { "type" => "integer", "minimum" => 1 },
+            "name"   => { "type" => "string" },
+            "admin"  => { "type" => "boolean" },
+          },
+          "additionalProperties" => { "type" => "string" },
+        }
+      end
+
+      it { is_expected.to be_empty }
+    end
+
+    context "when object breaks the 'const' constraint" do
+      before { source["const"] = { id: 3, name: "Joe" } }
+      let(:object) { { id: 1, name: "John" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'enum' constraint" do
+      before { source["const"] = [{ id: 3, name: "Joe" }] }
+      let(:object) { { id: 1, name: "John" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'maxProperties' constraint" do
+      before { source["maxProperties"] = 3 }
+      let(:object) { { id: 1, name: "Joe", admin: true, gender: "male" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'minProperties' constraint" do
+      before { source["minProperties"] = 3 }
+      let(:object) { { id: 1, name: "Joe" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'properties' constraint" do
+      before { source["properties"] = { id: { type: "integer" } } }
+      let(:object) { { id: "joe", name: "Joe" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'additionalProperties' constraint" do
+      before { source["additionalProperties"] = { type: "string" } }
+      let(:object) { { id: 1, name: "Joe" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'type' constraint" do
+      let(:object) { "foo" }
+      it { is_expected.not_to be_empty }
+    end
+  end
 end

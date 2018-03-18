@@ -9,7 +9,7 @@ class Locust
       def errors(object, path)
         return [] unless object.is_a? Hash
         return [] if object.count >= self
-        ["The number of properties of object #{path} is less than #{self}"]
+        ["The number of properties of object #{path} is less than #{to_i}"]
       end
     end
   end

@@ -9,7 +9,7 @@ class Locust
       def errors(object, path)
         return [] unless object.is_a? Hash
 
-        object.reject { |key| properties.include? key }
+        object.reject { |key| properties.include? key.to_s }
               .flat_map { |key, item| __getobj__.errors item, "#{path}/#{key}" }
       end
 

@@ -29,9 +29,18 @@ class Locust
     # @return [Array<String>]
     #
     def errors(object, path)
-      options.values
-             .select { |option| option.is_a? Locust::Validators::Base }
-             .flat_map { |validator| validator.errors(object, path) }
+      validators.flat_map { |validator| validator.errors(object, path) }
+    end
+
+    private
+
+    def validators
+      @validators ||= options.each_with_object([]) do |(key, val), obj|
+        next if key == :parent
+        next unless val.respond_to?(:errors)
+        next unless val.method(:errors).arity == 2
+        obj << val
+      end
     end
   end
 end

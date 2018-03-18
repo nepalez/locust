@@ -1,29 +1,30 @@
 RSpec.describe Locust::SchemaObject do
   let(:schema) { described_class.call source, parent }
   let(:parent) { double :parent }
-  let(:types)  { Locust::Validators }
-  let(:source) do
-    {
-      "type"        => :array,
-      "format"      => :tuple,
-      "readOnly"    => true,
-      "minItems"    => "1",
-      "maxItems"    => "3",
-      "uniqueItems" => true,
-      "default"     => [1],
-      "example"     => [1, 2.5, 3.5],
-      "xml"         => {
-        "name"      => "MagicNumber",
-        "namespace" => "https://example.com",
-        "prefix"    => "params",
-        "attribute" => true,
-        "wrapped"   => true,
-      },
-    }
-  end
 
   describe ".call" do
     subject { schema }
+
+    let(:types)  { Locust::Validators }
+    let(:source) do
+      {
+        "type"        => :array,
+        "format"      => :tuple,
+        "readOnly"    => true,
+        "minItems"    => "1",
+        "maxItems"    => "3",
+        "uniqueItems" => true,
+        "default"     => [1],
+        "example"     => [1, 2.5, 3.5],
+        "xml"         => {
+          "name"      => "MagicNumber",
+          "namespace" => "https://example.com",
+          "prefix"    => "params",
+          "attribute" => true,
+          "wrapped"   => true,
+        },
+      }
+    end
 
     it { is_expected.to be_kind_of described_class }
     it { is_expected.to be_kind_of described_class::Array }
@@ -62,6 +63,77 @@ RSpec.describe Locust::SchemaObject do
       its(:items) { is_expected.to be_a types::Items }
       its(:item)  { is_expected.to be_nil }
       its("items.first.type") { is_expected.to eq "integer" }
+    end
+  end
+
+  describe "#errors" do
+    subject { schema.errors object, "x" }
+
+    let(:source) { { "type" => "array" } }
+
+    context "when object satisfies all the constraints" do
+      let(:object) { %w[foo bar baz] }
+      let(:source) do
+        {
+          "type"  => :array,
+          "items" => {
+            "type"    => "string",
+            "pattern" => '^\w',
+          },
+          "minItems"    => "2",
+          "maxItems"    => "4",
+          "uniqueItems" => true,
+        }
+      end
+
+      it { is_expected.to be_empty }
+    end
+
+    context "when object breaks the 'const' constraint" do
+      before { source["const"] = %w[foo] }
+      let(:object) { %w[foo bar] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'enum' constraint" do
+      before { source["const"] = [%w[foo], %w[bar]] }
+      let(:object) { %w[foo bar] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'minItems' constraint" do
+      before { source["minItems"] = 3 }
+      let(:object) { %w[foo bar] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'maxItems' constraint" do
+      before { source["maxItems"] = 3 }
+      let(:object) { %w[foo bar baz qux] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'uniqueItems' constraint" do
+      before { source["uniqueItems"] = true }
+      let(:object) { %w[foo bar bar] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'item' constraint" do
+      before { source["item"] = { "type" => "string", "pattern" => 'r$' } }
+      let(:object) { %w[foo bar baz] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks the 'type' constraint" do
+      let(:object) { "foo" }
+      it { is_expected.not_to be_empty }
     end
   end
 end

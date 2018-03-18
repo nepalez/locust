@@ -9,7 +9,7 @@ class Locust
       def errors(object, path)
         return [] unless object.is_a? Array
         return [] if object.count <= self
-        ["The number of items in #{path} exceeds #{self}"]
+        ["The number of items in #{path} exceeds #{to_i}"]
       end
     end
   end
