@@ -18,8 +18,8 @@ class Locust
   #     option :value, SchemaObject
   #
   #     struct do
-  #       describe "The value of this keyword MUST be a valid schema object."
   #       name     { index ? "items[#{index}]" : "items" }
+  #       describe "The value of this keyword MUST be a valid schema object."
   #     end
   #   end
   #
@@ -28,10 +28,10 @@ class Locust
   #     option :value
   #
   #     struct do
+  #       name     "format"
+  #       describe "The value of this keyword MUST be non-empty string."
   #       coerce   { |value| value.to_s if value.is_a? Symbol }
   #       coerce   { |value| { value: value } }
-  #       describe "The value of this keyword MUST be non-empty string."
-  #       name     "format"
   #       validate { value.is_a? String }
   #       validate { value != "" }
   #     end
@@ -40,6 +40,8 @@ class Locust
   class Struct
     extend Dry::Initializer
     param :parent # back reference to the parent object
+
+    require_relative "struct/definition"
 
     class << self
       #
@@ -83,6 +85,12 @@ class Locust
       end
 
       private
+
+      attr_reader :definition
+
+      def struct
+        @definition = Definition.new { yield }
+      end
 
       def symbolize_keys(value)
         Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
