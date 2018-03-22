@@ -18,15 +18,12 @@ class Locust
 
       private
 
-      def initialize(parent, value = {})
-        value = symbolize_keys(value)
-
-        props = Hash value[:properties]
-        value[:properties] = props.each_with_object({}) do |(k, v), o|
-          o[k.to_sym] = v.merge(parent: self, name: k)
+      def initialize(parent, properties: nil, **opts)
+        properties = Hash(properties).each_with_object({}) do |(k, v), o|
+          o[k.to_sym] = v.merge(name: k)
         end
 
-        super(parent, value)
+        super(parent, properties: properties, **opts)
       end
     end
   end

@@ -12,7 +12,6 @@ class Locust
   require_relative "locust/struct"
 
   require_relative "locust/coercion"
-  require_relative "locust/schema"
 
   require_relative "locust/config"
   require_relative "locust/validators"

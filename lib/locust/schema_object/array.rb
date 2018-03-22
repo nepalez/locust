@@ -18,14 +18,10 @@ class Locust
 
       private
 
-      def initialize(parent, value = {})
-        value = symbolize_keys(value)
-
-        case items = value.delete(:items)
-        when ::Hash
-          value[:item] = items.merge(parent: self)
-        when ::Array
-          value[:items] = items.map { |item| item.merge(parent: self) }
+      def initialize(parent, items: nil, **value)
+        case items
+        when ::Hash  then value[:item]  = items
+        when ::Array then value[:items] = items
         end
 
         super parent, value

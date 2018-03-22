@@ -8,7 +8,7 @@ RSpec.describe Locust::SchemaObject do
 
     context "with a minimal schema" do
       it "applies default options" do
-        expect(subject.options.keys).to match_array %i[parent type]
+        expect(subject.options.keys).to match_array %i[type]
       end
 
       its(:type) { is_expected.to eq "null" }

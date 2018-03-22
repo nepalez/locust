@@ -8,7 +8,7 @@ class Locust
   # @see Validation Keywords for Any Instance Type in JSON Schema Specification
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1
   #
-  class SchemaObject < Schema
+  class SchemaObject < Struct
     require_relative "schema_object/factory"
     extend Factory
 

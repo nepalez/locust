@@ -7,7 +7,7 @@ class Locust
     # @see XML Object in OpenAPI Specification
     #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#xml-object
     #
-    class XML < Schema
+    class XML < Struct
       require_relative "xml/attribute"
       require_relative "xml/name"
       require_relative "xml/namespace"
