@@ -1,7 +1,41 @@
 class Locust
   #
-  # @abstract
-  # Defines a struct with references to the parent and chidren
+  # Defines a nested struct with references to the parent and chidren,
+  # and methods to coerce and validate the initialized instance.
+  #
+  # It uses [Struct::Definition] to specify methods to
+  # - set the name of the nested struct in error messages
+  # - describe a proper format of the current struct in error messages
+  # - coerce the assigned value to the hash of options
+  # - validate the initialized struct
+  #
+  # Its method [#error_messages] collects all validation errors,
+  # which are built using `name` and `describe` definitions.
+  #
+  # @example
+  #   class Item < Struct
+  #     option :index, proc(&:to_i)
+  #     option :value, SchemaObject
+  #
+  #     struct do
+  #       describe "The value of this keyword MUST be a valid schema object."
+  #       name     { index ? "items[#{index}]" : "items" }
+  #     end
+  #   end
+  #
+  # @example
+  #   class Format < Struct
+  #     option :value
+  #
+  #     struct do
+  #       coerce   { |value| value.to_s if value.is_a? Symbol }
+  #       coerce   { |value| { value: value } }
+  #       describe "The value of this keyword MUST be non-empty string."
+  #       name     "format"
+  #       validate { value.is_a? String }
+  #       validate { value != "" }
+  #     end
+  #   end
   #
   class Struct
     extend Dry::Initializer
