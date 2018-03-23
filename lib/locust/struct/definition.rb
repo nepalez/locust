@@ -12,7 +12,7 @@ class Locust
       # @return [Locust::Struct::Definition]
       #
       def self.new(&block)
-        super.tap { |record| record.instance_eval(&block) if block }
+        super.tap { |record| record.instance_exec(&block) if block }
       end
 
       #

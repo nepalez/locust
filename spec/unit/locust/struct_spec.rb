@@ -59,4 +59,21 @@ RSpec.describe Locust::Struct do
       it { is_expected.to eq [] }
     end
   end
+
+  describe "#ancestors" do
+    subject { struct.ancestors }
+
+    let(:struct)  { klass.new farther, {} }
+    let(:farther) { klass.new grandpa, {} }
+    let(:grandpa) { klass.new parent, {} }
+
+    it "returns a list of struct ancestors" do
+      expect(subject).to eq [grandpa, farther]
+    end
+
+    context "with no ancestors" do
+      subject { grandpa.ancestors }
+      it { is_expected.to eq [] }
+    end
+  end
 end

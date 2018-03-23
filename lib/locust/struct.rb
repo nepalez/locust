@@ -86,12 +86,6 @@ class Locust
 
       private
 
-      attr_reader :definition
-
-      def struct
-        @definition = Definition.new { yield }
-      end
-
       def symbolize_keys(value)
         Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
       rescue
@@ -119,6 +113,16 @@ class Locust
     #
     def children
       @children ||= options.values.select { |value| value.is_a? Locust::Struct }
+    end
+
+    #
+    # The ordered list of ancestor structs from the root
+    #
+    # @return [Array<Locust::Struct>]
+    #
+    def ancestors
+      @ancestors ||= \
+        parent.is_a?(Locust::Struct) ? parent.ancestors + [parent] : []
     end
   end
 end
