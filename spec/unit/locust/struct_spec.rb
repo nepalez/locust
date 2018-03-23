@@ -76,4 +76,29 @@ RSpec.describe Locust::Struct do
       it { is_expected.to eq [] }
     end
   end
+
+  describe "#full_path" do
+    subject { baz.full_path }
+
+    before do
+      class Foo < described_class
+        struct { name "foo[1]" }
+      end
+
+      class Bar < described_class
+      end
+
+      class Baz < described_class
+        struct { name "baz" }
+      end
+    end
+
+    let(:foo) { Foo.new nil, {} }
+    let(:bar) { Bar.new foo, {} }
+    let(:baz) { Baz.new bar, {} }
+
+    it "builds the full path to the current struct" do
+      expect(subject).to eq "foo[1].baz"
+    end
+  end
 end

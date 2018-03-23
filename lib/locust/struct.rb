@@ -84,7 +84,18 @@ class Locust
         super(parent, data)
       end
 
+      #
+      # @!attribute [r] definition
+      #
+      # @return [Locust::Struct::Definition] the definition of the struct
+      #
+      attr_reader :definition
+
       private
+
+      def struct(&block)
+        @definition = Definition.new(&block)
+      end
 
       def symbolize_keys(value)
         Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
@@ -123,6 +134,18 @@ class Locust
     def ancestors
       @ancestors ||= \
         parent.is_a?(Locust::Struct) ? parent.ancestors + [parent] : []
+    end
+
+    #
+    # Returns a full path to the current struct
+    #
+    # @return [String]
+    #
+    def full_path
+      @full_path ||= (ancestors + [self])
+                     .map { |item| item.class.definition&.part(item) }
+                     .compact
+                     .join(".")
     end
   end
 end
