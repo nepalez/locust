@@ -80,6 +80,7 @@ class Locust
       #
       def new(parent, data)
         return data if data.is_a? self
+        data = definition.prepare(data)
         data = data.is_a?(Hash) ? symbolize_keys(data) : {}
 
         super(parent, data)

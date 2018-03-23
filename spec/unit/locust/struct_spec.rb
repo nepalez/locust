@@ -23,6 +23,18 @@ RSpec.describe Locust::Struct do
 
       it { is_expected.to eq other }
     end
+
+    context "when data are coerced" do
+      let(:struct) { klass.new parent, :qux }
+      let(:klass) do
+        Class.new(described_class) do
+          option :bar
+          struct { coerce { |value| { bar: value.to_s.upcase } } }
+        end
+      end
+
+      its(:bar) { is_expected.to eq "QUX" }
+    end
   end
 
   describe ".call" do
