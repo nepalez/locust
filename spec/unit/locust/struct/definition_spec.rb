@@ -12,8 +12,8 @@ RSpec.describe Locust::Struct::Definition do
     end
 
     context "with a set of coercions" do
-      let(:definition) do
-        described_class.new do
+      before do
+        definition.instance_exec do
           coerce { |value| value.to_s.upcase }
           coerce { |value| { value: value } }
         end
@@ -33,8 +33,8 @@ RSpec.describe Locust::Struct::Definition do
     end
 
     context "when all validations succeeded" do
-      let(:definition) do
-        described_class.new do
+      before do
+        definition.instance_exec do
           validate { foo }
           validate { foo == :bar }
         end
@@ -44,8 +44,8 @@ RSpec.describe Locust::Struct::Definition do
     end
 
     context "when some validation failed" do
-      let(:definition) do
-        described_class.new do
+      before do
+        definition.instance_exec do
           validate { foo.is_a? Integer }
           validate { foo.odd? }
         end
@@ -59,11 +59,7 @@ RSpec.describe Locust::Struct::Definition do
     subject { definition.part(struct) }
 
     context "with a static name" do
-      let(:definition) do
-        described_class.new do
-          name :qux
-        end
-      end
+      before { definition.instance_exec { name :qux } }
 
       it "stringifies the name" do
         expect(subject).to eq "qux"
@@ -71,11 +67,7 @@ RSpec.describe Locust::Struct::Definition do
     end
 
     context "with a dynamic name" do
-      let(:definition) do
-        described_class.new do
-          name { foo }
-        end
-      end
+      before { definition.instance_exec { name { foo } } }
 
       it "builds the string lazily" do
         expect(subject).to eq "bar"
@@ -83,7 +75,7 @@ RSpec.describe Locust::Struct::Definition do
     end
 
     context "without any name" do
-      it { is_expected.to eq "" }
+      it { is_expected.to be_nil }
     end
   end
 
@@ -91,11 +83,7 @@ RSpec.describe Locust::Struct::Definition do
     subject { definition.desc(struct) }
 
     context "with a static decription" do
-      let(:definition) do
-        described_class.new do
-          describe :qux
-        end
-      end
+      before { definition.instance_exec { describe :qux } }
 
       it "stringifies the description" do
         expect(subject).to eq "qux"
@@ -103,11 +91,7 @@ RSpec.describe Locust::Struct::Definition do
     end
 
     context "with a dynamic description" do
-      let(:definition) do
-        described_class.new do
-          describe { foo }
-        end
-      end
+      before { definition.instance_exec { describe { foo } } }
 
       it "builds the string lazily" do
         expect(subject).to eq "bar"
@@ -115,7 +99,7 @@ RSpec.describe Locust::Struct::Definition do
     end
 
     context "without any description" do
-      it { is_expected.to eq "" }
+      it { is_expected.to be_nil }
     end
   end
 end

@@ -42,7 +42,7 @@ class Locust
       # @return [String]
       #
       def part(struct)
-        (@name.is_a?(Proc) ? struct.instance_exec(&@name) : @name).to_s
+        (@name.is_a?(Proc) ? struct.instance_exec(&@name) : @name)&.to_s
       end
 
       #
@@ -52,7 +52,7 @@ class Locust
       # @return [String]
       #
       def desc(struct)
-        (@desc.is_a?(Proc) ? struct.instance_exec(&@desc) : @desc).to_s
+        (@desc.is_a?(Proc) ? struct.instance_exec(&@desc) : @desc)&.to_s
       end
 
       private

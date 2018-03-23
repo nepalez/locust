@@ -60,45 +60,20 @@ RSpec.describe Locust::Struct do
     end
   end
 
-  describe "#ancestors" do
-    subject { struct.ancestors }
+  describe "#parents" do
+    subject { struct.parents }
 
     let(:struct)  { klass.new farther, {} }
     let(:farther) { klass.new grandpa, {} }
     let(:grandpa) { klass.new parent, {} }
 
-    it "returns a list of struct ancestors" do
+    it "returns a list of struct parents" do
       expect(subject).to eq [grandpa, farther]
     end
 
-    context "with no ancestors" do
-      subject { grandpa.ancestors }
+    context "when a parent is not a struct" do
+      subject { grandpa.parents }
       it { is_expected.to eq [] }
-    end
-  end
-
-  describe "#full_path" do
-    subject { baz.full_path }
-
-    before do
-      class Foo < described_class
-        struct { name "foo[1]" }
-      end
-
-      class Bar < described_class
-      end
-
-      class Baz < described_class
-        struct { name "baz" }
-      end
-    end
-
-    let(:foo) { Foo.new nil, {} }
-    let(:bar) { Bar.new foo, {} }
-    let(:baz) { Baz.new bar, {} }
-
-    it "builds the full path to the current struct" do
-      expect(subject).to eq "foo[1].baz"
     end
   end
 end

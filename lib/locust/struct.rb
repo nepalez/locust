@@ -81,20 +81,23 @@ class Locust
       def new(parent, data)
         return data if data.is_a? self
         data = data.is_a?(Hash) ? symbolize_keys(data) : {}
+
         super(parent, data)
       end
 
       #
-      # @!attribute [r] definition
+      # The class-level definition of the struct
       #
-      # @return [Locust::Struct::Definition] the definition of the struct
+      # @return [Locust::Struct::Definition]
       #
-      attr_reader :definition
+      def definition
+        @definition ||= Definition.new
+      end
 
       private
 
       def struct(&block)
-        @definition = Definition.new(&block)
+        self.tap { definition.instance_exec(&block) }
       end
 
       def symbolize_keys(value)
@@ -127,25 +130,12 @@ class Locust
     end
 
     #
-    # The ordered list of ancestor structs from the root
+    # The ordered list of all the parent structs
     #
     # @return [Array<Locust::Struct>]
     #
-    def ancestors
-      @ancestors ||= \
-        parent.is_a?(Locust::Struct) ? parent.ancestors + [parent] : []
-    end
-
-    #
-    # Returns a full path to the current struct
-    #
-    # @return [String]
-    #
-    def full_path
-      @full_path ||= (ancestors + [self])
-                     .map { |item| item.class.definition&.part(item) }
-                     .compact
-                     .join(".")
+    def parents
+      @parents ||= parent.is_a?(Locust::Struct) ? parent.parents + [parent] : []
     end
   end
 end
