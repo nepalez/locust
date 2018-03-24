@@ -41,7 +41,7 @@ class Locust
       # @param  [Locust::Struct] struct
       # @return [String]
       #
-      def part(struct)
+      def local_name(struct)
         (@name.is_a?(Proc) ? struct.instance_exec(&@name) : @name)&.to_s
       end
 

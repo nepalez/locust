@@ -24,14 +24,13 @@ class Locust
       end
 
       #
-      # Factory method to be used in option coercers
+      # Define class-level properties of the struct
       #
-      # @param  [Object] data   Any data to assign to the struct
-      # @param  [Locust::NestedStruct] parent Back reference to the parent
-      # @return [Locust::NestedStruct]
+      # @param [Proc] block The definition
+      # @return [self]
       #
-      def call(data, parent)
-        new(parent, data)
+      def struct(&block)
+        self.tap { definition.instance_exec(&block) }
       end
 
       #
@@ -43,33 +42,39 @@ class Locust
       #
       def new(parent, data)
         return data if data.is_a? self
-        data = definition.prepare(data)
+        data = prepare(data)
         data = data.is_a?(Hash) ? symbolize_keys(data) : {}
 
         super(parent, data)
       end
 
       #
-      # The class-level definition of the struct
+      # Builder method to be used in option coercers
       #
-      # @return [Locust::Struct::Definition]
+      # @param  [Object] data   Any data to assign to the struct
+      # @param  [Locust::NestedStruct] parent Back reference to the parent
+      # @return [Locust::NestedStruct]
       #
-      def definition
-        @definition ||= Definition.new
+      def call(data, parent)
+        new(parent, data)
       end
 
       private
 
-      def struct(&block)
-        self.tap { definition.instance_exec(&block) }
-      end
-
       def symbolize_keys(value)
         Hash(value).each_with_object({}) { |(k, v), o| o[k.to_sym] = v }
-      rescue
-        raise InvalidSchemaError,
-              "Invalid value #{value.inspect} for the schema." \
-              " The value MUST be a hash."
+      end
+
+      def definition
+        @definition ||= Definition.new
+      end
+
+      def respond_to_missing?(name, *)
+        definition.respond_to? name
+      end
+
+      def method_missing(*args, &block)
+        respond_to_missing?(*args) ? definition.send(*args, &block) : super
       end
     end
   end

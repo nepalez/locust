@@ -55,8 +55,8 @@ RSpec.describe Locust::Struct::Definition do
     end
   end
 
-  describe "#part" do
-    subject { definition.part(struct) }
+  describe "#local_name" do
+    subject { definition.local_name(struct) }
 
     context "with a static name" do
       before { definition.instance_exec { name :qux } }
