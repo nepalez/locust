@@ -5,24 +5,44 @@ class Locust::Config
   class Format
     # @private
     attr_reader :generators
+    # @private
+    attr_reader :validators
 
     #
-    # @!method add(options)
     # Registers a new value generator for specifications that use this format
     #
-    # @option (see Locust::Config::Generators#add)
-    # @yield  (see Locust::Config::Generators#add)
+    # @param  [Proc] block
     # @return [self]
     #
-    def generator(**options, &block)
-      @generators.add(**options, &block)
+    def generate(&block)
+      unless block&.arity&.zero?
+        raise TypeError, "A generator must be a block without arguments"
+      end
+
+      @generators << block
+      self
+    end
+
+    #
+    # Registers a new value generator for specifications that use this format
+    #
+    # @param  [Proc] block
+    # @return [self]
+    #
+    def validate(&block)
+      unless block&.arity == 1
+        raise TypeError, "A validator must be a block with exactly one argument"
+      end
+
+      @validators << block
       self
     end
 
     private
 
     def initialize
-      @generators = Generators.new
+      @generators = []
+      @validators = []
     end
   end
 end

@@ -16,37 +16,33 @@ RSpec.describe Locust::Config do
 
   describe "#format" do
     subject do
-      config.format("bar") { |f| f.generator { :BAR } }
-      config.format("bar") { |f| f.generator(immutable: true) { :BAZ } }
-      config.format("qux") { |f| f.generator { :QUX } }
+      config.format("ba") do
+        generate { :BAR }
+        validate { |value| ["invalid"] unless value.to_s[0] == "B" }
+      end
+
+      config.format("ba") do
+        generate { :BAZ }
+        validate { |value| ["invalid"] unless value.to_s[1] == "A" }
+      end
     end
 
     before { subject }
-    let(:formats) { config.formats }
 
-    it "registers formats with generators" do
-      expect(formats["qux"].generators.map(&:call)).to eq [:QUX]
+    let(:format)     { config.formats["ba"] }
+    let(:generators) { format.generators }
+    let(:validators) { format.validators }
+
+    it "sets generators" do
+      subject
+
+      expect(generators.map(&:call)).to eq %i[BAR BAZ]
     end
 
-    it "keeps a previous config as well" do
-      expect(formats["bar"].generators.map(&:call))
-        .to contain_exactly :BAR, :BAZ
-    end
+    it "sets validators" do
+      subject
 
-    it "applies the 'immutable: true' option" do
-      expect(formats["bar"].generators.mutable.map(&:call)).to eq [:BAR]
-    end
-
-    it "protects internal data by returning itself" do
-      expect(subject).to eq config
-    end
-
-    context "without a block" do
-      subject { config.format "bar" }
-
-      it "returns itself" do
-        expect(subject).to eq config
-      end
+      expect(validators.map { |g| g.call("BFR") }).to eq [nil, ["invalid"]]
     end
   end
 end

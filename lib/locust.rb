@@ -10,12 +10,8 @@ class Locust
   NotApplicableError = Class.new(StandardError)
 
   require_relative "locust/struct"
-
-  require_relative "locust/coercion"
-
+  require_relative "locust/schema"
   require_relative "locust/config"
-  require_relative "locust/validators"
-  require_relative "locust/schema_object"
 
   #
   # Builds and configures the generator at once

@@ -1,6 +1,6 @@
 RSpec.describe Locust do
   let(:builder) { described_class.new }
-  let(:block)   { proc { |c| c.format(:foo) { |f| f.generator { :FOO } } } }
+  let(:block)   { proc { |c| c.format(:foo) { generate { :FOO } } } }
 
   describe "#config" do
     subject { builder.config }

@@ -3,8 +3,6 @@ class Locust
   # Container for the global configuration of the Locust
   #
   class Config
-    require_relative "config/generator"
-    require_relative "config/generators"
     require_relative "config/format"
 
     #
@@ -17,11 +15,12 @@ class Locust
     # Creates or updates a definition for named format
     #
     # @param [#to_s] name  The unique name of the format
+    # @param [Proc]  block The block with format definition
     # @return [self]
     #
-    def format(name)
+    def format(name, &block)
       formats[name.to_s] = Format.new if formats[name.to_s] == DEFAULT
-      yield formats[name.to_s] if block_given?
+      formats[name.to_s].instance_exec(&block) if block
       self
     end
 
