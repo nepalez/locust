@@ -21,7 +21,7 @@ class Locust::Struct
       end
     end
 
-    def call(source, parent)
+    def call(source, parent = nil)
       return source if source.instance_of?(self)
       data = source.is_a?(Hash) ? symbolize_keys(source) : {}
       new(parent: parent, source: source, **data)

@@ -1,36 +1,86 @@
 RSpec.describe Locust::Schema::Items do
-  subject { described_class.call source, parent }
-
+  let(:schema) { described_class.call source, parent }
   let(:parent) { double :parent }
   let(:data)   { { "type" => "null" } }
 
-  context "with a single hash" do
+  describe ".call" do
+    subject { schema }
+
     let(:source) { data }
 
     its(:keyword) { is_expected.to eq "items" }
     its(:parent)  { is_expected.to eq parent }
     its(:source)  { is_expected.to eq source }
-    its(:list)    { is_expected.to eq [] }
-    its(:schema)  { is_expected.to be_kind_of Locust::Schema::Object }
-    its(:"schema.source") { is_expected.to eq data }
-    its(:"schema.parent") { is_expected.to eq subject }
   end
 
-  context "with an array of hashes" do
-    let(:source) { [data] }
+  describe "#schema" do
+    subject { schema.schema }
 
-    its(:schema) { is_expected.to be_nil }
-    its(:list)   { is_expected.not_to be_empty }
-    its(:"list.first") { is_expected.to be_kind_of Locust::Schema::Item }
-    its(:"list.first.parent") { is_expected.to eq parent }
-    its(:"list.first.index")  { is_expected.to eq 0 }
-    its(:"list.first.schema.source") { is_expected.to eq data }
+    context "with a single hash" do
+      let(:source) { data }
+
+      it { is_expected.to be_kind_of Locust::Schema::Object }
+      its(:source) { is_expected.to eq data }
+      its(:parent) { is_expected.to eq schema }
+    end
+
+    context "with an array of hashes" do
+      let(:source) { [data] }
+
+      it { is_expected.to be_nil }
+    end
+
+    context "with neither hash nor an array" do
+      let(:source) { 3 }
+
+      it { is_expected.to be_nil }
+    end
   end
 
-  context "with neither hash nor an array" do
-    let(:source) { 3 }
+  describe "#data" do
+    subject { schema.data }
 
-    its(:schema) { is_expected.to be_nil }
-    its(:list)   { is_expected.to be_empty }
+    context "with a single hash" do
+      let(:source) { data }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "with an array of hashes" do
+      let(:source) { [data] }
+
+      it { is_expected.not_to be_empty }
+      its(:count) { is_expected.to eq 1 }
+    end
+
+    context "with neither hash nor an array" do
+      let(:source) { 3 }
+
+      it { is_expected.to be_empty }
+    end
+  end
+
+  describe "#[]" do
+    subject { schema[0] }
+
+    context "with a single hash" do
+      let(:source) { data }
+
+      it { is_expected.to be_nil }
+    end
+
+    context "with an array of hashes" do
+      let(:source) { [data] }
+
+      it { is_expected.to be_a Locust::Schema::Item }
+      its(:source) { data }
+      its(:parent) { parent }
+    end
+
+    context "with neither hash nor an array" do
+      let(:source) { 3 }
+
+      it { is_expected.to be_nil }
+    end
   end
 end

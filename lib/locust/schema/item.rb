@@ -10,9 +10,5 @@ module Locust::Schema
     def schema
       @schema ||= Object.call(source, self)
     end
-
-    def chidlren
-      [schema]
-    end
   end
 end

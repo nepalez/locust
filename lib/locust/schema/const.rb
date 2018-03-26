@@ -6,13 +6,5 @@ module Locust::Schema
   #
   class Const < Locust::Struct
     keyword "const"
-
-    def verify(data, *path)
-      data == source ? [] : __data_error__(path)
-    end
-
-    def validate
-      parent.verify(source, *full_path)
-    end
   end
 end

@@ -7,25 +7,15 @@ module Locust::Schema
   class AllOf < Locust::Struct
     keyword "allOf"
 
-    def list
-      @list ||= if source.is_a? Array
-                  source.map { |item| Object.call(item, parent) }
-                else
-                  []
-                end
+    def data
+      @data ||= begin
+        src = Array === source ? source : []
+        src.map { |item| Object.call(item, parent) }
+      end
     end
 
-    def demand
-      "The value of this keyword MUST be an array"
-    end
-
-    def validate
-      source.is_a?(Array) ? [] : __schema_error__
-    end
-
-    def verify(data, *path)
-      return [] unless source.is_a?(Array)
-      source.map { |item| item.verify(data, *path) }
+    def [](index)
+      data[index]
     end
   end
 end

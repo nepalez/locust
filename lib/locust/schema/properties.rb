@@ -7,13 +7,17 @@ module Locust::Schema
   class Properties < Locust::Struct
     keyword "properties"
 
-    def list
-      @list ||= \
-        if source.is_a? Hash
-          source.map { |k, v| Property.call({ key: k, source: v }, parent) }
-        else
-          []
+    def data
+      @data ||= begin
+        src = Hash === source ? source : {}
+        src.each_with_object({}) do |(k, v), obj|
+          obj[k.to_s] = Property.call({ key: k, source: v }, parent)
         end
+      end
+    end
+
+    def [](key)
+      data[key.to_s]
     end
   end
 end

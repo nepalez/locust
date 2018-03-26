@@ -8,7 +8,6 @@ class Locust
   #
   class Struct
     require_relative "struct/dsl"
-
     extend Dry::Initializer
     extend DSL
     option :parent

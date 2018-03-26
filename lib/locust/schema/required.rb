@@ -7,8 +7,8 @@ module Locust::Schema
   class Required < Locust::Struct
     keyword "required"
 
-    def list
-      @list ||= Array(source).map(&:to_s)
+    def data
+      @data ||= Array(source).map(&:to_s)
     end
   end
 end
