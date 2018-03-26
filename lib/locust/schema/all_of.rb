@@ -9,7 +9,7 @@ module Locust::Schema
 
     def data
       @data ||= begin
-        src = Array === source ? source : []
+        src = source.is_a?(Array) ? source : []
         src.map { |item| Object.call(item, parent) }
       end
     end

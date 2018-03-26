@@ -9,7 +9,7 @@ module Locust::Schema
 
     def data
       @data ||= begin
-        src = Hash === source ? source : {}
+        src = source.is_a?(Hash) ? source : {}
         src.each_with_object({}) do |(k, v), obj|
           obj[k.to_s] = Property.call({ key: k, source: v }, parent)
         end

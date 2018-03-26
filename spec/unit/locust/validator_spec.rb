@@ -2,7 +2,7 @@ RSpec.describe Locust::Validator do
   let(:klass) do
     Class.new(described_class) do
       validate do
-        errors << "#{message} It MUST be a string" unless String === source
+        errors << "#{message} It MUST be a string" unless source.is_a? String
       end
 
       validate :allowed_value

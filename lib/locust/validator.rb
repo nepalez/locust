@@ -35,7 +35,7 @@ class Locust
       super
       @errors = []
       self.class.send(:validators).map do |item|
-        Proc === item ? instance_exec(&item) : __send__(item)
+        item.is_a?(Proc) ? instance_exec(&item) : __send__(item)
       end
     end
 
