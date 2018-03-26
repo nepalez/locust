@@ -49,5 +49,14 @@ class Locust
     def full_path
       @full_path ||= (parents + [self]).map(&:keyword).compact
     end
+
+    #
+    # Checks correctness of the schema and returns its errors
+    #
+    # @return [Array<String>]
+    #
+    def validate
+      Array self.class.validator&.call(self)
+    end
   end
 end

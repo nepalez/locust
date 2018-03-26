@@ -13,7 +13,7 @@ RSpec.describe Locust::Schema::Properties do
   end
 
   describe "#data" do
-    subject { schema.data } 
+    subject { schema.data }
 
     context "with a hash" do
       it { is_expected.to be_a Hash }

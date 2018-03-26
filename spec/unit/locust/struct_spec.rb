@@ -99,4 +99,24 @@ RSpec.describe Locust::Struct do
       end
     end
   end
+
+  describe "#validate" do
+    subject { struct.validate }
+
+    context "with a class-level validator" do
+      let(:validator) { double :validator, call: %w[foo bar] }
+      before { klass.validator(validator) }
+
+      it "uses validator to provide errors" do
+        expect(validator).to receive(:call).with(struct)
+        expect(subject).to eq %w[foo bar]
+      end
+    end
+
+    context "without a validator" do
+      it "returns an empty array" do
+        expect(subject).to eq []
+      end
+    end
+  end
 end

@@ -14,6 +14,10 @@ class Locust::Struct
       @keyword = block ? block : proc { string }
     end
 
+    def validator(klass = nil)
+      klass ? @validator = klass : @validator ||= nil
+    end
+
     def option(name, type = nil, **opts)
       tap do
         attribute = name.to_s.gsub(/([a-z])([A-Z])/, '\1_\2').downcase
