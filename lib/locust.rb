@@ -9,6 +9,7 @@ class Locust
   # Result of generation if the schema object forbids the case
   NotApplicableError = Class.new(StandardError)
 
+  require_relative "locust/validator"
   require_relative "locust/struct"
   require_relative "locust/schema"
   require_relative "locust/config"
