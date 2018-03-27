@@ -6,6 +6,9 @@ module Locust::Schemas
   # including the reference to its [#parent],
   # and the [#source] object for its data.
   #
+  # @private
+  # @abstract
+  #
   class Base
     extend Dry::Initializer
 

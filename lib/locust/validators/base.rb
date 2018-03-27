@@ -1,4 +1,4 @@
-class Locust
+module Locust::Validators
   #
   # Base class for schema-specific validators
   #
@@ -10,7 +10,7 @@ class Locust
   # @private
   # @abstract
   #
-  class Validator < SimpleDelegator
+  class Base < SimpleDelegator
     class << self
       def validate(key = nil, &block)
         validators << (block || key)

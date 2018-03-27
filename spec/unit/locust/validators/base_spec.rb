@@ -1,4 +1,4 @@
-RSpec.describe Locust::Validator do
+RSpec.describe Locust::Validators::Base do
   let(:klass) do
     Class.new(described_class) do
       validate do
