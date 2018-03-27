@@ -5,13 +5,12 @@ require "dry-initializer"
 #
 class Locust
   # Exception to be risen when object schema is invalid
-  InvalidSchemaError = Class.new(ArgumentError)
+  InvalidSchemasError = Class.new(ArgumentError)
   # Result of generation if the schema object forbids the case
   NotApplicableError = Class.new(StandardError)
 
   require_relative "locust/validator"
-  require_relative "locust/struct"
-  require_relative "locust/schema"
+  require_relative "locust/schemas"
   require_relative "locust/config"
 
   #
