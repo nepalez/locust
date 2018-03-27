@@ -6,10 +6,5 @@ module Locust::Schemas
   #
   class Type < Base
     keyword "type"
-
-    def demand
-      "The value of this keyword MUST be astring, which is equal to" \
-      " one of primitive types: '#{LIST.join("', '")}'"
-    end
   end
 end
