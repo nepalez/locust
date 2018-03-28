@@ -9,8 +9,8 @@ module Locust::Validators
 
     def primitive
       return if PRIMITIVES.include? source
-      "#{message} The value of this keyword MUST be a string" \
-      " equal to one of primitives: '#{PRIMITIVES.join("', '")}'"
+      errors << "#{message} The value of this keyword MUST be a string" \
+                " equal to one of primitives: '#{PRIMITIVES.join("', '")}'"
     end
 
     PRIMITIVES = %w[null boolean integer number string array object file].freeze

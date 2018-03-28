@@ -1,4 +1,4 @@
-RSpec.describe Locust::Schemas::XML do
+RSpec.describe Locust::Schemas::Xml do
   let(:schema) { described_class.call source, parent }
   let(:parent) { double :parent }
   let(:source) do
@@ -22,7 +22,7 @@ RSpec.describe Locust::Schemas::XML do
   describe "name" do
     subject { schema.name }
 
-    it { is_expected.to be_a Locust::Schemas::XML::Name }
+    it { is_expected.to be_a Locust::Schemas::XmlName }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source[:name] }
   end
@@ -30,7 +30,7 @@ RSpec.describe Locust::Schemas::XML do
   describe "namespace" do
     subject { schema.namespace }
 
-    it { is_expected.to be_a Locust::Schemas::XML::Namespace }
+    it { is_expected.to be_a Locust::Schemas::XmlNamespace }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source[:namespace] }
   end
@@ -38,7 +38,7 @@ RSpec.describe Locust::Schemas::XML do
   describe "prefix" do
     subject { schema.prefix }
 
-    it { is_expected.to be_a Locust::Schemas::XML::Prefix }
+    it { is_expected.to be_a Locust::Schemas::XmlPrefix }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source[:prefix] }
   end
@@ -46,7 +46,7 @@ RSpec.describe Locust::Schemas::XML do
   describe "attribute" do
     subject { schema.attribute }
 
-    it { is_expected.to be_a Locust::Schemas::XML::Attribute }
+    it { is_expected.to be_a Locust::Schemas::XmlAttribute }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source[:attribute] }
   end
@@ -54,7 +54,7 @@ RSpec.describe Locust::Schemas::XML do
   describe "wrapped" do
     subject { schema.wrapped }
 
-    it { is_expected.to be_a Locust::Schemas::XML::Wrapped }
+    it { is_expected.to be_a Locust::Schemas::XmlWrapped }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source[:wrapped] }
   end

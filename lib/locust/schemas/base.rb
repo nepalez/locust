@@ -49,6 +49,7 @@ module Locust::Schemas
 
     option :parent
     option :source
+    option :title
 
     #
     # The hash of known options assigned to the instance

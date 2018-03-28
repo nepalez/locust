@@ -30,6 +30,6 @@ module Locust::Schemas
     option :required,             Required
     option :type,                 Type
     option :uniqueItems,          UniqueItems
-    option :xml,                  XML
+    option :xml,                  Xml
   end
 end

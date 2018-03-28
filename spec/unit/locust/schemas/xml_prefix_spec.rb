@@ -1,10 +1,10 @@
-RSpec.describe Locust::Schemas::XML::Attribute do
+RSpec.describe Locust::Schemas::XmlPrefix do
   subject { described_class.call source, parent }
 
   let(:parent) { double :parent }
-  let(:source) { true }
+  let(:source) { "foo" }
 
-  its(:keyword) { is_expected.to eq "attribute" }
+  its(:keyword) { is_expected.to eq "prefix" }
   its(:parent)  { is_expected.to eq parent }
   its(:source)  { is_expected.to eq source }
 end

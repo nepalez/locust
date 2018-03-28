@@ -8,7 +8,11 @@ module Locust::Schemas
     keyword "additionalProperties"
 
     def schema
-      @schema ||= Object[source, self]
+      @schema ||= Object[source, self] unless [true, false].include? source
+    end
+
+    def allowed?
+      !!source
     end
   end
 end

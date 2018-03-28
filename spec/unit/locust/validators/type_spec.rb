@@ -45,6 +45,6 @@ RSpec.describe Locust::Validators::Type, ".call" do
 
   context "with unknown source" do
     let(:source) { "email" }
-    it { is_expected.to eq [] }
+    it { is_expected.not_to be_empty }
   end
 end

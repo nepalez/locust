@@ -338,7 +338,7 @@ RSpec.describe Locust::Schemas::Object do
       }
     end
 
-    it { is_expected.to be_a Locust::Schemas::XML }
+    it { is_expected.to be_a Locust::Schemas::Xml }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source["xml"] }
   end

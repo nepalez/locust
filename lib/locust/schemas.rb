@@ -31,6 +31,11 @@ class Locust
     require_relative "schemas/required"
     require_relative "schemas/type"
     require_relative "schemas/unique_items"
+    require_relative "schemas/xml_attribute"
+    require_relative "schemas/xml_name"
+    require_relative "schemas/xml_namespace"
+    require_relative "schemas/xml_prefix"
+    require_relative "schemas/xml_wrapped"
     require_relative "schemas/xml"
     require_relative "schemas/object"
   end
