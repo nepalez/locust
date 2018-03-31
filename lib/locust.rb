@@ -4,8 +4,9 @@ require "dry-initializer"
 # Edge-case examples generator for mutation testing of public APIs
 #
 class Locust
-  require_relative "locust/validators"
-  require_relative "locust/schemas"
+  require_relative "locust/validator"
+  require_relative "locust/schema"
+  require_relative "locust/keywords"
   require_relative "locust/config"
 
   #
