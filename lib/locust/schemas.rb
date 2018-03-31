@@ -10,7 +10,6 @@ class Locust
     require_relative "schemas/any_of"
     require_relative "schemas/default"
     require_relative "schemas/enum"
-    require_relative "schemas/example"
     require_relative "schemas/exclusive_maximum"
     require_relative "schemas/exclusive_minimum"
     require_relative "schemas/format"

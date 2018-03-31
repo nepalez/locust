@@ -93,21 +93,6 @@ RSpec.describe Locust::Schemas::Object do
     its(:source) { is_expected.to eq source["enum"] }
   end
 
-  describe "example" do
-    subject { schema.example }
-
-    let(:source) do
-      {
-        "type" => "object",
-        "example" => { "id" => 12, "name" => "Joe" },
-      }
-    end
-
-    it { is_expected.to be_a Locust::Schemas::Example }
-    its(:parent) { is_expected.to eq schema }
-    its(:source) { is_expected.to eq source["example"] }
-  end
-
   describe "exclusive_maximum" do
     subject { schema.exclusive_maximum }
 

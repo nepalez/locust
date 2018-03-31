@@ -15,7 +15,6 @@ module Locust::Schemas
     option :anyOf,                AnyOf
     option :default,              Default
     option :enum,                 Enum
-    option :example,              Example
     option :exclusiveMaximum,     ExclusiveMaximum
     option :exclusiveMinimum,     ExclusiveMinimum
     option :format,               Format

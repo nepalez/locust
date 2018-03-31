@@ -10,7 +10,6 @@ class Locust
     require_relative "validators/any_of"
     require_relative "validators/default"
     require_relative "validators/enum"
-    require_relative "validators/example"
     require_relative "validators/exclusive_maximum"
     require_relative "validators/exclusive_minimum"
     require_relative "validators/format"
