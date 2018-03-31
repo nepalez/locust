@@ -12,29 +12,25 @@ module Locust::Validators
 
     def parent_is_typed
       return if parent.respond_to?(:type)
-      errors << message
+      errors << message("This keyword MAY be added to an object schema only.")
     end
 
     def parent_describes_a_numeric
       return if errors.any?
       return if %w[integer number].include? parent.type.value
-      errors << message
+      errors << message("It MAY be used only for a number definition.")
     end
 
     def source_is_a_number
       return if errors.any?
-      errors << message unless source.is_a? Numeric
+      return if source.is_a? Numeric
+      errors << message("Its value MUST be a number.")
     end
 
     def source_is_positive
       return if errors.any?
-      errors << message unless source.to_f.positive?
-    end
-
-    def message
-      "#{super} This keyword CAN be added to a schema describing a number." \
-      " The value of this keyword MUST be a number." \
-      " This number MUST be strictly greater than 0."
+      return if source.positive?
+      errors << message("Its value MUST be strictly greater than 0.")
     end
   end
 end

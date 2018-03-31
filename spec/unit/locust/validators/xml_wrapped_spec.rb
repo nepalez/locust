@@ -1,11 +1,13 @@
 RSpec.describe Locust::Validators::XmlWrapped, ".call" do
   subject { described_class.call(schema) }
 
-  let(:schema) { double :schema, source: source, full_path: "foo.xml.wrapped" }
+  let(:type)   { double value: "array" }
+  let(:object) { double :object, type: type }
+  let(:parent) { double :xml, parent: object }
+  let(:source) { false }
+  let(:schema) { double parent: parent, source: source, full_path: "wrapped" }
 
   context "when a source is false" do
-    let(:source) { false }
-
     it { is_expected.to eq [] }
   end
 
@@ -17,6 +19,12 @@ RSpec.describe Locust::Validators::XmlWrapped, ".call" do
 
   context "when a source is not a boolean" do
     let(:source) { 12.5 }
+
+    it { is_expected.not_to be_empty }
+  end
+
+  context "when describes not an array" do
+    let(:type) { double value: "object" }
 
     it { is_expected.not_to be_empty }
   end

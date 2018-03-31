@@ -9,17 +9,14 @@ module Locust::Validators
     private
 
     def source_is_an_array
-      errors << message unless source.is_a? Array
+      return if source.is_a? Array
+      errors << message("Its value MUST be an array.")
     end
 
     def source_has_elements
       return if errors.any?
-      errors << message if source.count.zero?
-    end
-
-    def message
-      "#{super} This keyword's value MUST be an array." \
-      " This array MUST have at least one element."
+      return if source.count.positive?
+      errors << message("Its value MUST have at least one element.")
     end
   end
 end

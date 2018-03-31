@@ -39,8 +39,8 @@ module Locust::Validators
       end
     end
 
-    def message
-      "Invalid schema '#{full_path}'."
+    def message(text = nil)
+      ["Invalid schema at '#{full_path}'.", text].compact.join(" ")
     end
   end
 end

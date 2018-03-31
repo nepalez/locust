@@ -8,7 +8,8 @@ module Locust::Validators
     private
 
     def type_present
-      errors << "#{message} The type keyword MUST be defined" unless type
+      return if type
+      errors << message("The type keyword MUST be defined")
     end
   end
 end

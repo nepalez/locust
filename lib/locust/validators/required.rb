@@ -14,39 +14,37 @@ module Locust::Validators
 
     def parent_is_typed
       return if parent.respond_to?(:type)
-      errors << message
+      errors << message("This keyword MAY be added to an object schema only.")
     end
 
     def parent_describes_an_object
       return if errors.any?
-      errors << message unless parent.type.value == "object"
+      return if parent.type.value == "object"
+      errors << message("It MAY be used only for an object definition.")
     end
 
     def source_is_an_array
       return if errors.any?
-      errors << message unless source.is_a?(Array)
+      return if source.is_a? Array
+      errors << message("Its value MUST be an array.")
     end
 
     def source_has_elements
       return if errors.any?
-      errors << message if source.empty?
+      return if source.any?
+      errors << message("Its value MUST have at least one element.")
     end
 
     def source_elements_are_strings
       return if errors.any?
-      errors << message unless source.all? { |item| item.is_a? String }
+      return if source.all? { |item| item.is_a? String }
+      errors << message("All its elements MUST be strings.")
     end
 
     def source_elements_are_unique
       return if errors.any?
-      errors << message unless source.count == source.uniq.count
-    end
-
-    def message
-      "#{super} This keyword CAN be added to a schema describing an 'object'." \
-      " The value of this keyword MUST be an array." \
-      " This array MUST have at least one element." \
-      " Elements of this array MUST be strings, and MUST be unique."
+      return if source.uniq.count == source.count
+      errors << message("Its elements MUST be unique.")
     end
   end
 end

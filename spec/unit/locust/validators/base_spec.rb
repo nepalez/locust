@@ -29,7 +29,8 @@ RSpec.describe Locust::Validators::Base do
       let(:schema) { double source: :foo, full_path: "format" }
 
       it "returns expected errors" do
-        expect(subject).to eq ["Invalid schema 'format'. It MUST be a string"]
+        expect(subject)
+          .to eq ["Invalid schema at 'format'. It MUST be a string"]
       end
     end
 

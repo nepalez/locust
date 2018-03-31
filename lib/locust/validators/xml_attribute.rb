@@ -9,11 +9,8 @@ module Locust::Validators
 
     def source_is_a_boolean
       return if errors.any?
-      errors << message unless [true, false].include? source
-    end
-
-    def message
-      "#{super} The value of this keyword MUST be a boolean."
+      return if [true, false].include? source
+      errors << message("Its value MUST be a boolean.")
     end
   end
 end

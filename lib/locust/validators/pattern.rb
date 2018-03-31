@@ -11,24 +11,21 @@ module Locust::Validators
 
     def parent_is_typed
       return if parent.respond_to?(:type)
-      errors << message
+      errors << message("This keyword MAY be added to an object schema only.")
     end
 
     def parent_describes_a_string
       return if errors.any?
       return if parent.type.value == "string"
-      errors << message
+      errors << message("It MAY be used only for a string definition.")
     end
 
     def source_is_a_string
-      errors << message unless source.is_a?(String)
-    end
-
-    def message
-      "#{super} This keyword CAN be added to a schema describing a string." \
-      " The value of this keyword MUST be a string." \
-      " This string SHOULD be a valid regular expression," \
-      " according to the ECMA 262 regular expression dialect."
+      return if errors.any?
+      return if source.is_a? String
+      errors << message("Its value MUST be a string." \
+                       " This string SHOULD be a valid regular expression," \
+                       " according to the ECMA 262 regular expression dialect.")
     end
   end
 end

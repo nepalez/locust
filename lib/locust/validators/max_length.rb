@@ -12,28 +12,25 @@ module Locust::Validators
 
     def parent_is_typed
       return if parent.respond_to?(:type)
-      errors << message
+      errors << message("This keyword MAY be added to an object schema only.")
     end
 
     def parent_describes_a_string
       return if errors.any?
-      errors << message unless parent.type.value == "string"
+      return if parent.type.value == "string"
+      errors << message("It MAY be used only for a string definition.")
     end
 
     def source_is_an_integer
       return if errors.any?
-      errors << message unless source.is_a? Integer
+      return if source.is_a? Integer
+      errors << message("Its value MUST be an integer.")
     end
 
     def source_is_not_negative
       return if errors.any?
-      errors << message if source.negative?
-    end
-
-    def message
-      "#{super} This keyword CAN be added to a schema describing a 'string'." \
-      " The value of this keyword MUST be an integer." \
-      " This integer MUST be greater than, or equal to, 0."
+      return unless source.negative?
+      errors << message("Its value MUST be greater than, or equal to, 0.")
     end
   end
 end

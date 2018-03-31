@@ -10,27 +10,20 @@ module Locust::Validators
     private
 
     def source_is_an_array
-      errors << message unless source.is_a? Array
+      return if source.is_a? Array
+      errors << message("Its value MUST be an array.")
     end
 
     def source_has_elements
       return if errors.any?
-      errors << message if elements.zero?
+      return if source.any?
+      errors << message("Its value MUST have at least one element.")
     end
 
     def source_elements_are_unique
       return if errors.any?
-      errors << message if source.uniq.count != elements
-    end
-
-    def elements
-      @elements ||= Array(source).count
-    end
-
-    def message
-      "#{super} The value of this keyword MUST be an array." \
-      " This array MUST have at least one element." \
-      " Elements in the array MUST be unique."
+      return if source.uniq.count == source.count
+      errors << message("Its elements MUST be unique.")
     end
   end
 end

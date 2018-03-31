@@ -9,17 +9,14 @@ module Locust::Validators
     private
 
     def source_is_a_string
-      errors << message unless source.is_a?(String)
+      return if source.is_a?(String)
+      errors << message("Its value MUST be a string.")
     end
 
     def uri_is_absolute
       return if errors.any?
-      errors << message unless uri.host
-    end
-
-    def message
-      "#{super} The value of this keyword MUST be a string." \
-      " The string MUST be in the form of an absolute URI."
+      return if uri.host
+      errors << message("Its value MUST be in the form of an absolute URI.")
     end
   end
 end
