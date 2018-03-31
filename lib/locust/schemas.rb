@@ -8,7 +8,6 @@ class Locust
     require_relative "schemas/additional_properties"
     require_relative "schemas/all_of"
     require_relative "schemas/any_of"
-    require_relative "schemas/const"
     require_relative "schemas/default"
     require_relative "schemas/enum"
     require_relative "schemas/example"

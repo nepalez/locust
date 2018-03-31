@@ -45,19 +45,22 @@ RSpec.describe Locust::Schemas::Object do
     its(:source) { is_expected.to eq source["allOf"] }
   end
 
-  describe "const" do
-    subject { schema.const }
+  describe "any_of" do
+    subject { schema.any_of }
 
     let(:source) do
       {
-        "type" => "string",
-        "const" => "active",
+        "type" => "object",
+        "anyOf" => [
+          { "type" => "array", "minItems" => 12 },
+          { "type" => "array", "maxItems" => 13 },
+        ],
       }
     end
 
-    it { is_expected.to be_a Locust::Schemas::Const }
+    it { is_expected.to be_a Locust::Schemas::AnyOf }
     its(:parent) { is_expected.to eq schema }
-    its(:source) { is_expected.to eq source["const"] }
+    its(:source) { is_expected.to eq source["anyOf"] }
   end
 
   describe "items" do
@@ -268,6 +271,54 @@ RSpec.describe Locust::Schemas::Object do
     it { is_expected.to be_a Locust::Schemas::MultipleOf }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source["multipleOf"] }
+  end
+
+  describe "not" do
+    subject { schema.not }
+
+    let(:source) do
+      {
+        "type" => "object",
+        "not"  => { "type" => "array", "minItems" => 12 },
+      }
+    end
+
+    it { is_expected.to be_a Locust::Schemas::Not }
+    its(:parent) { is_expected.to eq schema }
+    its(:source) { is_expected.to eq source["not"] }
+  end
+
+  describe "nullable" do
+    subject { schema.nullable }
+
+    let(:source) do
+      {
+        "type" => "array",
+        "nullable" => true,
+      }
+    end
+
+    it { is_expected.to be_a Locust::Schemas::Nullable }
+    its(:parent) { is_expected.to eq schema }
+    its(:source) { is_expected.to eq source["nullable"] }
+  end
+
+  describe "one_of" do
+    subject { schema.one_of }
+
+    let(:source) do
+      {
+        "type" => "object",
+        "oneOf" => [
+          { "type" => "array", "minItems" => 12 },
+          { "type" => "array", "maxItems" => 13 },
+        ],
+      }
+    end
+
+    it { is_expected.to be_a Locust::Schemas::OneOf }
+    its(:parent) { is_expected.to eq schema }
+    its(:source) { is_expected.to eq source["oneOf"] }
   end
 
   describe "properties" do

@@ -13,7 +13,6 @@ module Locust::Schemas
     option :additionalProperties, AdditionalProperties
     option :allOf,                AllOf
     option :anyOf,                AnyOf
-    option :const,                Const
     option :default,              Default
     option :enum,                 Enum
     option :example,              Example
@@ -30,7 +29,7 @@ module Locust::Schemas
     option :multipleOf,           MultipleOf
     option :not,                  Not
     option :nullable,             Nullable
-    option :one_of,               OneOf
+    option :oneOf,                OneOf
     option :properties,           Properties
     option :required,             Required
     option :type,                 Type

@@ -8,7 +8,6 @@ class Locust
     require_relative "validators/additional_properties"
     require_relative "validators/all_of"
     require_relative "validators/any_of"
-    require_relative "validators/const"
     require_relative "validators/default"
     require_relative "validators/enum"
     require_relative "validators/example"

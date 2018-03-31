@@ -11,6 +11,9 @@ Style/Alias:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Style/DoubleNegation:
+  Enabled: false
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
