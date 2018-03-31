@@ -4,13 +4,15 @@ module Locust::Schemas
   #
   # @see Schemas Object in OpenAPI Specification
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#schemaObject
+  #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject
   #
   # @see Validation Keywords for Any Instance Type in JSON Schemas Specification
-  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.1
+  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.1
   #
   class Object < Base
     option :additionalProperties, AdditionalProperties
     option :allOf,                AllOf
+    option :anyOf,                AnyOf
     option :const,                Const
     option :default,              Default
     option :enum,                 Enum
@@ -26,6 +28,8 @@ module Locust::Schemas
     option :minProperties,        MinProperties
     option :minimum,              Minimum
     option :multipleOf,           MultipleOf
+    option :not,                  Not
+    option :one_of,               OneOf
     option :properties,           Properties
     option :required,             Required
     option :type,                 Type

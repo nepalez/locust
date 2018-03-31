@@ -2,7 +2,7 @@ module Locust::Schemas
   #
   # @private
   # @see The 'properties' keyword in JSON Schemas Specification
-  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.4
+  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.5.4
   #
   class Properties < Base
     keyword "properties"

@@ -1,11 +1,11 @@
 module Locust::Schemas
   #
   # @private
-  # @see The 'allOf' keyword in JSON Schemas Specification
-  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.7.1
+  # @see The 'oneOf' keyword in JSON Schemas Specification
+  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.7.3
   #
-  class AllOf < Base
-    keyword "allOf"
+  class OneOf < Base
+    keyword "oneOf"
 
     def data
       @data ||= begin

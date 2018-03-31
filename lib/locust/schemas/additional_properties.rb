@@ -2,7 +2,7 @@ module Locust::Schemas
   #
   # @private
   # @see The 'additionalProperties' keyword in JSON Schemas Specification
-  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.5.6
+  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.5.6
   #
   class AdditionalProperties < Base
     keyword "additionalProperties"

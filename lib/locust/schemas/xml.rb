@@ -5,6 +5,7 @@ module Locust::Schemas
   #
   # @see Xml Object in OpenAPI Specification
   #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#xml-object
+  #   https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#xmlObject
   #
   class Xml < Base
     keyword "xml"

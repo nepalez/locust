@@ -2,7 +2,7 @@ module Locust::Schemas
   #
   # @private
   # @see The 'items' keyword in JSON Schemas Specification (several values)
-  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-00#section-6.4.1
+  #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.4.1
   #
   class Items < Base
     keyword "items"
