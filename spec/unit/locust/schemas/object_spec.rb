@@ -324,6 +324,21 @@ RSpec.describe Locust::Schemas::Object do
     its(:source) { is_expected.to eq source["properties"] }
   end
 
+  describe "read_only" do
+    subject { schema.read_only }
+
+    let(:source) do
+      {
+        "type" => "array",
+        "readOnly" => true,
+      }
+    end
+
+    it { is_expected.to be_a Locust::Schemas::ReadOnly }
+    its(:parent) { is_expected.to eq schema }
+    its(:source) { is_expected.to eq source["readOnly"] }
+  end
+
   describe "required" do
     subject { schema.required }
 
@@ -362,6 +377,21 @@ RSpec.describe Locust::Schemas::Object do
     it { is_expected.to be_a Locust::Schemas::UniqueItems }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source["uniqueItems"] }
+  end
+
+  describe "write_only" do
+    subject { schema.write_only }
+
+    let(:source) do
+      {
+        "type" => "array",
+        "writeOnly" => true,
+      }
+    end
+
+    it { is_expected.to be_a Locust::Schemas::WriteOnly }
+    its(:parent) { is_expected.to eq schema }
+    its(:source) { is_expected.to eq source["writeOnly"] }
   end
 
   describe "xml" do

@@ -30,9 +30,11 @@ module Locust::Schemas
     option :nullable,             Nullable
     option :oneOf,                OneOf
     option :properties,           Properties
+    option :readOnly,             ReadOnly
     option :required,             Required
     option :type,                 Type
     option :uniqueItems,          UniqueItems
+    option :writeOnly,            WriteOnly
     option :xml,                  Xml
   end
 end
