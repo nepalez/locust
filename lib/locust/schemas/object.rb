@@ -29,6 +29,7 @@ module Locust::Schemas
     option :minimum,              Minimum
     option :multipleOf,           MultipleOf
     option :not,                  Not
+    option :nullable,             Nullable
     option :one_of,               OneOf
     option :properties,           Properties
     option :required,             Required

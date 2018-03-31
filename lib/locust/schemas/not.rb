@@ -5,7 +5,7 @@ module Locust::Schemas
   #   https://tools.ietf.org/html/draft-handrews-json-schema-validation-01#section-6.7.4
   #
   class Not < Base
-    keyword { "not" }
+    keyword "not"
 
     def schema
       @schema ||= Object.call(source, self)

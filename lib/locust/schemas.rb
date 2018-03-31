@@ -27,6 +27,7 @@ class Locust
     require_relative "schemas/minimum"
     require_relative "schemas/multiple_of"
     require_relative "schemas/not"
+    require_relative "schemas/nullable"
     require_relative "schemas/one_of"
     require_relative "schemas/pattern"
     require_relative "schemas/properties"

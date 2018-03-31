@@ -27,6 +27,7 @@ class Locust
     require_relative "validators/minimum"
     require_relative "validators/multiple_of"
     require_relative "validators/not"
+    require_relative "validators/nullable"
     require_relative "validators/one_of"
     require_relative "validators/pattern"
     require_relative "validators/properties"
