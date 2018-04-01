@@ -7,7 +7,8 @@ module Locust::Keywords
   class Items < Locust::Schema
     require_relative "items/validator"
 
-    keyword "items"
+    keyword   "items"
+    validator Validator
 
     def schema
       return @schema if instance_variable_defined? :@schema

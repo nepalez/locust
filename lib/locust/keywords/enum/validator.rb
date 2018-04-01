@@ -3,11 +3,17 @@ class Locust::Keywords::Enum
   # Checks the 'enum' keyword definition
   #
   class Validator < Locust::Validator
+    validate :parent_is_an_object
     validate :source_is_an_array
     validate :source_has_elements
     validate :source_elements_are_unique
 
     private
+
+    def parent_is_an_object
+      return if parent.is_a? Locust::Keywords::Object
+      errors << message("This keyword MAY be added to an object schema only.")
+    end
 
     def source_is_an_array
       return if source.is_a? Array

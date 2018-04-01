@@ -8,6 +8,7 @@ module Locust::Keywords
   class XmlPrefix < Locust::Schema
     require_relative "xml_prefix/validator"
 
-    keyword "prefix"
+    keyword   "prefix"
+    validator Validator
   end
 end

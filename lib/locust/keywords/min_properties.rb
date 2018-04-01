@@ -7,6 +7,7 @@ module Locust::Keywords
   class MinProperties < Locust::Schema
     require_relative "min_properties/validator"
 
-    keyword "minProperties"
+    keyword   "minProperties"
+    validator Validator
   end
 end

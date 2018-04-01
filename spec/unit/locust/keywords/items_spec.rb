@@ -1,12 +1,11 @@
 RSpec.describe Locust::Keywords::Items do
-  let(:schema) { described_class.call source, parent }
-  let(:parent) { double :parent }
-  let(:data)   { { "type" => "null" } }
+  let(:keyword) { described_class.call source, parent }
+  let(:parent)  { Locust::Keywords::Object.call({ type: "array" }, nil) }
+  let(:data)    { { "type" => "null" } }
+  let(:source)  { data }
 
   describe ".call" do
-    subject { schema }
-
-    let(:source) { data }
+    subject { keyword }
 
     its(:keyword) { is_expected.to eq "items" }
     its(:parent)  { is_expected.to eq parent }
@@ -14,14 +13,14 @@ RSpec.describe Locust::Keywords::Items do
   end
 
   describe "#schema" do
-    subject { schema.schema }
+    subject { keyword.schema }
 
     context "with a single hash" do
       let(:source) { data }
 
       it { is_expected.to be_kind_of Locust::Keywords::Object }
       its(:source) { is_expected.to eq data }
-      its(:parent) { is_expected.to eq schema }
+      its(:parent) { is_expected.to eq keyword }
     end
 
     context "with an array of hashes" do
@@ -38,7 +37,7 @@ RSpec.describe Locust::Keywords::Items do
   end
 
   describe "#data" do
-    subject { schema.data }
+    subject { keyword.data }
 
     context "with a single hash" do
       let(:source) { data }
@@ -61,7 +60,7 @@ RSpec.describe Locust::Keywords::Items do
   end
 
   describe "#[]" do
-    subject { schema[0] }
+    subject { keyword[0] }
 
     context "with a single hash" do
       let(:source) { data }
@@ -81,6 +80,24 @@ RSpec.describe Locust::Keywords::Items do
       let(:source) { 3 }
 
       it { is_expected.to be_nil }
+    end
+  end
+
+  describe "#validate" do
+    subject { keyword.validate }
+
+    it { is_expected.to eq [] }
+
+    context "when parent schema describes not an array" do
+      let(:parent) { Locust::Keywords::Object.call({ type: "object" }, nil) }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when parent is not an object" do
+      let(:parent) { Locust::Schema.call(nil, nil) }
+
+      it { is_expected.not_to be_empty }
     end
   end
 end

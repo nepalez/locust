@@ -7,6 +7,7 @@ module Locust::Keywords
   class ExclusiveMinimum < Locust::Schema
     require_relative "exclusive_minimum/validator"
 
-    keyword "exclusiveMinimum"
+    keyword   "exclusiveMinimum"
+    validator Validator
   end
 end

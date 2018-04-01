@@ -3,20 +3,20 @@ class Locust::Keywords::Minimum
   # Checks the 'minimum' keyword definition
   #
   class Validator < Locust::Validator
-    validate :parent_is_typed
+    validate :parent_is_an_object
     validate :parent_describes_a_numeric
     validate :source_is_a_number
 
     private
 
-    def parent_is_typed
-      return if parent.respond_to?(:type)
+    def parent_is_an_object
+      return if parent.is_a? Locust::Keywords::Object
       errors << message("This keyword MAY be added to an object schema only.")
     end
 
     def parent_describes_a_numeric
       return if errors.any?
-      return if %w[integer number].include? parent.type.value
+      return if %w[integer number].include? parent.type.source
       errors << message("It MAY be used only for a number definition.")
     end
 

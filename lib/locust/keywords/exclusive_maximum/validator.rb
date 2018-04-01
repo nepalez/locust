@@ -3,15 +3,22 @@ class Locust::Keywords::ExclusiveMaximum
   # Checks the 'exclusiveMaximum' keyword definition
   #
   class Validator < Locust::Validator
-    validate :parent_has_options
+    validate :parent_is_an_object
+    validate :parent_describes_a_number
     validate :parent_has_a_maximum
     validate :source_is_a_boolean
 
     private
 
-    def parent_has_options
-      return if parent.respond_to?(:options)
-      errors << message("This keyword MAY be added to an object schema only.")
+    def parent_is_an_object
+      return if parent.is_a? Locust::Keywords::Object
+      errors << message("It MAY be added to an object schema only.")
+    end
+
+    def parent_describes_a_number
+      return if errors.any?
+      return if %w[integer number].include? parent.type.source
+      errors << message("It MAY be used only for definition of a number.")
     end
 
     def parent_has_a_maximum

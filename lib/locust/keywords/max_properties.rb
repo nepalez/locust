@@ -7,6 +7,7 @@ module Locust::Keywords
   class MaxProperties < Locust::Schema
     require_relative "max_properties/validator"
 
-    keyword "maxProperties"
+    keyword   "maxProperties"
+    validator Validator
   end
 end

@@ -7,6 +7,7 @@ module Locust::Keywords
   class Nullable < Locust::Schema
     require_relative "nullable/validator"
 
-    keyword "nullable"
+    keyword   "nullable"
+    validator Validator
   end
 end

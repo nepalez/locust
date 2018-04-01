@@ -6,8 +6,10 @@ module Locust::Keywords
   class Item < Locust::Schema
     require_relative "item/validator"
 
-    keyword { "items[#{index}]" }
-    option  :index
+    option :index
+
+    keyword   { "items[#{index}]" }
+    validator Validator
 
     def schema
       @schema ||= Object.call(source, self)

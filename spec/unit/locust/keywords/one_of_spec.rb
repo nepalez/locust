@@ -1,12 +1,12 @@
-RSpec.describe Locust::Keywords::AllOf do
+RSpec.describe Locust::Keywords::OneOf do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "object" }, nil) }
-  let(:source)  { [{ type: "string" }, { type: "number" }] }
+  let(:source)  { [{ type: "string" }, { type: "null" }] }
 
   describe ".call" do
     subject { keyword }
 
-    its(:keyword) { is_expected.to eq "allOf" }
+    its(:keyword) { is_expected.to eq "oneOf" }
     its(:parent)  { is_expected.to eq parent }
     its(:source)  { is_expected.to eq source }
   end

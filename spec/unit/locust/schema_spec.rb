@@ -50,11 +50,8 @@ RSpec.describe Locust::Schema do
     context "with unexpected options" do
       subject { struct.options }
 
-      it "returns all options" do
-        expect(subject).to eq foo_bar: :BAZ,
-                              qux:     other,
-                              parent:  parent,
-                              source:  value
+      it "returns all options except for parent and source" do
+        expect(subject).to eq foo_bar: :BAZ, qux: other
       end
     end
   end
@@ -99,11 +96,15 @@ RSpec.describe Locust::Schema do
     subject { struct.validate }
 
     context "with a class-level validator" do
-      let(:validator) { double :validator, call: %w[foo bar] }
-      before { klass.validator(validator) }
+      let(:validator) { double :validator }
+
+      before do
+        allow(validator).to receive_message_chain(:new, :errors) { %w[foo bar] }
+        klass.validator(validator)
+      end
 
       it "uses validator to provide errors" do
-        expect(validator).to receive(:call).with(struct)
+        expect(validator).to receive(:new).with(struct)
         expect(subject).to eq %w[foo bar]
       end
     end

@@ -8,7 +8,8 @@ module Locust::Keywords
   class XmlNamespace < Locust::Schema
     require_relative "xml_namespace/validator"
 
-    keyword "namespace"
+    keyword   "namespace"
+    validator Validator
 
     def uri
       @uri ||= URI source.to_s

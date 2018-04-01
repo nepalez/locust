@@ -3,21 +3,21 @@ class Locust::Keywords::MinItems
   # Checks the 'minItems' keyword definition
   #
   class Validator < Locust::Validator
-    validate :parent_is_typed
+    validate :parent_is_an_object
     validate :parent_describes_an_array
     validate :source_is_an_integer
     validate :source_is_not_negative
 
     private
 
-    def parent_is_typed
-      return if parent.respond_to?(:type)
+    def parent_is_an_object
+      return if parent.is_a? Locust::Keywords::Object
       errors << message("This keyword MAY be added to an object schema only.")
     end
 
     def parent_describes_an_array
       return if errors.any?
-      return if parent.type.value == "array"
+      return if parent.type.source == "array"
       errors << message("It MAY be used only for an array definition.")
     end
 

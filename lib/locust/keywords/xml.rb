@@ -10,12 +10,13 @@ module Locust::Keywords
   class Xml < Locust::Schema
     require_relative "xml/validator"
 
-    keyword "xml"
-
     option :name,      XmlName
     option :namespace, XmlNamespace
     option :prefix,    XmlPrefix
     option :attribute, XmlAttribute
     option :wrapped,   XmlWrapped
+
+    keyword   "xml"
+    validator Validator
   end
 end

@@ -8,6 +8,7 @@ module Locust::Keywords
   class XmlAttribute < Locust::Schema
     require_relative "xml_attribute/validator"
 
-    keyword "attribute"
+    keyword   "attribute"
+    validator Validator
   end
 end

@@ -33,14 +33,16 @@ class Locust
 
     def initialize(schema)
       super
-      @errors = []
+      @errors  = []
+      @message = "Invalid schema at '#{Array(full_path).join(".")}'."
+
       self.class.send(:validators).map do |item|
         item.is_a?(Proc) ? instance_exec(&item) : __send__(item)
       end
     end
 
     def message(text = nil)
-      ["Invalid schema at '#{full_path}'.", text].compact.join(" ")
+      [@message, text].compact.join(" ")
     end
   end
 end

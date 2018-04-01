@@ -1,18 +1,17 @@
 RSpec.describe Locust::Keywords::Object do
   let(:schema) { described_class.call source, parent }
   let(:parent) { double :parent }
+  let(:source) { { "type" => "array" } }
 
   describe ".call" do
     subject { schema }
-
-    let(:source) { { "type" => "array" } }
 
     its(:keyword) { is_expected.to be_nil }
     its(:parent)  { is_expected.to eq parent }
     its(:source)  { is_expected.to eq source }
   end
 
-  describe "additional_properties" do
+  describe "#additional_properties" do
     subject { schema.additional_properties }
 
     let(:source) do
@@ -27,7 +26,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["additionalProperties"] }
   end
 
-  describe "all_of" do
+  describe "#all_of" do
     subject { schema.all_of }
 
     let(:source) do
@@ -45,7 +44,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["allOf"] }
   end
 
-  describe "any_of" do
+  describe "#any_of" do
     subject { schema.any_of }
 
     let(:source) do
@@ -63,7 +62,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["anyOf"] }
   end
 
-  describe "items" do
+  describe "#items" do
     subject { schema.items }
 
     let(:source) do
@@ -78,7 +77,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["items"] }
   end
 
-  describe "enum" do
+  describe "#enum" do
     subject { schema.enum }
 
     let(:source) do
@@ -93,7 +92,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["enum"] }
   end
 
-  describe "exclusive_maximum" do
+  describe "#exclusive_maximum" do
     subject { schema.exclusive_maximum }
 
     let(:source) do
@@ -108,7 +107,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["exclusiveMaximum"] }
   end
 
-  describe "exclusive_minimum" do
+  describe "#exclusive_minimum" do
     subject { schema.exclusive_minimum }
 
     let(:source) do
@@ -123,7 +122,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["exclusiveMinimum"] }
   end
 
-  describe "format" do
+  describe "#format" do
     subject { schema.format }
 
     let(:source) do
@@ -138,7 +137,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["format"] }
   end
 
-  describe "items" do
+  describe "#items" do
     subject { schema.items }
 
     let(:source) do
@@ -153,7 +152,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["items"] }
   end
 
-  describe "max_items" do
+  describe "#max_items" do
     subject { schema.max_items }
 
     let(:source) do
@@ -168,7 +167,22 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["maxItems"] }
   end
 
-  describe "max_properties" do
+  describe "#max_length" do
+    subject { schema.max_length }
+
+    let(:source) do
+      {
+        "type" => "array",
+        "maxLength" => 3,
+      }
+    end
+
+    it { is_expected.to be_a Locust::Keywords::MaxLength }
+    its(:parent) { is_expected.to eq schema }
+    its(:source) { is_expected.to eq source["maxLength"] }
+  end
+
+  describe "#max_properties" do
     subject { schema.max_properties }
 
     let(:source) do
@@ -183,7 +197,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["maxProperties"] }
   end
 
-  describe "maximum" do
+  describe "#maximum" do
     subject { schema.maximum }
 
     let(:source) do
@@ -198,7 +212,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["maximum"] }
   end
 
-  describe "min_items" do
+  describe "#min_items" do
     subject { schema.min_items }
 
     let(:source) do
@@ -213,7 +227,22 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["minItems"] }
   end
 
-  describe "min_properties" do
+  describe "#min_length" do
+    subject { schema.min_length }
+
+    let(:source) do
+      {
+        "type" => "array",
+        "minLength" => 3,
+      }
+    end
+
+    it { is_expected.to be_a Locust::Keywords::MinLength }
+    its(:parent) { is_expected.to eq schema }
+    its(:source) { is_expected.to eq source["minLength"] }
+  end
+
+  describe "#min_properties" do
     subject { schema.min_properties }
 
     let(:source) do
@@ -228,7 +257,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["minProperties"] }
   end
 
-  describe "minimum" do
+  describe "#minimum" do
     subject { schema.minimum }
 
     let(:source) do
@@ -243,7 +272,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["minimum"] }
   end
 
-  describe "multiple_of" do
+  describe "#multiple_of" do
     subject { schema.multiple_of }
 
     let(:source) do
@@ -258,7 +287,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["multipleOf"] }
   end
 
-  describe "not" do
+  describe "#not" do
     subject { schema.not }
 
     let(:source) do
@@ -273,7 +302,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["not"] }
   end
 
-  describe "nullable" do
+  describe "#nullable" do
     subject { schema.nullable }
 
     let(:source) do
@@ -288,7 +317,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["nullable"] }
   end
 
-  describe "one_of" do
+  describe "#one_of" do
     subject { schema.one_of }
 
     let(:source) do
@@ -306,7 +335,22 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["oneOf"] }
   end
 
-  describe "properties" do
+  describe "#pattern" do
+    subject { schema.pattern }
+
+    let(:source) do
+      {
+        "type" => "object",
+        "pattern" => '\w+',
+      }
+    end
+
+    it { is_expected.to be_a Locust::Keywords::Pattern }
+    its(:parent) { is_expected.to eq schema }
+    its(:source) { is_expected.to eq source["pattern"] }
+  end
+
+  describe "#properties" do
     subject { schema.properties }
 
     let(:source) do
@@ -324,22 +368,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["properties"] }
   end
 
-  describe "read_only" do
-    subject { schema.read_only }
-
-    let(:source) do
-      {
-        "type" => "array",
-        "readOnly" => true,
-      }
-    end
-
-    it { is_expected.to be_a Locust::Keywords::ReadOnly }
-    its(:parent) { is_expected.to eq schema }
-    its(:source) { is_expected.to eq source["readOnly"] }
-  end
-
-  describe "required" do
+  describe "#required" do
     subject { schema.required }
 
     let(:source) do
@@ -354,7 +383,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["required"] }
   end
 
-  describe "type" do
+  describe "#type" do
     subject { schema.type }
 
     let(:source) { { "type" => "array" } }
@@ -364,7 +393,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq "array" }
   end
 
-  describe "unique_items" do
+  describe "#unique_items" do
     subject { schema.unique_items }
 
     let(:source) do
@@ -379,22 +408,7 @@ RSpec.describe Locust::Keywords::Object do
     its(:source) { is_expected.to eq source["uniqueItems"] }
   end
 
-  describe "write_only" do
-    subject { schema.write_only }
-
-    let(:source) do
-      {
-        "type" => "array",
-        "writeOnly" => true,
-      }
-    end
-
-    it { is_expected.to be_a Locust::Keywords::WriteOnly }
-    its(:parent) { is_expected.to eq schema }
-    its(:source) { is_expected.to eq source["writeOnly"] }
-  end
-
-  describe "xml" do
+  describe "#xml" do
     subject { schema.xml }
 
     let(:source) do
@@ -407,5 +421,39 @@ RSpec.describe Locust::Keywords::Object do
     it { is_expected.to be_a Locust::Keywords::Xml }
     its(:parent) { is_expected.to eq schema }
     its(:source) { is_expected.to eq source["xml"] }
+  end
+
+  describe "#validate" do
+    subject { schema.validate }
+
+    context "when object has the type property" do
+      let(:source) { { type: "null" } }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object has the anyOf property" do
+      let(:source) { { format: "email", anyOf: [{ type: "null" }] } }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object has the oneOf property" do
+      let(:source) { { format: "email", oneOf: [{ type: "null" }] } }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object has no type, anyOf, oneOf properties" do
+      let(:source) { { format: "email" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when some of its options is not valid" do
+      let(:source) { { type: "string", minLength: -1 } }
+
+      it { is_expected.not_to be_empty }
+    end
   end
 end

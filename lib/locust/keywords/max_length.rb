@@ -7,6 +7,7 @@ module Locust::Keywords
   class MaxLength < Locust::Schema
     require_relative "max_length/validator"
 
-    keyword "maxLength"
+    keyword   "maxLength"
+    validator Validator
   end
 end

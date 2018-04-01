@@ -8,6 +8,7 @@ module Locust::Keywords
   class XmlName < Locust::Schema
     require_relative "xml_name/validator"
 
-    keyword "name"
+    keyword   "name"
+    validator Validator
   end
 end

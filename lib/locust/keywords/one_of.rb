@@ -7,7 +7,8 @@ module Locust::Keywords
   class OneOf < Locust::Schema
     require_relative "one_of/validator"
 
-    keyword "oneOf"
+    keyword   "oneOf"
+    validator Validator
 
     def data
       @data ||= begin

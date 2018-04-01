@@ -1,14 +1,14 @@
-RSpec.describe Locust::Keywords::MaxProperties do
+RSpec.describe Locust::Keywords::Property do
   let(:keyword) { described_class.call source, parent }
+  let(:source)  { { key: "foo", source: { "type" => "null" } } }
   let(:parent)  { Locust::Keywords::Object.call({ type: "object" }, nil) }
-  let(:source)  { 12 }
 
   describe ".call" do
     subject { keyword }
 
-    its(:keyword) { is_expected.to eq "maxProperties" }
+    its(:keyword) { is_expected.to eq "properties[foo]" }
     its(:parent)  { is_expected.to eq parent }
-    its(:source)  { is_expected.to eq source }
+    its(:source)  { is_expected.to eq source[:source] }
   end
 
   describe "#validate" do
@@ -16,32 +16,26 @@ RSpec.describe Locust::Keywords::MaxProperties do
 
     it { is_expected.to eq [] }
 
-    context "when a parent describes not an object" do
+    context "when parent describes not an object" do
       let(:parent) { Locust::Keywords::Object.call({ type: "array" }, nil) }
 
       it { is_expected.not_to be_empty }
     end
 
-    context "when a parent is not an object" do
+    context "when parent is not an object" do
       let(:parent) { Locust::Schema.call(nil, nil) }
 
       it { is_expected.not_to be_empty }
     end
 
-    context "when a source is negative" do
-      let(:source) { -12 }
+    context "when source is not a valid schema" do
+      let(:source) { { key: "foo", source: nil } }
 
       it { is_expected.not_to be_empty }
     end
 
-    context "when a source is zero" do
-      let(:source) { 0 }
-
-      it { is_expected.to eq [] }
-    end
-
-    context "when a source is not an integer" do
-      let(:source) { 12.5 }
+    context "when key is empty" do
+      let(:source) { { key: "", source: { "type" => "null" } } }
 
       it { is_expected.not_to be_empty }
     end

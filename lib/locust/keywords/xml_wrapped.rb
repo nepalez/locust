@@ -8,6 +8,7 @@ module Locust::Keywords
   class XmlWrapped < Locust::Schema
     require_relative "xml_wrapped/validator"
 
-    keyword "wrapped"
+    keyword   "wrapped"
+    validator Validator
   end
 end

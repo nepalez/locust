@@ -6,8 +6,10 @@ module Locust::Keywords
   class Property < Locust::Schema
     require_relative "property/validator"
 
-    keyword { "properties[#{key}]" }
-    option  :key
+    option :key
+
+    keyword   { "properties[#{key}]" }
+    validator Validator
 
     def schema
       @schema ||= Object.call(source, self)

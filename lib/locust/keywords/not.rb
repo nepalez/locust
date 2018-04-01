@@ -7,7 +7,8 @@ module Locust::Keywords
   class Not < Locust::Schema
     require_relative "not/validator"
 
-    keyword "not"
+    keyword   "not"
+    validator Validator
 
     def schema
       @schema ||= Object.call(source, self)

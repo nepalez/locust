@@ -7,6 +7,7 @@ module Locust::Keywords
   class Minimum < Locust::Schema
     require_relative "minimum/validator"
 
-    keyword "minimum"
+    keyword   "minimum"
+    validator Validator
   end
 end

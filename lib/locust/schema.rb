@@ -29,7 +29,7 @@ class Locust
         super(name, type, as: attribute, optional: true, **opts)
       end
 
-      def call(source, parent = nil)
+      def call(source, parent)
         return source if source.instance_of?(self)
         data = source.is_a?(Hash) ? symbolize_keys(source) : {}
         new(parent: parent, source: source, **data)
@@ -57,7 +57,9 @@ class Locust
     # @return [Hash<Symbol, Object>]
     #
     def options
-      @options ||= self.class.dry_initializer.attributes(self)
+      @options ||= self.class
+                       .dry_initializer.attributes(self)
+                       .reject { |key, _| %i[parent source].include? key }
     end
 
     #
@@ -96,12 +98,21 @@ class Locust
     end
 
     #
+    # Schema-specific validator
+    #
+    # @return [Locust::Validator]
+    #
+    def validator
+      @validator ||= self.class.validator&.new(self)
+    end
+
+    #
     # Checks correctness of the schema and returns its errors
     #
     # @return [Array<String>]
     #
     def validate
-      Array self.class.validator&.call(self)
+      Array validator&.errors
     end
   end
 end

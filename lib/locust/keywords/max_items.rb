@@ -7,6 +7,7 @@ module Locust::Keywords
   class MaxItems < Locust::Schema
     require_relative "max_items/validator"
 
-    keyword "maxItems"
+    keyword   "maxItems"
+    validator Validator
   end
 end

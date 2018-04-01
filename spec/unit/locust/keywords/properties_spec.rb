@@ -1,11 +1,11 @@
 RSpec.describe Locust::Keywords::Properties do
-  let(:schema) { described_class.call source, parent }
-  let(:parent) { double :parent }
-  let(:source) { { "foo" => data } }
-  let(:data)   { { "type" => "null" }  }
+  let(:keyword) { described_class.call source, parent }
+  let(:parent)  { Locust::Keywords::Object.call({ type: "object" }, nil) }
+  let(:source)  { { "foo" => data } }
+  let(:data)    { { "type" => "null" }  }
 
   describe ".call" do
-    subject { schema }
+    subject { keyword }
 
     its(:keyword) { is_expected.to eq "properties" }
     its(:parent)  { is_expected.to eq parent }
@@ -13,7 +13,7 @@ RSpec.describe Locust::Keywords::Properties do
   end
 
   describe "#data" do
-    subject { schema.data }
+    subject { keyword.data }
 
     context "with a hash" do
       it { is_expected.to be_a Hash }
@@ -28,12 +28,29 @@ RSpec.describe Locust::Keywords::Properties do
   end
 
   describe "#[]" do
-    subject { schema[:foo] }
+    subject { keyword[:foo] }
 
     it { is_expected.to be_a Locust::Keywords::Property }
-
     its(:schema) { is_expected.to be_a Locust::Keywords::Object }
     its(:source) { is_expected.to eq data }
     its(:parent) { is_expected.to eq parent }
+  end
+
+  describe "#validate" do
+    subject { keyword.validate }
+
+    it { is_expected.to eq [] }
+
+    context "when parent describes not an object" do
+      let(:parent) { Locust::Keywords::Object.call({ type: "array" }, nil) }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when parent is not an object" do
+      let(:parent) { Locust::Schema.call(nil, nil) }
+
+      it { is_expected.not_to be_empty }
+    end
   end
 end

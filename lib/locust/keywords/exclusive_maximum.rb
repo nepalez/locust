@@ -7,6 +7,7 @@ module Locust::Keywords
   class ExclusiveMaximum < Locust::Schema
     require_relative "exclusive_maximum/validator"
 
-    keyword "exclusiveMaximum"
+    keyword   "exclusiveMaximum"
+    validator Validator
   end
 end

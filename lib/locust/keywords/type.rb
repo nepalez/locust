@@ -7,6 +7,7 @@ module Locust::Keywords
   class Type < Locust::Schema
     require_relative "type/validator"
 
-    keyword "type"
+    keyword   "type"
+    validator Validator
   end
 end

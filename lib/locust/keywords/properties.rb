@@ -7,7 +7,8 @@ module Locust::Keywords
   class Properties < Locust::Schema
     require_relative "properties/validator"
 
-    keyword "properties"
+    keyword   "properties"
+    validator Validator
 
     def data
       @data ||= begin
