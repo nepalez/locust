@@ -22,8 +22,7 @@ class Locust::Keywords::AdditionalProperties
 
     def schema_is_valid
       return if errors.any?
-      return unless schema
-      errors.concat schema.validate
+      errors.concat Array(schema&.validate)
     end
   end
 end

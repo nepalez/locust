@@ -1,8 +1,7 @@
 RSpec.describe Locust::Keywords::Items do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "array" }, nil) }
-  let(:data)    { { "type" => "null" } }
-  let(:source)  { data }
+  let(:source)  { { "type" => "null" } }
 
   describe ".call" do
     subject { keyword }
@@ -16,15 +15,15 @@ RSpec.describe Locust::Keywords::Items do
     subject { keyword.schema }
 
     context "with a single hash" do
-      let(:source) { data }
+      let(:source) { { "type" => "null" } }
 
       it { is_expected.to be_kind_of Locust::Keywords::Object }
-      its(:source) { is_expected.to eq data }
+      its(:source) { is_expected.to eq source }
       its(:parent) { is_expected.to eq keyword }
     end
 
     context "with an array of hashes" do
-      let(:source) { [data] }
+      let(:source) { [{ "type" => "null" }] }
 
       it { is_expected.to be_nil }
     end
@@ -36,17 +35,17 @@ RSpec.describe Locust::Keywords::Items do
     end
   end
 
-  describe "#data" do
-    subject { keyword.data }
+  describe "#schemas" do
+    subject { keyword.schemas }
 
     context "with a single hash" do
-      let(:source) { data }
+      let(:source) { { "type" => "null" } }
 
       it { is_expected.to eq [] }
     end
 
     context "with an array of hashes" do
-      let(:source) { [data] }
+      let(:source) { [{ "type" => "null" }] }
 
       it { is_expected.not_to be_empty }
       its(:count) { is_expected.to eq 1 }
@@ -63,17 +62,17 @@ RSpec.describe Locust::Keywords::Items do
     subject { keyword[0] }
 
     context "with a single hash" do
-      let(:source) { data }
+      let(:source) { { "type" => "null" } }
 
       it { is_expected.to be_nil }
     end
 
     context "with an array of hashes" do
-      let(:source) { [data] }
+      let(:source) { [{ "type" => "null" }] }
 
       it { is_expected.to be_a Locust::Keywords::Item }
-      its(:source) { data }
-      its(:parent) { parent }
+      its(:source) { is_expected.to eq "type" => "null" }
+      its(:parent) { is_expected.to eq parent }
     end
 
     context "with neither hash nor an array" do
@@ -96,6 +95,18 @@ RSpec.describe Locust::Keywords::Items do
 
     context "when parent is not an object" do
       let(:parent) { Locust::Schema.call(nil, nil) }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when source is not a valid schema" do
+      let(:source) { { "type" => "foo" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when source contains invalid schema" do
+      let(:source) { [{ "type" => "foo" }] }
 
       it { is_expected.not_to be_empty }
     end

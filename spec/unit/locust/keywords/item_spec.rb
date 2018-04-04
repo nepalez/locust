@@ -37,5 +37,23 @@ RSpec.describe Locust::Keywords::Item do
 
       it { is_expected.not_to be_empty }
     end
+
+    context "when index is negative" do
+      before { source[:index] = -1 }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when index is not defined" do
+      before { source.delete :index }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when source is not a valid schema object" do
+      let(:data) { { "type" => "foo" } }
+
+      it { is_expected.not_to be_empty }
+    end
   end
 end

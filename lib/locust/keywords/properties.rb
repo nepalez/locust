@@ -10,8 +10,8 @@ module Locust::Keywords
     keyword   "properties"
     validator Validator
 
-    def data
-      @data ||= begin
+    def schemas
+      @schemas ||= begin
         src = source.is_a?(Hash) ? source : {}
         src.each_with_object({}) do |(k, v), obj|
           obj[k.to_s] = Property.call({ key: k, source: v }, parent)
@@ -20,7 +20,7 @@ module Locust::Keywords
     end
 
     def [](key)
-      data[key.to_s]
+      schemas[key.to_s]
     end
   end
 end
