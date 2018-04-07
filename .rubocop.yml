@@ -8,6 +8,9 @@ AllCops:
 Style/Alias:
   Enabled: false
 
+Style/CaseEquality:
+  Enabled: false
+
 Style/ClassAndModuleChildren:
   Enabled: false
 
