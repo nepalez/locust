@@ -1,13 +1,14 @@
 RSpec.describe Locust::Validator do
   let(:klass) do
     Class.new(described_class) do
-      validate do
-        errors << "#{message} It MUST be a string" unless source.is_a? String
-      end
-
+      validate :source_is_a_string
       validate :allowed_value
 
       private
+
+      def source_is_a_string
+        errors << "#{message} It MUST be a string" unless source.is_a? String
+      end
 
       def allowed_value
         return if errors.any?
@@ -16,8 +17,8 @@ RSpec.describe Locust::Validator do
     end
   end
 
-  describe ".call" do
-    subject { klass.call(schema) }
+  describe "#call" do
+    subject { klass.new(schema).errors }
 
     context "with a valid schema" do
       let(:schema) { double source: "foo", full_path: "format" }
@@ -25,16 +26,7 @@ RSpec.describe Locust::Validator do
       it { is_expected.to eq [] }
     end
 
-    context "with a schema that broke inline validator" do
-      let(:schema) { double source: :foo, full_path: "format" }
-
-      it "returns expected errors" do
-        expect(subject)
-          .to eq ["Invalid schema at 'format'. It MUST be a string"]
-      end
-    end
-
-    context "with a schema that broke method validator" do
+    context "with an invalid schema" do
       let(:schema) { double source: "baz", full_path: "format" }
 
       it "returns expected errors" do

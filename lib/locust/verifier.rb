@@ -10,7 +10,7 @@ class Locust
   # @private
   # @abstract
   #
-  class Validator < SimpleDelegator
+  class Verifier
     class << self
       def validate(key)
         validators << key
@@ -23,15 +23,33 @@ class Locust
       end
     end
 
-    attr_reader :errors
+    attr_reader :schema, :object, :path, :errors
 
     private
 
-    def initialize(schema)
-      super
+    def initialize(schema, object, *path)
+      @schema  = schema
+      @object  = object
+      @path    = path
       @errors  = []
-      @message = "Invalid schema at '#{Array(full_path).join(".")}'."
+      @message = "The object '#{object_path}'" \
+                 " does not satisfy the schema '#{schema_path}'."
+
       self.class.send(:validators).map { |item| __send__(item) }
+    end
+
+    def object_path
+      path.each_with_object("") do |item, obj|
+        if item.is_a?(Integer)
+          obj << "[#{item}]"
+        else
+          obj << (obj.empty? ? item : ".#{item}")
+        end
+      end
+    end
+
+    def schema_path
+      Array(schema.full_path).join(".")
     end
 
     def message(text = nil)

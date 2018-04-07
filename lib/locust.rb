@@ -5,6 +5,7 @@ require "dry-initializer"
 #
 class Locust
   require_relative "locust/validator"
+  require_relative "locust/verifier"
   require_relative "locust/schema"
   require_relative "locust/keywords"
   require_relative "locust/config"

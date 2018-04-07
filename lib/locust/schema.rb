@@ -24,6 +24,11 @@ class Locust
         @validator = klass
       end
 
+      def verifier(klass = nil)
+        return @verifier ||= nil unless klass
+        @verifier = klass
+      end
+
       def option(name, type = nil, **opts)
         attribute = name.to_s.gsub(/([a-z])([A-Z])/, '\1_\2').downcase
         super(name, type, as: attribute, optional: true, **opts)
@@ -98,21 +103,24 @@ class Locust
     end
 
     #
-    # Schema-specific validator
-    #
-    # @return [Locust::Validator]
-    #
-    def validator
-      @validator ||= self.class.validator&.new(self)
-    end
-
-    #
     # Checks correctness of the schema and returns its errors
     #
     # @return [Array<String>]
     #
     def validate
-      Array validator&.errors
+      Array self.class.validator&.new(self)&.errors
+    end
+
+    #
+    # Checks whether the object by path satisfies the schema,
+    # and returns its errors
+    #
+    # @param  [Object] object
+    # @param  [Array<Integer, String>] path
+    # @return [Array<String>]
+    #
+    def verify(object, *path)
+      Array self.class.verifier&.new(self, object, *path)&.errors
     end
   end
 end
