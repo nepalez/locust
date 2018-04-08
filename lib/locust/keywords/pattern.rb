@@ -6,9 +6,11 @@ module Locust::Keywords
   #
   class Pattern < Locust::Schema
     require_relative "pattern/validator"
+    require_relative "pattern/verifier"
 
     keyword   "pattern"
     validator Validator
+    verifier  Verifier
 
     def matcher
       @matcher ||= Regexp.new source.to_s

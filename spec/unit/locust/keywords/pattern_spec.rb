@@ -39,4 +39,26 @@ RSpec.describe Locust::Keywords::Pattern do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when object satisfies the pattern" do
+      let(:object) { "foobar" }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object doesn't satisfy the pattern" do
+      let(:object) { "barbaz" }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object is not a string" do
+      let(:object) { 1 }
+
+      it { is_expected.to eq [] }
+    end
+  end
 end
