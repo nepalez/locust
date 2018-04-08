@@ -1,7 +1,7 @@
 RSpec.describe Locust::Keywords::MaxProperties do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "object" }, nil) }
-  let(:source)  { 12 }
+  let(:source)  { 3 }
 
   describe ".call" do
     subject { keyword }
@@ -44,6 +44,34 @@ RSpec.describe Locust::Keywords::MaxProperties do
       let(:source) { 12.5 }
 
       it { is_expected.not_to be_empty }
+    end
+  end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when number of object properties is less than the limit" do
+      let(:object) { { foo: 1, bar: 2 } }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when number of object properties is greater than the limit" do
+      let(:object) { { foo: 1, bar: 2, baz: 3, qux: 4 } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when number of object properties is equal to the limit" do
+      let(:object) { { foo: 1, bar: 2, baz: 3 } }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object is not a hash" do
+      let(:object) { 1 }
+
+      it { is_expected.to eq [] }
     end
   end
 end
