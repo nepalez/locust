@@ -7,6 +7,7 @@ class Locust::Keywords::Enum
     validate :source_is_an_array
     validate :source_has_elements
     validate :source_elements_are_unique
+    validate :source_elements_are_valid
 
     private
 
@@ -30,6 +31,11 @@ class Locust::Keywords::Enum
       return if errors.any?
       return if source.uniq.count == source.count
       errors << message("Its elements MUST be unique.")
+    end
+
+    def source_elements_are_valid
+      return if errors.any?
+      errors.concat source.flat_map { |item| parent.verify(item, *full_path) }
     end
   end
 end

@@ -1,6 +1,6 @@
 RSpec.describe Locust::Keywords::Enum do
   let(:keyword) { described_class.call source, parent }
-  let(:parent)  { Locust::Keywords::Object.call({ type: "object" }, nil) }
+  let(:parent)  { Locust::Keywords::Object.call({ type: "string" }, nil) }
   let(:source)  { %w[foo bar] }
 
   describe ".call" do
@@ -38,6 +38,12 @@ RSpec.describe Locust::Keywords::Enum do
       let(:parent) { Locust::Schema.call(nil, nil) }
 
       it { is_expected.not_to be_empty }
+    end
+
+    context "when source contain invalid elements" do
+      let(:source) { ["foo", 1] }
+
+      xit { is_expected.not_to be_empty }
     end
   end
 end
