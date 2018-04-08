@@ -6,9 +6,11 @@ module Locust::Keywords
   #
   class AllOf < Locust::Schema
     require_relative "all_of/validator"
+    require_relative "all_of/verifier"
 
     keyword   "allOf"
     validator Validator
+    verifier  Verifier
 
     def data
       @data ||= begin

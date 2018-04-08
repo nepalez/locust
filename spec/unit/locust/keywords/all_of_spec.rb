@@ -54,4 +54,14 @@ RSpec.describe Locust::Keywords::AllOf do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when object satisfies all the requirements" do
+    end
+
+    context "when object breaks some requirement" do
+    end
+  end
 end

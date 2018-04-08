@@ -5,20 +5,24 @@ class Locust::Keywords::OneOf
 
     private
 
-    def count
-      @count ||= schema.data.count { |item| item.verify(object).empty? }
+    def all_errors
+      @all_errors = schema.data.map { |item| item.verify(object) }
+    end
+
+    def num_of_valid_schemas
+      @num_of_valid_schemas ||= all_errors.count(&:empty?)
     end
 
     def object_satisfies_a_requirement
       return unless schema.data&.count&.positive?
-      return unless count.zero?
-      errors << message("It should satisfy some schema.")
+      return unless num_of_valid_schemas.zero?
+      errors.concat all_errors.flatten
     end
 
     def object_satisfies_exactly_one_requirement
       return unless schema.data&.count&.positive?
-      return unless count > 1
-      errors << message("It should satisfy exactly one of given schemas.")
+      return unless num_of_valid_schemas > 1
+      errors << message("It should satisfy only one of given schemas.")
     end
   end
 end
