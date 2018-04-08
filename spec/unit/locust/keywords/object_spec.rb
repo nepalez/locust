@@ -456,4 +456,164 @@ RSpec.describe Locust::Keywords::Object do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { schema.verify object }
+
+    let(:source) { { type: "string" } }
+
+    context "when object satisfies all restrictions" do
+      let(:object) { "foo" }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object not satisfies the type restriction" do
+      let(:object) { 1 }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the additionalProperties restriction" do
+      let(:source) { { type: "object", additionalProperties: false } }
+      let(:object) { { foo: "bar" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the allOf restriction" do
+      let(:source) { { type: "number", allOf: { type: "number", maximum: 2 } } }
+      let(:object) { 3 }
+
+      xit { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the anyOf restriction" do
+      let(:source) { { type: "number", anyOf: { type: "number", maximum: 2 } } }
+      let(:object) { 3 }
+
+      xit { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the enum restriction" do
+      let(:source) { { type: "number", enum: [1, 2] } }
+      let(:object) { 3 }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the format restriction" do
+      let(:source) { { type: "string", format: "date" } }
+      let(:object) { "foo" }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the items restriction" do
+      let(:source) { { type: "array", items: { type: "number" } } }
+      let(:object) { %w[foo] }
+
+      xit { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the maxItems restriction" do
+      let(:source) { { type: "array", maxItems: 2 } }
+      let(:object) { %w[foo bar baz] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the maxLength restriction" do
+      let(:source) { { type: "string", maxLength: 2 } }
+      let(:object) { "foo" }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the maxProperties restriction" do
+      let(:source) { { type: "object", maxProperties: 2 } }
+      let(:object) { { foo: 1, bar: 2, baz: 3 } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the maximum restriction" do
+      let(:source) { { type: "number", maximum: 2 } }
+      let(:object) { 3 }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the minItems restriction" do
+      let(:source) { { type: "array", minItems: 2 } }
+      let(:object) { %w[foo] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the minLength restriction" do
+      let(:source) { { type: "string", minLength: 2 } }
+      let(:object) { "f" }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the minProperties restriction" do
+      let(:source) { { type: "object", minProperties: 2 } }
+      let(:object) { { foo: 1 } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the minimum restriction" do
+      let(:source) { { type: "number", minimum: 2 } }
+      let(:object) { 1 }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the multipleOf restriction" do
+      let(:source) { { type: "number", multipleOf: 2 } }
+      let(:object) { 3 }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the oneOf restriction" do
+      let(:source) { { oneOf: [{ type: "number" }] } }
+      let(:object) { "foo" }
+
+      xit { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the pattern restriction" do
+      let(:source) { { type: "string", pattern: "foo" } }
+      let(:object) { "bar" }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the properties restriction" do
+      let(:object) { { foo: 3 } }
+      let(:source) do
+        { type: "object", properties: { foo: { "type" => "number" } } }
+      end
+
+      xit { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the required restriction" do
+      let(:source) { { type: "object", required: %w[foo] } }
+      let(:object) { { bar: "baz" } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object not satisfies the uniqueItems restriction" do
+      let(:source) { { type: "array", uniqueItems: true } }
+      let(:object) { %w[bar bar] }
+
+      it { is_expected.not_to be_empty }
+    end
+  end
 end

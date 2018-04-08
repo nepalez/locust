@@ -43,7 +43,7 @@ RSpec.describe Locust::Keywords::Enum do
     context "when source contain invalid elements" do
       let(:source) { ["foo", 1] }
 
-      xit { is_expected.not_to be_empty }
+      it { is_expected.not_to be_empty }
     end
   end
 

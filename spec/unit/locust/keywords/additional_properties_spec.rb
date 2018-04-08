@@ -145,7 +145,7 @@ RSpec.describe Locust::Keywords::AdditionalProperties do
       context "when some additional property is invalid" do
         let(:source) { { type: "integer" } }
 
-        xit { is_expected.not_to be_empty }
+        it { is_expected.not_to be_empty }
       end
 
       context "when additional properties are forbidden" do

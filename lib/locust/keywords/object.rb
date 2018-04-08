@@ -11,6 +11,7 @@ module Locust::Keywords
   #
   class Object < Locust::Schema
     require_relative "object/validator"
+    require_relative "object/verifier"
 
     option :additionalProperties, AdditionalProperties
     option :allOf,                AllOf
@@ -41,5 +42,6 @@ module Locust::Keywords
     option :xml,                  Xml
 
     validator Validator
+    verifier  Verifier
   end
 end

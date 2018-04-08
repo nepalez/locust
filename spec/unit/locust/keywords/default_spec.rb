@@ -31,7 +31,7 @@ RSpec.describe Locust::Keywords::Default do
     context "when source doesn't satisfy the parent schema" do
       let(:source) { 1 }
 
-      xit { is_expected.not_to be_empty }
+      it { is_expected.not_to be_empty }
     end
   end
 end

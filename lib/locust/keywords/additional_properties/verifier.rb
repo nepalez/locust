@@ -9,7 +9,7 @@ class Locust::Keywords::AdditionalProperties
       return if schema.allowed?
       return unless object.is_a?(Hash)
       return if additional_properties.empty?
-      errors << message("It does not support additional properties" \
+      errors << message("Forbidden properties:" \
                         " '#{additional_properties.keys.join(', ')}'.")
     end
 
