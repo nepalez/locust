@@ -3,11 +3,11 @@ class Locust::Keywords::Type
   # Checks the type keyword definition
   #
   class Verifier < Locust::Verifier
-    validate :object_has_a_proper_type
+    validate :type_is_valid
 
     private
 
-    def object_has_a_proper_type
+    def type_is_valid
       return if object.nil? && nullable?
       TYPES[schema.source].each { |type| return if object.is_a?(type) }
       errors << message

@@ -42,4 +42,34 @@ RSpec.describe Locust::Keywords::UniqueItems do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when object elements are unique" do
+      let(:object) { %i[foo bar] }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object has repetitive elements" do
+      let(:object) { %i[foo bar foo] }
+
+      context "when uniqueness is required" do
+        it { is_expected.not_to be_empty }
+      end
+
+      context "when uniqueness is not required" do
+        let(:source) { false }
+
+        it { is_expected.to eq [] }
+      end
+    end
+
+    context "when object is not an array" do
+      let(:object) { %i[foo bar] }
+
+      it { is_expected.to eq [] }
+    end
+  end
 end

@@ -6,8 +6,10 @@ module Locust::Keywords
   #
   class UniqueItems < Locust::Schema
     require_relative "unique_items/validator"
+    require_relative "unique_items/verifier"
 
     keyword   "uniqueItems"
     validator Validator
+    verifier  Verifier
   end
 end
