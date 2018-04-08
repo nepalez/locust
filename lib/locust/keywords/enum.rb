@@ -6,8 +6,10 @@ module Locust::Keywords
   #
   class Enum < Locust::Schema
     require_relative "enum/validator"
+    require_relative "enum/verifier"
 
     keyword   "enum"
     validator Validator
+    verifier  Verifier
   end
 end

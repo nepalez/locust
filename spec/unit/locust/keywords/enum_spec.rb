@@ -46,4 +46,20 @@ RSpec.describe Locust::Keywords::Enum do
       xit { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when object equals to one of enum elements" do
+      let(:object) { "foo" }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object differs from all enum elements" do
+      let(:object) { "qux" }
+
+      it { is_expected.not_to be_empty }
+    end
+  end
 end
