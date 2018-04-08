@@ -6,8 +6,10 @@ module Locust::Keywords
   #
   class MultipleOf < Locust::Schema
     require_relative "multiple_of/validator"
+    require_relative "multiple_of/verifier"
 
     keyword   "multipleOf"
     validator Validator
+    verifier  Verifier
   end
 end
