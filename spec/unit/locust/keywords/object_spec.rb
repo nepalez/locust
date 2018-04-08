@@ -489,10 +489,10 @@ RSpec.describe Locust::Keywords::Object do
     end
 
     context "when object not satisfies the anyOf restriction" do
-      let(:source) { { type: "number", anyOf: { type: "number", maximum: 2 } } }
       let(:object) { 3 }
+      let(:source) { { anyOf: [{ type: "number", maximum: 2 }] } }
 
-      xit { is_expected.not_to be_empty }
+      it { is_expected.not_to be_empty }
     end
 
     context "when object not satisfies the enum restriction" do

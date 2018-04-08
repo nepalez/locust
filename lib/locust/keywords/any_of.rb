@@ -6,9 +6,11 @@ module Locust::Keywords
   #
   class AnyOf < Locust::Schema
     require_relative "any_of/validator"
+    require_relative "any_of/verifier"
 
     keyword   "anyOf"
     validator Validator
+    verifier  Verifier
 
     def data
       @data ||= begin
