@@ -58,4 +58,26 @@ RSpec.describe Locust::Keywords::Required do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when object has all required properties" do
+      let(:object) { { foo: :FOO, bar: :BAR } }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object miss required properties" do
+      let(:object) { { foo: :FOO, baz: :BAZ } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object is not a hash" do
+      let(:object) { %w[foo bar] }
+
+      it { is_expected.to eq [] }
+    end
+  end
 end

@@ -6,9 +6,11 @@ module Locust::Keywords
   #
   class Required < Locust::Schema
     require_relative "required/validator"
+    require_relative "required/verifier"
 
     keyword   "required"
     validator Validator
+    verifier  Verifier
 
     def data
       @data ||= Array(source).map(&:to_s)
