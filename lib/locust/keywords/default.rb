@@ -5,6 +5,7 @@ module Locust::Keywords
   class Default < Locust::Schema
     require_relative "default/validator"
 
-    keyword "default"
+    keyword   "default"
+    validator Validator
   end
 end
