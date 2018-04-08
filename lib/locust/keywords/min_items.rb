@@ -6,8 +6,10 @@ module Locust::Keywords
   #
   class MinItems < Locust::Schema
     require_relative "min_items/validator"
+    require_relative "min_items/verifier"
 
     keyword   "minItems"
     validator Validator
+    verifier  Verifier
   end
 end
