@@ -112,4 +112,102 @@ RSpec.describe Locust::Keywords::Format do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when format is integer" do
+      let(:source) { "integer" }
+
+      context "when object is inside the 32bit signed" do
+        let(:object) { 2 ^ 31 - 1 }
+
+        it { is_expected.to eq [] }
+      end
+
+      context "when object is greater than 32bit signed" do
+        let(:object) { 2 ^ 31 }
+
+        it { is_expected.not_to be_empty }
+      end
+
+      context "when object is less than 32bit signed" do
+        let(:object) { - 2 ^ 31 - 1 }
+
+        it { is_expected.not_to be_empty }
+      end
+
+      context "when object is not an integer" do
+        let(:object) { 1.3 }
+
+        it { is_expected.to eq [] }
+      end
+    end
+
+    context "when format is date" do
+      let(:source) { "date" }
+
+      context "when object is a valid date" do
+        let(:object) { "2018-04-08" }
+
+        it { is_expected.to eq [] }
+      end
+
+      context "when object is not a valid date" do
+        let(:object) { "2018-04-38" }
+
+        it { is_expected.not_to be_empty }
+      end
+
+      context "when object is not a string" do
+        let(:object) { 1.3 }
+
+        it { is_expected.to eq [] }
+      end
+    end
+
+    context "when format is dateTime" do
+      let(:source) { "dateTime" }
+
+      context "when object is a valid dateTime" do
+        let(:object) { "2018-04-08 10:00:00" }
+
+        it { is_expected.to eq [] }
+      end
+
+      context "when object is not a valid dateTime" do
+        let(:object) { "2018-04-30 25:61:61" }
+
+        it { is_expected.not_to be_empty }
+      end
+
+      context "when object is not a string" do
+        let(:object) { 1.3 }
+
+        it { is_expected.to eq [] }
+      end
+    end
+
+    context "when custom formatter is defined" do
+      before do
+        Locust.configure do |c|
+          c.format "email" do
+            validate { |value| !value.is_a?(String) || value["@"] }
+          end
+        end
+      end
+
+      context "when object satisfy a format validator" do
+        let(:object) { "foo@bar.baz" }
+
+        xit { is_expected.to eq [] }
+      end
+
+      context "when object doesn't satisfy a format validator" do
+        let(:object) { "foo.bar.baz" }
+
+        xit { is_expected.not_to be_empty }
+      end
+    end
+  end
 end

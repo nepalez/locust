@@ -7,8 +7,10 @@ module Locust::Keywords
   #
   class Format < Locust::Schema
     require_relative "format/validator"
+    require_relative "format/verifier"
 
     keyword   "format"
     validator Validator
+    verifier  Verifier
   end
 end
