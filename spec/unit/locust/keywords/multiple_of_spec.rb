@@ -57,9 +57,9 @@ RSpec.describe Locust::Keywords::MultipleOf do
     subject { keyword.verify object }
 
     context "when object is a multiple of given value" do
-      let(:object) { 24 }
+     let(:object) { 24 }
 
-      it { is_expected.to eq [] }
+     it { is_expected.to eq [] }
    end
 
     context "when object is not a multiple of given value" do

@@ -51,9 +51,9 @@ RSpec.describe Locust::Keywords::MinProperties do
     subject { keyword.verify object }
 
     context "when number of object properties is less than the limit" do
-      let(:object) { { foo: 1, bar: 2 } }
+     let(:object) { { foo: 1, bar: 2 } }
 
-      it { is_expected.not_to be_empty }
+     it { is_expected.not_to be_empty }
    end
 
     context "when number of object properties is greater than the limit" do

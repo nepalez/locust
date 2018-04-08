@@ -35,7 +35,8 @@ class Locust::Keywords::Enum
 
     def source_elements_are_valid
       return if errors.any?
-      errors.concat source.flat_map { |item| parent.verify(item, *full_path) }
+      list = source.flat_map { |item| parent.verify(item, *full_path) }
+      errors.concat(list)
     end
   end
 end
