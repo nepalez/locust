@@ -19,6 +19,6 @@ class Locust::Keywords::Type
                         " '#{PRIMITIVES.join("', '")}'")
     end
 
-    PRIMITIVES = %w[null boolean integer number string array object file].freeze
+    PRIMITIVES = %w[boolean integer number string array object file].freeze
   end
 end

@@ -18,7 +18,6 @@ class Locust::Keywords::Type
     end
 
     TYPES = {
-      "null"    => [NilClass],
       "boolean" => [FalseClass, TrueClass],
       "integer" => [Integer],
       "number"  => [Numeric],

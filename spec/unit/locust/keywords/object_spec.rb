@@ -427,19 +427,19 @@ RSpec.describe Locust::Keywords::Object do
     subject { schema.validate }
 
     context "when object has the type property" do
-      let(:source) { { type: "null" } }
+      let(:source) { { type: "integer" } }
 
       it { is_expected.to eq [] }
     end
 
     context "when object has the anyOf property" do
-      let(:source) { { format: "email", anyOf: [{ type: "null" }] } }
+      let(:source) { { format: "email", anyOf: [{ type: "integer" }] } }
 
       it { is_expected.to eq [] }
     end
 
     context "when object has the oneOf property" do
-      let(:source) { { format: "email", oneOf: [{ type: "null" }] } }
+      let(:source) { { format: "email", oneOf: [{ type: "integer" }] } }
 
       it { is_expected.to eq [] }
     end

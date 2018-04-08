@@ -1,7 +1,7 @@
 RSpec.describe Locust::Keywords::Properties do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "object" }, nil) }
-  let(:source)  { { "foo" => { "type" => "null" } } }
+  let(:source)  { { "foo" => { "type" => "integer" } } }
 
   describe ".call" do
     subject { keyword }
@@ -31,7 +31,7 @@ RSpec.describe Locust::Keywords::Properties do
 
     it { is_expected.to be_a Locust::Keywords::Property }
     its(:schema) { is_expected.to be_a Locust::Keywords::Object }
-    its(:source) { is_expected.to eq "type" => "null" }
+    its(:source) { is_expected.to eq "type" => "integer" }
     its(:parent) { is_expected.to eq parent }
   end
 

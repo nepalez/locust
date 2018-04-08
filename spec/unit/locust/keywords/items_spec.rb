@@ -1,7 +1,7 @@
 RSpec.describe Locust::Keywords::Items do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "array" }, nil) }
-  let(:source)  { { "type" => "null" } }
+  let(:source)  { { "type" => "integer" } }
 
   describe ".call" do
     subject { keyword }
@@ -15,7 +15,7 @@ RSpec.describe Locust::Keywords::Items do
     subject { keyword.schema }
 
     context "with a single hash" do
-      let(:source) { { "type" => "null" } }
+      let(:source) { { "type" => "integer" } }
 
       it { is_expected.to be_kind_of Locust::Keywords::Object }
       its(:source) { is_expected.to eq source }
@@ -23,7 +23,7 @@ RSpec.describe Locust::Keywords::Items do
     end
 
     context "with an array of hashes" do
-      let(:source) { [{ "type" => "null" }] }
+      let(:source) { [{ "type" => "integer" }] }
 
       it { is_expected.to be_nil }
     end
@@ -39,13 +39,13 @@ RSpec.describe Locust::Keywords::Items do
     subject { keyword.schemas }
 
     context "with a single hash" do
-      let(:source) { { "type" => "null" } }
+      let(:source) { { "type" => "integer" } }
 
       it { is_expected.to eq [] }
     end
 
     context "with an array of hashes" do
-      let(:source) { [{ "type" => "null" }] }
+      let(:source) { [{ "type" => "integer" }] }
 
       it { is_expected.not_to be_empty }
       its(:count) { is_expected.to eq 1 }
@@ -62,16 +62,16 @@ RSpec.describe Locust::Keywords::Items do
     subject { keyword[0] }
 
     context "with a single hash" do
-      let(:source) { { "type" => "null" } }
+      let(:source) { { "type" => "integer" } }
 
       it { is_expected.to be_nil }
     end
 
     context "with an array of hashes" do
-      let(:source) { [{ "type" => "null" }] }
+      let(:source) { [{ "type" => "integer" }] }
 
       it { is_expected.to be_a Locust::Keywords::Item }
-      its(:source) { is_expected.to eq "type" => "null" }
+      its(:source) { is_expected.to eq "type" => "integer" }
       its(:parent) { is_expected.to eq parent }
     end
 

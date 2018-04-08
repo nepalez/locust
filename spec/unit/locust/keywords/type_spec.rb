@@ -14,11 +14,6 @@ RSpec.describe Locust::Keywords::Type do
   describe "#validate" do
     subject { keyword.validate }
 
-    context "when source is 'null'" do
-      let(:source) { "null" }
-      it { is_expected.to eq [] }
-    end
-
     context "when source is 'boolean'" do
       let(:source) { "boolean" }
       it { is_expected.to eq [] }
@@ -70,22 +65,6 @@ RSpec.describe Locust::Keywords::Type do
 
     let(:parent) { Locust::Keywords::Object.call({ nullable: nullable }, nil) }
     let(:nullable) { true }
-
-    context "when type is null" do
-      let(:source) { "null" }
-
-      context "when object is nil" do
-        let(:object) { nil }
-
-        it { is_expected.to eq [] }
-      end
-
-      context "when object is not nil" do
-        let(:object) { 1 }
-
-        it { is_expected.not_to be_empty }
-      end
-    end
 
     context "when type is boolean" do
       let(:source) { "boolean" }

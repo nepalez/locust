@@ -1,7 +1,7 @@
 RSpec.describe Locust::Keywords::Item do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "array" }, nil) }
-  let(:data)    { { "type" => "null" } }
+  let(:data)    { { "type" => "integer" } }
   let(:source)  { { source: data, index: 13 } }
 
   describe ".call" do

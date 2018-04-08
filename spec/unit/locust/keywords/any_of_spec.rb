@@ -1,7 +1,7 @@
 RSpec.describe Locust::Keywords::AnyOf do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "object" }, nil) }
-  let(:source)  { [{ type: "string" }, { type: "null" }] }
+  let(:source)  { [{ type: "string" }, { type: "integer" }] }
 
   describe ".call" do
     subject { keyword }

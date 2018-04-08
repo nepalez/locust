@@ -1,6 +1,6 @@
 RSpec.describe Locust::Keywords::Property do
   let(:keyword) { described_class.call source, parent }
-  let(:source)  { { key: "foo", source: { "type" => "null" } } }
+  let(:source)  { { key: "foo", source: { "type" => "integer" } } }
   let(:parent)  { Locust::Keywords::Object.call({ type: "object" }, nil) }
 
   describe ".call" do
@@ -35,7 +35,7 @@ RSpec.describe Locust::Keywords::Property do
     end
 
     context "when key is empty" do
-      let(:source) { { key: "", source: { "type" => "null" } } }
+      let(:source) { { key: "", source: { "type" => "integer" } } }
 
       it { is_expected.not_to be_empty }
     end
