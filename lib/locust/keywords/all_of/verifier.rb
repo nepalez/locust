@@ -5,8 +5,7 @@ class Locust::Keywords::AllOf
     private
 
     def object_satisfies_all_requirement
-      return unless schema.data&.count&.positive?
-      return unless count.zero?
+      return unless schema.data
       list = schema.data.flat_map { |item| item.verify(object) }
       errors.concat(list)
     end
