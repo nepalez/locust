@@ -6,9 +6,11 @@ module Locust::Keywords
   #
   class Not < Locust::Schema
     require_relative "not/validator"
+    require_relative "not/verifier"
 
     keyword   "not"
     validator Validator
+    verifier  Verifier
 
     def schema
       @schema ||= Object.call(source, self)

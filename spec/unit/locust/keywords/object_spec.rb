@@ -579,6 +579,13 @@ RSpec.describe Locust::Keywords::Object do
       it { is_expected.not_to be_empty }
     end
 
+    context "when object not satisfies the 'not' restriction" do
+      let(:source) { { type: "string", not: { enum: %w[foo] } } }
+      let(:object) { "foo" }
+
+      xit { is_expected.not_to be_empty }
+    end
+
     context "when object not satisfies the oneOf restriction" do
       let(:source) { { oneOf: [{ type: "number" }] } }
       let(:object) { "foo" }
