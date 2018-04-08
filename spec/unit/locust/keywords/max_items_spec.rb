@@ -1,7 +1,7 @@
 RSpec.describe Locust::Keywords::MaxItems do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "array" }, nil) }
-  let(:source)  { 12 }
+  let(:source)  { 3 }
 
   describe ".call" do
     subject { keyword }
@@ -44,6 +44,34 @@ RSpec.describe Locust::Keywords::MaxItems do
       let(:source) { 12.5 }
 
       it { is_expected.not_to be_empty }
+    end
+  end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when number of object elements is less than the limit" do
+      let(:object) { %w[foo bar] }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when number of object elements is greater than the limit" do
+      let(:object) { %w[foo bar baz qux] }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when number of object elements is equal to the limit" do
+      let(:object) { %w[foo bar baz] }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object is not an array" do
+      let(:object) { "foo" }
+
+      it { is_expected.to eq [] }
     end
   end
 end
