@@ -6,9 +6,11 @@ module Locust::Keywords
   #
   class AdditionalProperties < Locust::Schema
     require_relative "additional_properties/validator"
+    require_relative "additional_properties/verifier"
 
     keyword   "additionalProperties"
     validator Validator
+    verifier  Verifier
 
     def schema
       @schema ||= Object[source, self] unless [true, false].include? source

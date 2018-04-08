@@ -1,7 +1,7 @@
 RSpec.describe Locust::Keywords::AdditionalProperties do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: type }, nil) }
-  let(:source)  { { "type" => "object" } }
+  let(:source)  { { "type" => "string" } }
   let(:type)    { "object" }
 
   describe ".call" do
@@ -115,6 +115,50 @@ RSpec.describe Locust::Keywords::AdditionalProperties do
       let(:source) { "foo" }
 
       it { is_expected.not_to be_empty }
+    end
+  end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when object has no additional properties" do
+      let(:object) { {} }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object has additional properties" do
+      let(:object) { { "foo" => "bar" } }
+
+      context "when additional properties are enabled" do
+        let(:source) { true }
+
+        it { is_expected.to eq [] }
+      end
+
+      context "when all additional properties are valid" do
+        let(:source) { { type: "string" } }
+
+        it { is_expected.to eq [] }
+      end
+
+      context "when some additional property is invalid" do
+        let(:source) { { type: "integer" } }
+
+        xit { is_expected.not_to be_empty }
+      end
+
+      context "when additional properties are forbidden" do
+        let(:source) { false }
+
+        it { is_expected.not_to be_empty }
+      end
+    end
+
+    context "when object is not a hash" do
+      let(:object) { 1 }
+
+      it { is_expected.to eq [] }
     end
   end
 end
