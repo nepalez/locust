@@ -1,7 +1,7 @@
 RSpec.describe Locust::Keywords::Maximum do
   let(:keyword) { described_class.call source, parent }
   let(:parent)  { Locust::Keywords::Object.call({ type: "number" }, nil) }
-  let(:source)  { 12 }
+  let(:source)  { 3 }
 
   describe ".call" do
     subject { keyword }
@@ -38,6 +38,42 @@ RSpec.describe Locust::Keywords::Maximum do
       let(:source) { :foo }
 
       it { is_expected.not_to be_empty }
+    end
+  end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when object is less than the limit" do
+      let(:object) { 2 }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object is greater than the limit" do
+      let(:object) { 4 }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object is equal to the limit" do
+      let(:object) { 3 }
+
+      it { is_expected.to eq [] }
+
+      context "when exclusiveMaximum is set" do
+        let(:parent) do
+          Locust::Keywords::Object.call({ exclusiveMaximum: true }, nil)
+        end
+
+        it { is_expected.not_to be_empty }
+      end
+    end
+
+    context "when object is not a number" do
+      let(:object) { :foo }
+
+      it { is_expected.to eq [] }
     end
   end
 end
