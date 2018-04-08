@@ -54,4 +54,33 @@ RSpec.describe Locust::Keywords::OneOf do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    let(:source) do
+      [
+        { type: "string", pattern: 'f' },
+        { type: "string", minLength: 3 },
+      ]
+    end
+
+    context "when object satisfies exactly one requirement" do
+      let(:object) { "fo" }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object satisfies several requirements" do
+      let(:object) { "foo" }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object breaks all the requirements" do
+      let(:object) { "ba" }
+
+      it { is_expected.not_to be_empty }
+    end
+  end
 end

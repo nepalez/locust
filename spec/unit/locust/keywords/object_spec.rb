@@ -590,7 +590,7 @@ RSpec.describe Locust::Keywords::Object do
       let(:source) { { oneOf: [{ type: "number" }] } }
       let(:object) { "foo" }
 
-      xit { is_expected.not_to be_empty }
+      it { is_expected.not_to be_empty }
     end
 
     context "when object not satisfies the pattern restriction" do
