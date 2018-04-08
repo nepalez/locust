@@ -6,8 +6,10 @@ module Locust::Keywords
   #
   class MinLength < Locust::Schema
     require_relative "min_length/validator"
+    require_relative "min_length/verifier"
 
     keyword   "minLength"
     validator Validator
+    verifier  Verifier
   end
 end
