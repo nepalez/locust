@@ -60,7 +60,7 @@ RSpec.describe Locust::Keywords::OneOf do
 
     let(:source) do
       [
-        { type: "string", pattern: 'f' },
+        { type: "string", pattern: "f" },
         { type: "string", minLength: 3 },
       ]
     end

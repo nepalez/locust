@@ -482,7 +482,7 @@ RSpec.describe Locust::Keywords::Object do
     end
 
     context "when object not satisfies the allOf restriction" do
-      let(:source) { { type: "number", allOf: { type: "number", maximum: 2 } } }
+      let(:source) { { allOf: [{ type: "number", maximum: 2 }] } }
       let(:object) { 3 }
 
       it { is_expected.not_to be_empty }
