@@ -6,9 +6,11 @@ module Locust::Keywords
   #
   class Properties < Locust::Schema
     require_relative "properties/validator"
+    require_relative "properties/verifier"
 
     keyword   "properties"
     validator Validator
+    verifier  Verifier
 
     def schemas
       @schemas ||= begin

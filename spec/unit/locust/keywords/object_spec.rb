@@ -601,12 +601,12 @@ RSpec.describe Locust::Keywords::Object do
     end
 
     context "when object not satisfies the properties restriction" do
-      let(:object) { { foo: 3 } }
+      let(:object) { { foo: :bar } }
       let(:source) do
         { type: "object", properties: { foo: { "type" => "number" } } }
       end
 
-      xit { is_expected.not_to be_empty }
+      it { is_expected.not_to be_empty }
     end
 
     context "when object not satisfies the required restriction" do

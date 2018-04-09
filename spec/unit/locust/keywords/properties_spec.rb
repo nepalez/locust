@@ -70,4 +70,33 @@ RSpec.describe Locust::Keywords::Properties do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    let(:source) do
+      {
+        "foo" => { "type" => "integer" },
+        "bar" => { "type" => "string" },
+      }
+    end
+
+    context "when all properties satisfy their schemas" do
+      let(:object) { { foo: 1, baz: :qux } }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when some property breaks the schema" do
+      let(:object) { { foo: 1, bar: 2 } }
+
+      it { is_expected.not_to be_empty }
+    end
+
+    context "when object is not a hash" do
+      let(:object) { 3 }
+
+      it { is_expected.to eq [] }
+    end
+  end
 end
