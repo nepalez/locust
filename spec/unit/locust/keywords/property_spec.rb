@@ -40,4 +40,20 @@ RSpec.describe Locust::Keywords::Property do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "when object satisfies the schema" do
+      let(:object) { 1 }
+
+      it { is_expected.to eq [] }
+    end
+
+    context "when object does not satisfy the schema" do
+      let(:object) { "foo" }
+
+      it { is_expected.not_to be_empty }
+    end
+  end
 end
