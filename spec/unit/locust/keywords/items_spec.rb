@@ -111,4 +111,52 @@ RSpec.describe Locust::Keywords::Items do
       it { is_expected.not_to be_empty }
     end
   end
+
+  describe "#verify" do
+    subject { keyword.verify object }
+
+    context "with shared schema" do
+      let(:source) { { "type" => "integer" } }
+
+      context "when all items satisfy the schema" do
+        let(:object) { [1, 2, 3] }
+
+        it { is_expected.to eq [] }
+      end
+
+      context "when some item breaks the schema" do
+        let(:object) { [1, 2, :foo] }
+
+        it { is_expected.not_to be_empty }
+      end
+
+      context "when object is not an array" do
+        let(:object) { :foo }
+
+        it { is_expected.to eq [] }
+      end
+    end
+
+    context "with separate schemas" do
+      let(:source) { [{ "type" => "integer" }, { "type" => "string" }] }
+
+      context "when all items satisfy their schemas" do
+        let(:object) { [1, "foo", :bar] }
+
+        it { is_expected.to eq [] }
+      end
+
+      context "when some item breaks its schema" do
+        let(:object) { [1, 2, :bar] }
+
+        it { is_expected.not_to be_empty }
+      end
+
+      context "when object is not an array" do
+        let(:object) { :foo }
+
+        it { is_expected.to eq [] }
+      end
+    end
+  end
 end

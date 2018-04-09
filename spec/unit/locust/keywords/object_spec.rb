@@ -513,7 +513,7 @@ RSpec.describe Locust::Keywords::Object do
       let(:source) { { type: "array", items: { type: "number" } } }
       let(:object) { %w[foo] }
 
-      xit { is_expected.not_to be_empty }
+      it { is_expected.not_to be_empty }
     end
 
     context "when object not satisfies the maxItems restriction" do
@@ -583,7 +583,7 @@ RSpec.describe Locust::Keywords::Object do
       let(:source) { { type: "string", not: { enum: %w[foo] } } }
       let(:object) { "foo" }
 
-      xit { is_expected.not_to be_empty }
+      it { is_expected.not_to be_empty }
     end
 
     context "when object not satisfies the oneOf restriction" do
