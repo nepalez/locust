@@ -1,5 +1,6 @@
 RSpec.describe Locust::Schema do
-  let(:parent) { double }
+  let(:config) { double :config }
+  let(:parent) { double :parent, config: config }
   let(:value)  { { "fooBar" => :BAZ, foo: 1, qux: other } }
   let(:struct) { klass.call(value, parent) }
   let(:other)  { klass.call({}, parent) }
@@ -43,6 +44,19 @@ RSpec.describe Locust::Schema do
       subject { klass.call other, parent }
 
       it { is_expected.to eq other }
+    end
+  end
+
+  describe "#config" do
+    subject { struct.config }
+
+    it { is_expected.to eq parent.config }
+
+    context "when it was set explicitly" do
+      let(:custom) { double :config }
+      let(:struct) { klass.call({ source: value, config: custom }, parent) }
+
+      it { is_expected.to eq custom }
     end
   end
 

@@ -55,6 +55,7 @@ class Locust
     option :parent
     option :source
     option :title
+    option :config, default: -> { parent&.config }
 
     #
     # The hash of known options assigned to the instance
@@ -64,7 +65,7 @@ class Locust
     def options
       @options ||= self.class
                        .dry_initializer.attributes(self)
-                       .reject { |key, _| %i[parent source].include? key }
+                       .reject { |key| %i[parent source config].include? key }
     end
 
     #
@@ -103,12 +104,12 @@ class Locust
     end
 
     #
-    # Checks correctness of the schema and returns its errors
+    # Checks correctness of the schema, memoizes and returns its errors
     #
     # @return [Array<String>]
     #
     def validate
-      Array self.class.validator&.new(self)&.errors
+      @validate ||= Array self.class.validator&.new(self)&.errors
     end
 
     #
