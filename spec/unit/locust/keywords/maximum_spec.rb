@@ -63,7 +63,10 @@ RSpec.describe Locust::Keywords::Maximum do
 
       context "when exclusiveMaximum is set" do
         let(:parent) do
-          Locust::Keywords::Object.call({ exclusiveMaximum: true }, nil)
+          Locust::Keywords::Object.call(
+            { type: "integer", exclusiveMaximum: true },
+            nil
+          )
         end
 
         it { is_expected.not_to be_empty }

@@ -160,5 +160,13 @@ RSpec.describe Locust::Keywords::AdditionalProperties do
 
       it { is_expected.to eq [] }
     end
+
+    context "when schema is invalid" do
+      let(:parent) { Locust::Schema.call(nil, nil) }
+      let(:source) { false }
+      let(:object) { { "foo" => "bar" } }
+
+      it { is_expected.to eq [] }
+    end
   end
 end

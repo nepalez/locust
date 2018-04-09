@@ -4,8 +4,12 @@ class Locust::Keywords::AllOf
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty?
+    end
+
     def object_satisfies_all_requirement
-      return unless schema.data
+      return unless continue?
       list = schema.data.flat_map { |item| item.verify(object) }
       errors.concat(list)
     end

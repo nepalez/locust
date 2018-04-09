@@ -4,8 +4,12 @@ class Locust::Keywords::Not
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty?
+    end
+
     def object_breaks_the_schema
-      return unless schema.schema
+      return unless continue?
       return if schema.schema.verify(object).any?
       errors << message("It should fail to validate against the schema.")
     end

@@ -5,8 +5,12 @@ class Locust::Keywords::Items
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty? && object.is_a?(Array)
+    end
+
     def all_items_satisfy_shared_schema
-      return unless object.is_a? Array
+      return unless continue?
       verifier = schema.schema
       return unless verifier
       object.each_with_index do |val, index|
@@ -15,7 +19,7 @@ class Locust::Keywords::Items
     end
 
     def all_items_satisfy_their_schemas
-      return unless object.is_a? Array
+      return unless continue?
       object.each_with_index do |val, index|
         verifier = schema.schemas[index]
         next unless verifier

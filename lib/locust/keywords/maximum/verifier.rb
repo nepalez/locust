@@ -4,12 +4,16 @@ class Locust::Keywords::Maximum
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty? && object.is_a?(Numeric)
+    end
+
     def exclusive?
       schema.parent&.exclusive_maximum&.source == true
     end
 
     def object_satisfies_the_limit
-      return unless object.is_a? Numeric
+      return unless continue?
       return if object < schema.source
       return if !exclusive? && object == schema.source
       errors << message

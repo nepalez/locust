@@ -581,8 +581,8 @@ RSpec.describe Locust::Keywords::Object do
     end
 
     context "when object not satisfies the 'not' restriction" do
-      let(:source) { { type: "string", not: { enum: %w[foo] } } }
-      let(:object) { "foo" }
+      let(:source) { { type: "string", not: { type: "string", enum: %w[fo] } } }
+      let(:object) { "fo" }
 
       it { is_expected.not_to be_empty }
     end

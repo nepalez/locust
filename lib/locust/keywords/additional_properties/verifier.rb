@@ -5,18 +5,21 @@ class Locust::Keywords::AdditionalProperties
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty? && object.is_a?(Hash)
+    end
+
     def additional_properties_are_enabled
+      return unless continue?
       return if schema.allowed?
-      return unless object.is_a?(Hash)
-      return if additional_properties.empty?
+      return unless additional_properties.any?
       errors << message("Forbidden properties:" \
                         " '#{additional_properties.keys.join(', ')}'.")
     end
 
     def additional_properties_are_valid
-      return if errors.any?
+      return unless continue?
       return unless schema.schema
-      return unless object.is_a?(Hash)
       list = additional_properties.flat_map do |key, val|
         schema.schema.verify(val, *path, key)
       end

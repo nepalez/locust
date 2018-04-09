@@ -4,8 +4,12 @@ class Locust::Keywords::MaxLength
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty? && object.is_a?(String)
+    end
+
     def object_length_satisfies_the_limit
-      return unless object.is_a? String
+      return unless continue?
       return if object.length <= schema.source
       errors << message
     end

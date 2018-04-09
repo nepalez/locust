@@ -4,8 +4,12 @@ class Locust::Keywords::UniqueItems
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty? && object.is_a?(Array)
+    end
+
     def elements_are_unique
-      return unless object.is_a? Array
+      return unless continue?
       return unless schema.source == true
       return if object.uniq == object
       errors << message("Its elements MUST be unique.")

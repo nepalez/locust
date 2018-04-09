@@ -7,7 +7,12 @@ class Locust::Keywords::Type
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty?
+    end
+
     def type_is_valid
+      return unless continue?
       return if object.nil? && nullable?
       TYPES[schema.source].each { |type| return if object.is_a?(type) }
       errors << message

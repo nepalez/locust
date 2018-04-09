@@ -117,6 +117,7 @@ RSpec.describe Locust::Keywords::Format do
     subject { keyword.verify object }
 
     context "when format is integer" do
+      let(:schema) { { "type" => "integer" } }
       let(:source) { "integer" }
 
       context "when object is inside the 32bit signed" do

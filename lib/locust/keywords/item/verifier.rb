@@ -5,7 +5,7 @@ class Locust::Keywords::Item
     private
 
     def object_satisfies_the_schema
-      return unless schema.schema
+      return unless schema.validate.empty?
       list = schema.schema.verify(object, *path)
       errors.concat list
     end

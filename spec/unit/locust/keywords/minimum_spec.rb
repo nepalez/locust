@@ -61,9 +61,12 @@ RSpec.describe Locust::Keywords::Minimum do
 
       it { is_expected.to eq [] }
 
-      context "when exclusiveMaximum is set" do
+      context "when exclusiveMinimum is set" do
         let(:parent) do
-          Locust::Keywords::Object.call({ exclusiveMinimum: true }, nil)
+          Locust::Keywords::Object.call(
+            { type: "integer", exclusiveMinimum: true },
+            nil
+          )
         end
 
         it { is_expected.not_to be_empty }

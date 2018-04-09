@@ -6,7 +6,12 @@ class Locust::Keywords::Format
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty?
+    end
+
     def integer_is_inside_the_limit
+      return unless continue?
       return unless schema.source == "integer"
       return unless object.is_a? Integer
       return if (-2 ^ 31..2 ^ 31 - 1).include? object
@@ -14,7 +19,7 @@ class Locust::Keywords::Format
     end
 
     def date_is_valid
-      return if errors.any?
+      return unless continue?
       return unless schema.source == "date"
       return unless object.is_a? String
       return if date
@@ -23,7 +28,7 @@ class Locust::Keywords::Format
     end
 
     def date_time_is_valid
-      return if errors.any?
+      return unless continue?
       return unless schema.source == "dateTime"
       return unless object.is_a? String
       return if date_time

@@ -4,8 +4,12 @@ class Locust::Keywords::Property
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty?
+    end
+
     def object_satisfies_the_schema
-      return unless schema.schema
+      return unless continue?
       list = schema.schema.verify(object, *path)
       errors.concat list
     end

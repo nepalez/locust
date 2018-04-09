@@ -16,7 +16,7 @@ class Locust::Keywords::Maximum
 
     def parent_describes_a_numeric
       return if errors.any?
-      return if %w[integer number].include? parent.type.source
+      return if %w[integer number].include? parent.type&.source
       errors << message("It MAY be used only for a number definition.")
     end
 

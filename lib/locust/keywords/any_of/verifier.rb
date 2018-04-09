@@ -4,6 +4,10 @@ class Locust::Keywords::AnyOf
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty?
+    end
+
     def all_errors
       @all_errors = schema.data.map { |item| item.verify(object) }
     end
@@ -13,7 +17,7 @@ class Locust::Keywords::AnyOf
     end
 
     def object_satisfies_some_requirement
-      return unless schema.data&.count&.positive?
+      return unless continue?
       return unless num_of_valid_schemas.zero?
       errors.concat all_errors.flatten
     end

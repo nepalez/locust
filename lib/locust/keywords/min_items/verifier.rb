@@ -4,8 +4,12 @@ class Locust::Keywords::MinItems
 
     private
 
+    def continue?
+      errors.empty? && schema.validate.empty? && object.is_a?(Array)
+    end
+
     def number_of_items_satisfies_the_limit
-      return unless object.is_a? Array
+      return unless continue?
       return if object.count >= schema.source
       errors << message
     end
