@@ -3,6 +3,7 @@ class Locust::Keywords::Format
     validate :integer_is_inside_the_limit
     validate :date_is_valid
     validate :date_time_is_valid
+    validate :object_satisfies_custom_validators
 
     private
 
@@ -34,6 +35,17 @@ class Locust::Keywords::Format
       return if date_time
       errors << \
         message("Its value should be a valid dateTime as defined by RFC3339.")
+    end
+
+    def object_satisfies_custom_validators
+      return unless continue?
+      return unless custom
+      return if custom.check(object)
+      errors << message
+    end
+
+    def custom
+      @custom ||= schema.config&.formats&.[](schema.source)
     end
 
     def date

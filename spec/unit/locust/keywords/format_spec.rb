@@ -190,10 +190,14 @@ RSpec.describe Locust::Keywords::Format do
     end
 
     context "when custom formatter is defined" do
-      before do
-        Locust.configure do |c|
+      let(:parent) do
+        Locust::Keywords::Object.call({ schema: schema, config: config }, nil)
+      end
+
+      let(:config) do
+        Locust::Config.new.tap do |c|
           c.format "email" do
-            validate { |value| !value.is_a?(String) || value["@"] }
+            validate { |value| value.to_s["@"] }
           end
         end
       end
@@ -201,13 +205,13 @@ RSpec.describe Locust::Keywords::Format do
       context "when object satisfy a format validator" do
         let(:object) { "foo@bar.baz" }
 
-        xit { is_expected.to eq [] }
+        it { is_expected.to eq [] }
       end
 
       context "when object doesn't satisfy a format validator" do
         let(:object) { "foo.bar.baz" }
 
-        xit { is_expected.not_to be_empty }
+        it { is_expected.not_to be_empty }
       end
     end
   end

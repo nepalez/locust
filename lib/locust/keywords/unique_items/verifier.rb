@@ -10,7 +10,7 @@ class Locust::Keywords::UniqueItems
 
     def elements_are_unique
       return unless continue?
-      return unless schema.source == true
+      return unless schema.source
       return if object.uniq == object
       errors << message("Its elements MUST be unique.")
     end

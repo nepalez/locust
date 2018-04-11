@@ -38,6 +38,16 @@ class Locust::Config
       self
     end
 
+    #
+    # Validates given object
+    #
+    # @param  [Object] object
+    # @return [Boolean]
+    #
+    def check(object)
+      @validators.inject(true) { |result, item| result && item.call(object) }
+    end
+
     private
 
     def initialize

@@ -1,5 +1,8 @@
 RSpec.describe Locust::Config do
-  let(:config) { described_class.new }
+  let(:config)     { described_class.new }
+  let(:format)     { config.formats["ba"] }
+  let(:generators) { format.generators }
+  let(:validators) { format.validators }
 
   describe "#formats" do
     subject { config.formats }
@@ -15,34 +18,50 @@ RSpec.describe Locust::Config do
   end
 
   describe "#format" do
-    subject do
+    before do
       config.format("ba") do
         generate { :BAR }
-        validate { |value| ["invalid"] unless value.to_s[0] == "B" }
+        validate { |value| value.to_s[0] == "B" }
       end
 
       config.format("ba") do
         generate { :BAZ }
-        validate { |value| ["invalid"] unless value.to_s[1] == "A" }
+        validate { |value| value.to_s[1] == "A" }
       end
     end
 
-    before { subject }
-
-    let(:format)     { config.formats["ba"] }
-    let(:generators) { format.generators }
-    let(:validators) { format.validators }
-
     it "sets generators" do
-      subject
-
       expect(generators.map(&:call)).to eq %i[BAR BAZ]
     end
 
     it "sets validators" do
-      subject
+      expect(validators.map { |g| g.call("BFR") }).to eq [true, false]
+    end
+  end
 
-      expect(validators.map { |g| g.call("BFR") }).to eq [nil, ["invalid"]]
+  describe "#valid?" do
+    subject { format.check object }
+
+    before do
+      config.format("ba") do
+        generate { :BAR }
+        validate { |value| value.to_s[0] == "B" }
+      end
+
+      config.format("ba") do
+        generate { :BAZ }
+        validate { |value| value.to_s[1] == "A" }
+      end
+    end
+
+    context "when object satisfy all the conditions" do
+      let(:object) { :BAR }
+      it { is_expected.to eq true }
+    end
+
+    context "when object breaks some condition" do
+      let(:object) { :BOR }
+      it { is_expected.to eq false }
     end
   end
 end
