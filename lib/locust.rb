@@ -9,6 +9,7 @@ class Locust
   require_relative "locust/schema"
   require_relative "locust/keywords"
   require_relative "locust/config"
+  require_relative "locust/loader"
 
   #
   # Builds and configures the generator at once

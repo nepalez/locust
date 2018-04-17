@@ -2,8 +2,10 @@ require "bundler/setup"
 require "pry"
 require "locust"
 require "rspec/its"
+require "webmock/rspec"
 
 require_relative "support/fixtures_helper.rb"
+require_relative "support/helpers.rb"
 require_relative "support/matchers.rb"
 
 RSpec.configure do |config|
